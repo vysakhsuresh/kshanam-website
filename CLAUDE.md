@@ -218,15 +218,30 @@ the next person does not "fix" them back.
    Touching a field jumps to the slide that line appears on. Exporting a video
    to find out what you got was the single worst thing about the first build.
 
-6. **Designs are generated from compact specs.** `scripts/gen-templates.mjs`
-   holds one spec per design — palette, typefaces, ornaments, a layout recipe
-   — and writes the JSON the engine reads. The output is committed and safe to
-   edit by hand. Six recipes and a kit of 25 drawn motifs, 7 frames and 4
-   patterns is what makes a wide, consistent library affordable.
+6. **Designs are generated from compact specs.** `scripts/design-specs.json`
+   holds one spec per design — palette, typefaces, ornaments, a layout recipe,
+   and its own sample copy — and `scripts/gen-templates.mjs` writes the JSON
+   the engine reads. The output is committed and safe to edit by hand. Eight
+   recipes and a kit of 35 drawn motifs, 11 frames and 8 textures is what makes
+   a wide, consistent library affordable.
 
-7. **Music is synthesised, not licensed.** Eight instrumental beds are
+7. **Music is synthesised, not licensed.** Nine instrumental beds are
    generated from scratch in `music.js`, so there is no licence to honour and
    no attribution to carry. Visitors can still pick their own song, or none.
 
 8. **It is a desktop product as much as a phone one.** Laptop, tablet and
    phone layouts are all designed and all tested at their own widths.
+
+9. **The quality bar is enforced, not described.** "Ultra premium" is a set of
+   rules a machine checks, in the generator and again in
+   `tests/templates.mjs` against the committed JSON: contrast floors on muted
+   as well as ink, no pure white or black, no scatter patterns, foil only on
+   hairlines and never inside a letterform, two ornamental marks and three type
+   sizes per slide, 40px gutters, and one sentence per design saying what its
+   idea actually is. A style guide nobody reads is worth less than a gate that
+   fails the build. The full list is in the README.
+
+10. **Every design writes its own sample copy.** Shared defaults meant twelve
+    designs all saying "Anjali & Rahul", which reads as one design shown twelve
+    times. The sample names are the first thing anybody sees, so no two designs
+    may share them, and a test enforces it.
