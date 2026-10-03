@@ -11,7 +11,9 @@
     "test": "node tests/templates.mjs && node tests/render-mp4.mjs && node tests/screens.mjs",
     "test:templates": "node tests/templates.mjs",
     "test:render": "node tests/render-mp4.mjs",
-    "test:screens": "node tests/screens.mjs"
+    "test:screens": "node tests/screens.mjs",
+    "build:pages": "KSHANAM_BASE=/kshanam-website/ vite build --outDir ../docs --emptyOutDir && touch docs/.nojekyll",
+    "test:built": "node tests/built-site.mjs"
   },
   "devDependencies": {
     "playwright": "^1.63.0",

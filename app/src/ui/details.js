@@ -339,7 +339,7 @@ $('share').addEventListener('click', async () => {
 
 $('fb-good').addEventListener('click', async () => {
   const text = ui.lang === 'ml' ? t('ml', 'shareSite') : t('en', 'shareSite');
-  const url = location.origin + '/';
+  const url = location.origin + import.meta.env.BASE_URL;
   if (navigator.share) {
     try { await navigator.share({ title: 'Kshanam', text, url }); return; } catch { /* dismissed */ }
   }

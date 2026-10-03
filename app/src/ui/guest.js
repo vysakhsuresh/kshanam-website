@@ -41,7 +41,8 @@ for (const btn of document.querySelectorAll('.lang-toggle button')) {
 }
 
 document.getElementById('guest-name').textContent = template.name;
-document.getElementById('use').href = `/details.html?t=${encodeURIComponent(template.id)}`;
+document.getElementById('use').href =
+  `${import.meta.env.BASE_URL}details.html?t=${encodeURIComponent(template.id)}`;
 document.getElementById('use').addEventListener('click', () => {
   const details = loadDetails();
   details.templateId = template.id;

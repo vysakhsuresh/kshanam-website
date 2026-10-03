@@ -7,7 +7,12 @@ const page = (name) => resolve(here, 'app', name);
 
 // The app lives in app/ so the entry pages sit together, and the build output
 // goes to dist/, which is what Cloudflare Pages publishes.
+// GitHub Pages serves the repo under /kshanam-website/; Cloudflare Pages
+// serves it at the root. One build, one environment variable.
+const base = process.env.KSHANAM_BASE || '/';
+
 export default defineConfig({
+  base,
   root: 'app',
   publicDir: 'public',
   build: {

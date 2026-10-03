@@ -166,6 +166,31 @@ H.264 encode itself needs a real device. Please try it on a phone early.
 
 ---
 
+## Looking at it on a phone (GitHub Pages preview)
+
+A built copy lives in `docs/` so GitHub Pages can serve it without any CI.
+It is a preview only - Cloudflare Pages is still the real target.
+
+Turn it on once, in the repo's **Settings -> Pages**:
+
+- **Source:** Deploy from a branch
+- **Branch:** `claude/gifted-bardeen-fnv928`
+- **Folder:** `/docs`   (not `/ (root)`)
+
+Then it appears at **https://vysakhsuresh.github.io/kshanam-website/** a
+minute or two later.
+
+To refresh it after a change:
+
+```sh
+npm run build:pages     # rebuilds docs/ with the /kshanam-website/ base
+npm run test:built      # serves docs' build from a sub-path and drives it
+git add docs && git commit -m "Refresh the Pages preview" && git push
+```
+
+`docs/` is a build output and is committed on purpose; everything in it comes
+from `app/`. Never edit it by hand.
+
 ## Deploying to Cloudflare Pages
 
 Static output, free plan, well inside the 20,000 file and 25 MiB limits.

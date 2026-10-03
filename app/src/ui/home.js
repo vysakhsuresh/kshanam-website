@@ -83,7 +83,8 @@ function renderDesigns() {
   for (const template of forOccasion(ui.occasion)) {
     const a = document.createElement('a');
     a.className = 'design';
-    a.href = `/details.html?t=${encodeURIComponent(template.id)}&o=${encodeURIComponent(ui.occasion)}`;
+    a.href = `${import.meta.env.BASE_URL}details.html`
+      + `?t=${encodeURIComponent(template.id)}&o=${encodeURIComponent(ui.occasion)}`;
     a.addEventListener('click', () => {
       const details = loadDetails();
       details.templateId = template.id;
