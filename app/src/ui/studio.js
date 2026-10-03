@@ -488,6 +488,10 @@ ensureFonts(templateFamilies(template), BASE)
     const opening = player.prepared.scenes.find((s) => s.id === 'names')
       || player.prepared.scenes[0];
     player.seek(opening.start + Math.min(1.6, opening.duration * 0.45));
-    $('hint').textContent = `${template.name} — ${player.prepared.scenes.length} slides, `
-      + `${Math.round(player.duration)} seconds.`;
+    // The design's own one-line idea, which is the sentence that justified it
+    // existing. Worth more here than a second count on its own.
+    $('hint').textContent = [
+      `${template.name} — ${player.prepared.scenes.length} slides, ${Math.round(player.duration)} seconds.`,
+      template.idea,
+    ].filter(Boolean).join(' ');
   });
