@@ -175,6 +175,33 @@ async function main() {
        dim.length ? dim.map((b) => `${b.where}/"${b.text}" ${b.ratio}:1`).join('; ')
                   : `${buttons.length} buttons checked`);
 
+    // Get help, on every page: a button that is always there and two ways to
+    // reach a person. And no trace of the old product name anywhere.
+    const helpRows = [];
+    for (const name of ['', 'studio.html', 'guest.html', 'help.html']) {
+      await page.goto(`${base}/${name}`, { waitUntil: 'load' });
+      await page.waitForTimeout(400);
+      helpRows.push(await page.evaluate((where) => {
+        const fab = document.querySelector('.help-fab');
+        if (fab) fab.click();
+        const hrefs = [...document.querySelectorAll('.help-option')]
+          .map((a) => a.getAttribute('href') || '');
+        return {
+          where: where || 'home',
+          fab: !!fab,
+          whatsapp: hrefs.some((h) => h.startsWith('https://wa.me/')),
+          email: hrefs.some((h) => h.startsWith('mailto:')),
+          oldName: (document.documentElement.innerHTML.match(/festa/gi) || []).length,
+        };
+      }, name));
+    }
+    const noFab = helpRows.filter((r) => !r.fab || !r.whatsapp || !r.email);
+    ok('get help offers WhatsApp and email on every page', noFab.length === 0,
+       noFab.length ? noFab.map((r) => r.where).join(', ') : `${helpRows.length} pages`);
+    const stale = helpRows.filter((r) => r.oldName > 0);
+    ok('nothing still says the old product name', stale.length === 0,
+       stale.map((r) => `${r.where} (${r.oldName})`).join(', ') || 'clean');
+
     await page.goto(base + '/', { waitUntil: 'networkidle' });
     // The gallery pages at 24 cards, so the library size comes from the
     // "Everything" chip rather than from how many cards happen to be in the
