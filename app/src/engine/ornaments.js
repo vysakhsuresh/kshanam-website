@@ -103,17 +103,45 @@ export const MOTIFS = {
     },
   },
 
+  /**
+   * A dove in flight: round head, oval body, one raised wing, a fanned tail.
+   *
+   * Two loose curves - which is what this was - read as a leaf, and a leaf on
+   * a baptism card is not a near miss, it is the wrong drawing. The head is a
+   * circle on purpose: at 50px with a hairline stroke, a shape the eye can
+   * name beats a shape that is anatomically closer.
+   */
   dove: {
-    w: 34, h: 24,
+    w: 36, h: 28,
     draw(ctx) {
+      // Body.
       ctx.beginPath();
-      ctx.moveTo(2, 16);
-      ctx.quadraticCurveTo(12, 20, 22, 14);
-      ctx.quadraticCurveTo(30, 10, 32, 3);
+      ctx.moveTo(8, 20);
+      ctx.bezierCurveTo(10, 26, 24, 25, 26, 16);
+      ctx.bezierCurveTo(27, 12, 22, 9, 16, 11);
+      ctx.bezierCurveTo(10, 13, 7, 16, 8, 20);
+      ctx.stroke();
+      // Head and beak.
+      ctx.beginPath();
+      ctx.arc(28, 9, 4.2, 0, Math.PI * 2);
       ctx.stroke();
       ctx.beginPath();
-      ctx.moveTo(10, 15);
-      ctx.quadraticCurveTo(15, 4, 24, 6);
+      ctx.moveTo(32, 8.4);
+      ctx.lineTo(36, 10.2);
+      ctx.lineTo(32, 11.2);
+      ctx.stroke();
+      // The raised wing.
+      ctx.beginPath();
+      ctx.moveTo(14, 15);
+      ctx.quadraticCurveTo(15, 4, 24, 2);
+      ctx.quadraticCurveTo(21, 10, 22, 17);
+      ctx.stroke();
+      // Tail feathers.
+      ctx.beginPath();
+      ctx.moveTo(9, 18.5);
+      ctx.lineTo(1, 14.5);
+      ctx.moveTo(9, 21);
+      ctx.lineTo(1, 22);
       ctx.stroke();
     },
   },
@@ -862,13 +890,20 @@ export function motifSize(name, height) {
 export function drawMotif(ctx, name, cx, cy, height, opts = {}) {
   const m = MOTIFS[name];
   if (!m) return;
-  const scale = height / m.h;
+
+  // `height` is the size a design asks for, and most motifs are about as wide
+  // as they are tall, so scaling by height is right for them. The rule-shaped
+  // ones are not: dot-rule is 80x6, so asking for 56 asks for something 746px
+  // wide on a 360px frame, and what lands is four enormous dots with the rest
+  // off the edge. Nothing may be drawn wider than the live measure.
+  const maxWidth = opts.maxWidth || 240;
+  const scale = Math.min(height / m.h, maxWidth / m.w);
   const stroke = opts.stroke || opts.fill || '#000';
 
   ctx.save();
   ctx.translate(cx, cy);
   if (opts.rotate) ctx.rotate(opts.rotate);
-  ctx.translate(-(m.w * scale) / 2, -height / 2);
+  ctx.translate(-(m.w * scale) / 2, -(m.h * scale) / 2);
   ctx.scale(scale, scale);
   ctx.lineWidth = (opts.width || 1.6) / scale;
   ctx.lineCap = 'round';
