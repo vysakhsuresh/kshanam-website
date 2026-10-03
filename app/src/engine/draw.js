@@ -113,6 +113,19 @@ function drawCover(ctx, bitmap, box, focal = {}, zoom = 1) {
 }
 
 export function drawLayer(ctx, layer, env) {
+  // One place for opacity, rather than every layer type reinventing it. A
+  // photograph used as a ground needs a wash of the design's own paper colour
+  // over it, which is a rect at an alpha, and rects had no alpha.
+  if (layer.alpha != null && layer.alpha < 1 && layer.type !== 'pattern') {
+    const prev = ctx.globalAlpha;
+    ctx.globalAlpha = prev * layer.alpha;
+    try { drawLayerBody(ctx, layer, env); } finally { ctx.globalAlpha = prev; }
+    return;
+  }
+  drawLayerBody(ctx, layer, env);
+}
+
+function drawLayerBody(ctx, layer, env) {
   switch (layer.type) {
     case 'rect': {
       const style = styleFor(ctx, layer.fill, env,

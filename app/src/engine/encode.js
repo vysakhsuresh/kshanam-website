@@ -95,7 +95,7 @@ export async function renderToMp4(o) {
   const photos = Object.entries((values && values.photos) || {})
     .filter(([, p]) => p && p.bitmap)
     .map(([slot]) => slot);
-  const prepared = prepare(template, { photos });
+  const prepared = prepare(template, { photos, photoMode: o.photoMode });
   const frames = frameCount(prepared, fps);
 
   const caps = await detectCapabilities({ width: canvas.width, height: canvas.height });

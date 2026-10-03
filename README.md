@@ -134,6 +134,29 @@ editable by hand:
 Either way the renderer is untouched. That is the rule the format exists to
 protect.
 
+### Photos
+
+Up to four, and one decision about where they go — because "can I use my own
+photo" really means three different things:
+
+| Where | What happens |
+| --- | --- |
+| On their own slide | An extra page, laid out by how many pictures there are |
+| Behind everything | The first picture becomes the ground for the whole invitation |
+| Both | A page of their own, and behind |
+
+Nobody is asked to choose a *layout*. One picture fills the panel, two stand
+side by side, three put the best one on top, four make a square — the engine
+builds the boxes from the count, so a design carries an area and a treatment
+(`photoPage`) rather than four versions of the same slide, and adding a
+picture never means editing a design.
+
+A picture used as the ground is washed back with the design's own paper colour
+at 0.7. That number was measured against a deliberately awful test image: past
+about 0.78 the photograph disappears, under about 0.6 the names start to fight
+it. A design whose ground is already a photograph — the `photoLed` recipe —
+skips the wash, because it has its own scrim.
+
 ### Fields, and why switching design keeps your typing
 
 A design names a *fieldset* — `couple`, `person` or `event` — and supplies its
@@ -155,7 +178,8 @@ VP9/AV1/VP8 and Opus. `MediaRecorder` is deliberately unused.
 - **The H.264 encode has never run on a real phone.** CI's Chromium ships
   without proprietary codecs, so the tests exercise the VP9/Opus fallback. The
   codec *selection* is tested; the encode itself needs a real Android.
-- Photo slots exist on every design but only one per design is used so far.
+- No way yet to reorder the pictures once added; removing and re-adding is the
+  only way to change which one is first.
 - No design ships Malayalam sample copy. Typed Malayalam shapes correctly on
   every design through the script font stack, and a test proves it by drawing
   Malayalam into a design built around a Latin serif — but the words the site

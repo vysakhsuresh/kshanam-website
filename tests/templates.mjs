@@ -169,7 +169,20 @@ async function checkTemplate(file, fieldsets) {
     if (seen.has(scene.id)) note(file, `two scenes share the id "${scene.id}"`);
     seen.add(scene.id);
     if (!(scene.duration > 0)) note(file, `scene "${scene.id}" has no duration`);
-    if (!Array.isArray(scene.layers) || !scene.layers.length) {
+    // A photo page carries an area and a treatment rather than layers: the
+    // engine builds the boxes for however many pictures were actually added.
+    if (scene.photoPage) {
+      const pg = scene.photoPage;
+      for (const key of ['x', 'y', 'w', 'h']) {
+        if (!(typeof pg[key] === 'number')) note(file, `scene "${scene.id}": photoPage has no ${key}`);
+      }
+      if (pg.x < 0 || pg.y < 0 || pg.x + pg.w > 360 || pg.y + pg.h > 640) {
+        note(file, `scene "${scene.id}": photoPage runs outside the frame`);
+      }
+      if (pg.w < 120 || pg.h < 140) {
+        note(file, `scene "${scene.id}": photoPage is ${pg.w}x${pg.h}; four pictures in that is a contact sheet`);
+      }
+    } else if (!Array.isArray(scene.layers) || !scene.layers.length) {
       note(file, `scene "${scene.id}" has no layers`);
     }
     if (scene.requires && !photoSlots.has(scene.requires)) {
@@ -234,6 +247,42 @@ async function checkTemplate(file, fieldsets) {
   }
 
   checkTaste(file, t);
+
+  // Every arrangement has to build, not just the one-picture case, and no
+  // picture may be laid outside the frame whatever the count.
+  const slotList = [...photoSlots];
+  for (let n = 1; n <= slotList.length; n++) {
+    const laid = prepare(t, { photos: slotList.slice(0, n) });
+    const page = laid.scenes.find((sc) => sc.id === 'photo');
+    if (!page) continue;
+    if (page.layers.length !== n) {
+      note(file, `with ${n} photo${n === 1 ? '' : 's'} the photo page drew ${page.layers.length}`);
+    }
+    for (const l of page.layers) {
+      if (l.x < 0 || l.y < 0 || l.x + l.w > 360 || l.y + l.h > 640 || l.w < 40 || l.h < 40) {
+        note(file, `with ${n} photos a picture lands at ${l.x},${l.y} ${l.w}x${l.h}`);
+      }
+      if (!photoSlots.has(l.slot)) note(file, `photo page uses undeclared slot "${l.slot}"`);
+    }
+  }
+
+  // A photograph used as the ground must not bury the design: the wash over it
+  // is what keeps every text colour in the palette readable.
+  const ground = prepare(t, { photos: slotList.slice(0, 1), photoMode: 'background' });
+  const hasGroundPhoto = ground.background.some((l) => l.type === 'photo');
+  if (!hasGroundPhoto) note(file, 'a photo used as the ground never reaches the background');
+
+  // Either the photograph is washed back with the design's own paper colour,
+  // or the design is one whose ground is a photograph already and carries its
+  // own scrim. What is not allowed is a picture at full strength under text.
+  const washed = ground.background.some((l) => l.type === 'rect' && l.alpha > 0.5 && l.alpha < 1);
+  const scrimmed = (t.background || []).some((l) =>
+    l.type === 'photo'
+    || (l.type === 'rect' && l.fill && typeof l.fill === 'object' && Array.isArray(l.fill.stops)
+        && l.fill.stops.some(([, c]) => /rgba\(0,\s*0,\s*0,\s*0?\.[5-9]/.test(String(c)))));
+  if (hasGroundPhoto && !washed && !scrimmed) {
+    note(file, 'a photo used as the ground is neither washed back nor scrimmed');
+  }
 
   // Lengths, with and without the optional photo scene, through the real
   // timeline builder rather than by adding numbers up here.

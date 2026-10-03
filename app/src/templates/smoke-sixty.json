@@ -76,11 +76,30 @@
   },
   "photoSlots": [
     {
-      "key": "main",
+      "key": "p1",
       "label": "Photo",
       "hint": "A picture of the people this is about"
+    },
+    {
+      "key": "p2",
+      "label": "Photo 2",
+      "hint": "Optional"
+    },
+    {
+      "key": "p3",
+      "label": "Photo 3",
+      "hint": "Optional"
+    },
+    {
+      "key": "p4",
+      "label": "Photo 4",
+      "hint": "Optional"
     }
   ],
+  "photoGround": {
+    "fill": "@bg",
+    "alpha": 0.7
+  },
   "transition": 0.5,
   "background": [
     {
@@ -93,7 +112,7 @@
     },
     {
       "type": "photo",
-      "slot": "main",
+      "slot": "p1",
       "x": 0,
       "y": 0,
       "w": 360,

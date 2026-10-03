@@ -49,6 +49,7 @@ self.onmessage = async (event) => {
     const result = await renderToMp4({
       template: msg.template,
       values: msg.values,
+      photoMode: msg.photoMode,
       canvas,
       fps: msg.fps,
       music: msg.music || 'music-box',

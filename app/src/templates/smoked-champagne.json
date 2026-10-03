@@ -76,11 +76,30 @@
   },
   "photoSlots": [
     {
-      "key": "main",
+      "key": "p1",
       "label": "Photo",
       "hint": "A picture of the people this is about"
+    },
+    {
+      "key": "p2",
+      "label": "Photo 2",
+      "hint": "Optional"
+    },
+    {
+      "key": "p3",
+      "label": "Photo 3",
+      "hint": "Optional"
+    },
+    {
+      "key": "p4",
+      "label": "Photo 4",
+      "hint": "Optional"
     }
   ],
+  "photoGround": {
+    "fill": "@bg",
+    "alpha": 0.7
+  },
   "transition": 0.5,
   "background": [
     {
@@ -288,31 +307,15 @@
     },
     {
       "id": "photo",
-      "duration": 4,
-      "requires": "main",
-      "layers": [
-        {
-          "type": "photo",
-          "slot": "main",
-          "motion": {
-            "preset": "zoom-in",
-            "amount": 0.06
-          },
-          "anim": {
-            "in": {
-              "preset": "scale-in",
-              "at": 0.1,
-              "dur": 0.9
-            }
-          },
-          "x": 0,
-          "y": 0,
-          "w": 360,
-          "h": 232,
-          "anchorX": 180,
-          "anchorY": 116
-        }
-      ]
+      "duration": 4.5,
+      "photoPage": {
+        "gap": 4,
+        "x": 0,
+        "y": 0,
+        "w": 360,
+        "h": 232
+      },
+      "layers": []
     },
     {
       "id": "when",

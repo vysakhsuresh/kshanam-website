@@ -33,6 +33,8 @@ function write(key, value) {
 }
 
 export const DEFAULT_ENTRY = {
+  // Where the family's pictures go: 'slide', 'background' or 'both'.
+  photoMode: 'slide',
   templateId: 'kasavu-gold',
   music: 'music-box',
   values: {},

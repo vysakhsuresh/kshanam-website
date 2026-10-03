@@ -15,6 +15,7 @@ export function createPlayer(canvas, options = {}) {
   let template = options.template;
   let entered = options.entered || {};
   let photos = options.photos || {};
+  let photoMode = options.photoMode || 'slide';
   let prepared = null;
   let time = 0;
   let playing = false;
@@ -27,7 +28,7 @@ export function createPlayer(canvas, options = {}) {
 
   function rebuild() {
     const filled = Object.keys(photos).filter((k) => photos[k] && photos[k].bitmap);
-    prepared = prepare(template, { photos: filled });
+    prepared = prepare(template, { photos: filled, photoMode });
     if (time > prepared.duration) time = 0;
   }
 
@@ -90,6 +91,7 @@ export function createPlayer(canvas, options = {}) {
     },
     setEntered(next) { entered = next; draw(); },
     setPhotos(next) { photos = next; rebuild(); draw(); },
+    setPhotoMode(next) { photoMode = next; rebuild(); draw(); },
     setTemplate(next, nextEntered) {
       template = next;
       if (nextEntered) entered = nextEntered;

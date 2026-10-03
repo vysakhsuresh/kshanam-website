@@ -299,9 +299,56 @@ async function main() {
 
     ok('music can be chosen', await page.locator('#music .choice').count() >= 6,
        String(await page.locator('#music .choice').count()));
-    ok('a photo can be added', await page.locator('#photos input[type=file]').count() >= 1);
+    ok('four pictures can be added', await page.locator('#photos input[type=file]').count() === 4);
     ok('photo controls stay hidden until there is a photo',
        await page.locator('.photo-sliders:visible').count() === 0);
+    ok('where-the-pictures-go is not asked until there is one',
+       await page.locator('#photos .choice').count() === 0);
+
+    // Add pictures one at a time and watch the photo page rearrange itself.
+    // Nobody is asked to choose a layout, so the engine has to get it right
+    // for one, two, three and four.
+    const png = (seed) => page.evaluate((i) => {
+      const c = document.createElement('canvas'); c.width = 600; c.height = 800;
+      const x = c.getContext('2d');
+      x.fillStyle = `hsl(${i * 70} 60% 45%)`; x.fillRect(0, 0, 600, 800);
+      return c.toDataURL('image/png');
+    }, seed);
+    const laid = [];
+    for (let n = 1; n <= 4; n++) {
+      const inputs = await page.$$('#photos input[type=file]');
+      await inputs[n - 1].setInputFiles({
+        name: `p${n}.png`, mimeType: 'image/png',
+        buffer: Buffer.from((await png(n)).split(',')[1], 'base64'),
+      });
+      await page.waitForTimeout(450);
+      laid.push(await page.evaluate(() => {
+        const sc = window.__player && window.__player.prepared.scenes.find((x) => x.id === 'photo');
+        return sc ? sc.layers.length : -1;
+      }));
+    }
+    ok('the photo page lays out one, two, three and four',
+       laid.join(',') === '1,2,3,4', laid.join(','));
+
+    ok('where the pictures go is asked once there is one',
+       await page.locator('#photos .choice').count() === 3);
+
+    // "Behind everything" has to reach the background, and has to be washed
+    // back, or the names land on a photograph at full strength.
+    await page.locator('#photos .choice', { hasText: 'Behind everything' }).first().click();
+    await page.waitForTimeout(400);
+    const ground = await page.evaluate(() => {
+      const bg = window.__player ? window.__player.prepared.background : [];
+      return {
+        photo: bg.some((l) => l.type === 'photo'),
+        wash: bg.some((l) => l.type === 'rect' && l.alpha > 0.5 && l.alpha < 1),
+      };
+    });
+    ok('a picture behind everything reaches the background and is washed back',
+       ground.photo && ground.wash, JSON.stringify(ground));
+
+    await page.locator('#photos .choice', { hasText: 'On their own slide' }).first().click();
+    await page.waitForTimeout(300);
     ok('nothing marked hidden is actually on screen',
        await page.locator('[hidden]:visible').count() === 0,
        String(await page.locator('[hidden]:visible').count()));

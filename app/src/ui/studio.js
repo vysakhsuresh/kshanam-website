@@ -52,6 +52,7 @@ const persist = () => {
 /* -------------------------------------------------------------- player */
 
 const player = createPlayer($('player'), { template, entered, photos, base: BASE,
+  photoMode: entry.photoMode,
   onTime: (t, duration, scene) => {
     $('scrub').value = String(Math.round((t / duration) * 1000));
     $('time').textContent = clock(t);
@@ -59,6 +60,13 @@ const player = createPlayer($('player'), { template, entered, photos, base: BASE
   },
   onEnd: () => setPlayIcon(false),
 });
+
+// A deliberate seam for tests, which drive this page rather than a harness:
+// the storyboard shows that a photo slide exists but not how it is laid out,
+// and the layout is the part worth checking. Nothing secret - the player is
+// reachable from the console on any static page anyway.
+window.__player = player;
+
 
 function clock(sec) {
   const s = Math.floor(sec);
@@ -96,6 +104,7 @@ function buildSlides() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'slide';
+    btn.dataset.scene = scene.id;
     btn.title = `Jump to this slide`;
     btn.setAttribute('aria-label', `Slide ${slideCanvases.length + 1}`);
 
@@ -192,94 +201,167 @@ function schedulePaint() {
 
 /* -------------------------------------------------------------- photos */
 
+/**
+ * Up to four pictures, and one decision about where they go.
+ *
+ * The decision is the whole feature. "Can I use my own photo" really means
+ * three different things — a page of their own, behind the whole invitation,
+ * or both — and asking which of three is a question anybody can answer. How
+ * two or three pictures are arranged is not a question anybody wants, so the
+ * engine decides that from how many there are.
+ */
+const PHOTO_PLACES = [
+  { id: 'slide', name: 'On their own slide', note: 'An extra page in the invitation' },
+  { id: 'background', name: 'Behind everything', note: 'Softened, so the words stay readable' },
+  { id: 'both', name: 'Both', note: 'A page of their own, and behind' },
+];
+
+let selectedSlot = null;
+
+function photoCount() {
+  return (template.photoSlots || []).filter((s) => photos[s.key]).length;
+}
+
+function openPhoto(slot, file) {
+  file.value = '';
+  file.click();
+}
+
+function removePhoto(key) {
+  delete photos[key];
+  setPhotoFile(key, null);
+  if (selectedSlot === key) selectedSlot = null;
+  player.setPhotos(photos);
+  buildPhotos();
+  buildSlides();
+  schedulePaint();
+}
+
 function buildPhotos() {
   const host = $('photos');
   host.textContent = '';
+  const slots = template.photoSlots || [];
 
-  for (const slot of template.photoSlots || []) {
-    const row = document.createElement('div');
-    row.className = 'photo-row';
+  const strip = document.createElement('div');
+  strip.className = 'photo-strip';
 
-    const thumb = document.createElement('div');
-    thumb.className = 'photo-thumb';
-    const img = document.createElement('img');
-    img.alt = '';
-    img.hidden = true;
-    thumb.appendChild(img);
+  for (const slot of slots) {
+    const has = !!photos[slot.key];
+    const cell = document.createElement('div');
+    cell.className = 'photo-cell' + (has ? ' is-set' : '') +
+      (selectedSlot === slot.key ? ' is-active' : '');
 
     const file = document.createElement('input');
     file.type = 'file';
     file.accept = 'image/*';
     file.className = 'visually-hidden';
-    file.id = `photo-${slot.key}`;
-
-    const pick = document.createElement('button');
-    pick.type = 'button';
-    pick.className = 'btn btn-ghost';
-    pick.textContent = 'Add a photo';
-    pick.addEventListener('click', () => {
-      if (photos[slot.key]) {
-        delete photos[slot.key];
-        setPhotoFile(slot.key, null);
-        file.value = '';
-        img.hidden = true;
-        img.removeAttribute('src');
-        pick.textContent = 'Add a photo';
-        sliders.hidden = true;
-        player.setPhotos(photos);
-        buildSlides();
-      } else {
-        file.click();
-      }
-    });
-
-    // Focal point and zoom: one slot has to work for a portrait, a group and
-    // a landscape, and centre-cropping fails all three.
-    const sliders = document.createElement('div');
-    sliders.className = 'photo-sliders';
-    sliders.hidden = true;
-    sliders.innerHTML = `
-      <label>Across <input type="range" min="0" max="100" value="50" data-axis="x" /></label>
-      <label>Up/down <input type="range" min="0" max="100" value="50" data-axis="y" /></label>
-      <label>Zoom <input type="range" min="100" max="220" value="100" data-axis="zoom" /></label>`;
-    sliders.addEventListener('input', (e) => {
-      const axis = e.target.dataset.axis;
-      const entryFor = photos[slot.key];
-      if (!entryFor || !axis) return;
-      if (axis === 'zoom') entryFor.zoom = Number(e.target.value) / 100;
-      else entryFor.focal[axis] = Number(e.target.value) / 100;
-      player.setPhotos(photos);
-      schedulePaint();
-    });
-
     file.addEventListener('change', async () => {
       const chosen = file.files && file.files[0];
       if (!chosen) return;
       try {
         const bitmap = await createImageBitmap(chosen);
-        photos[slot.key] = { bitmap, focal: { x: 0.5, y: 0.5 }, zoom: 1 };
+        photos[slot.key] = { bitmap, focal: { x: 0.5, y: 0.5 }, zoom: 1, url: URL.createObjectURL(chosen) };
         setPhotoFile(slot.key, chosen);
-        img.src = URL.createObjectURL(chosen);
-        img.hidden = false;
-        pick.textContent = 'Remove';
-        sliders.hidden = false;
+        selectedSlot = slot.key;
         player.setPhotos(photos);
+        buildPhotos();
         buildSlides();
+        schedulePaint();
       } catch {
         $('form-error').textContent = 'That picture could not be opened. Try another one.';
       }
     });
 
-    const col = document.createElement('div');
-    col.style.flex = '1';
-    col.style.minWidth = '180px';
-    const hint = document.createElement('p');
-    hint.className = 'stage-hint';
-    hint.textContent = slot.hint || 'Optional. It stays on your device.';
-    col.append(pick, hint);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'photo-tile';
+    if (has) {
+      const img = document.createElement('img');
+      img.src = photos[slot.key].url;
+      img.alt = '';
+      button.appendChild(img);
+      button.title = 'Adjust this picture';
+      button.setAttribute('aria-label', `Adjust ${slot.label}`);
+      button.addEventListener('click', () => {
+        selectedSlot = selectedSlot === slot.key ? null : slot.key;
+        buildPhotos();
+      });
+    } else {
+      button.innerHTML = '<span aria-hidden="true">+</span>';
+      button.setAttribute('aria-label', `Add ${slot.label}`);
+      button.addEventListener('click', () => openPhoto(slot.key, file));
+    }
+    cell.append(button, file);
 
-    row.append(thumb, col, sliders);
-    host.append(row, file);
+    if (has) {
+      const drop = document.createElement('button');
+      drop.type = 'button';
+      drop.className = 'photo-remove';
+      drop.innerHTML = '&times;';
+      drop.setAttribute('aria-label', `Remove ${slot.label}`);
+      drop.addEventListener('click', () => removePhoto(slot.key));
+      cell.appendChild(drop);
+    }
+    strip.appendChild(cell);
+  }
+  host.appendChild(strip);
+
+  const hint = document.createElement('p');
+  hint.className = 'stage-hint';
+  hint.textContent = photoCount()
+    ? 'Tap a picture to move it about inside its frame. They stay on your device.'
+    : 'Optional, up to four. They stay on your device and are never uploaded.';
+  host.appendChild(hint);
+
+  // Focal point and zoom, for whichever picture is being adjusted. One frame
+  // has to work for a portrait, a group and a landscape, and centre-cropping
+  // fails all three.
+  if (selectedSlot && photos[selectedSlot]) {
+    const p = photos[selectedSlot];
+    const sliders = document.createElement('div');
+    sliders.className = 'photo-sliders';
+    sliders.innerHTML = `
+      <label>Across <input type="range" min="0" max="100" data-axis="x" /></label>
+      <label>Up/down <input type="range" min="0" max="100" data-axis="y" /></label>
+      <label>Zoom <input type="range" min="100" max="220" data-axis="zoom" /></label>`;
+    sliders.querySelector('[data-axis=x]').value = Math.round(p.focal.x * 100);
+    sliders.querySelector('[data-axis=y]').value = Math.round(p.focal.y * 100);
+    sliders.querySelector('[data-axis=zoom]').value = Math.round(p.zoom * 100);
+    sliders.addEventListener('input', (e) => {
+      const axis = e.target.dataset.axis;
+      if (!axis) return;
+      if (axis === 'zoom') p.zoom = Number(e.target.value) / 100;
+      else p.focal[axis] = Number(e.target.value) / 100;
+      player.setPhotos(photos);
+      schedulePaint();
+    });
+    host.appendChild(sliders);
+  }
+
+  // Where they go. Only worth asking once there is a picture to place.
+  if (photoCount()) {
+    const label = document.createElement('p');
+    label.className = 'field-label';
+    label.textContent = 'Where do the pictures go?';
+    const places = document.createElement('div');
+    places.className = 'choices';
+    for (const place of PHOTO_PLACES) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'choice';
+      b.innerHTML = `${place.name} <small>${place.note}</small>`;
+      b.setAttribute('aria-pressed', String(entry.photoMode === place.id));
+      b.addEventListener('click', () => {
+        entry.photoMode = place.id;
+        saveEntry(entry);
+        player.setPhotoMode(place.id);
+        buildPhotos();
+        buildSlides();
+        schedulePaint();
+      });
+      places.appendChild(b);
+    }
+    host.append(label, places);
   }
 }
 
@@ -418,6 +500,7 @@ $('make').addEventListener('click', () => {
     type: 'render',
     template,
     values: toValues(entered, payload),
+    photoMode: entry.photoMode,
     music: entry.music === 'file' && !songPcm ? 'music-box' : entry.music,
     pcm: songPcm,
     baseUrl: BASE,

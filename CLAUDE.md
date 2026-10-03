@@ -256,3 +256,12 @@ the next person does not "fix" them back.
     with a rule through it reads as "no entry", and an envelope or a folded
     page is somebody else's icon. The filled version is the favicon, because a
     hairline disappears in a browser tab.
+
+12. **Photos: four, and one question.** "Can I use my own photo" means three
+    things — a page of their own, behind the whole invitation, or both — so
+    that is the only question asked. How two or three pictures are *arranged*
+    is not a question anybody wants, so the engine builds the boxes from the
+    count and a design carries an area and a treatment rather than four
+    versions of the same slide. A picture used as the ground is washed back
+    with the design's own paper colour, which is what keeps every text colour
+    in the palette readable over it.

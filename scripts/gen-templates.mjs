@@ -111,9 +111,16 @@ function nameLayers(spec, opts) {
   ];
 }
 
-const photoScene = (layer) => ({
-  id: 'photo', duration: 4, requires: 'main',
-  layers: [{ type: 'photo', slot: 'main', motion: { preset: 'zoom-in', amount: 0.06 }, anim: scaleIn(0.1, 0.9), ...layer }],
+/**
+ * The photo page: an area and a treatment, not a fixed set of boxes.
+ *
+ * The engine lays the pictures out for however many the family added - one
+ * fills the panel, two stand side by side, three put the best one on top,
+ * four make a square - so a design never has to carry four versions of the
+ * same slide, and adding a picture never means editing a design.
+ */
+const photoScene = (page) => ({
+  id: 'photo', duration: 4.5, photoPage: { gap: 10, ...page }, layers: [],
 });
 
 
@@ -226,7 +233,7 @@ const RECIPES = {
           ...nameLayers(spec, { big: 52, y: 252, gap: 48 }),
           rule(404, 26, { anim: growWidth(1.4) }),
         ] },
-        photoScene({ x: 90, y: 186, w: 180, h: 240, radius: 3, stroke: '@accent', width: 1, anchorX: MID, anchorY: 306 }),
+        photoScene({ x: 48, y: 150, w: 264, h: 330, radius: 3, stroke: '@accent', width: 1 }),
         { id: 'when', duration: 5, layers: [
           text({ text: '{{dateLong}}', font: 'body', weight: 600, size: 26, color: '@ink', y: 284, maxWidth: DISPLAY_W, maxLines: 2, lineHeight: 1.25, minSize: 16, anim: fadeUp(0.3) }),
           text({ text: '{{timeLabel}} {{timeText}}', font: 'body', size: 18, color: '@muted', y: 334, maxWidth: DISPLAY_W, maxLines: 2, anim: fadeUp(0.75) }),
@@ -264,7 +271,7 @@ const RECIPES = {
           ...nameLayers(spec, { big: 44, y: 256, gap: 46, maxWidth: NARROW_W + 20 }),
           motif(spec.divider || 'diamond', 406, 11, { width: 1, anim: fadeIn(1.3) }),
         ] },
-        photoScene({ x: 94, y: 192, w: 172, h: 228, shape: 'arch', stroke: '@accent', width: 1.2, anchorX: MID, anchorY: 306 }),
+        photoScene({ x: 74, y: 152, w: 212, h: 320, shape: 'arch', stroke: '@accent', width: 1.2 }),
         { id: 'when', duration: 5, layers: [
           text({ text: '{{dateLong}}', font: 'display', size: 26, color: '@ink', y: 288, maxWidth: NARROW_W + 18, maxLines: 2, lineHeight: 1.25, minSize: 16, anim: fadeUp(0.3) }),
           text({ text: '{{timeLabel}} {{timeText}}', font: 'body', size: 18, color: '@muted', y: 336, maxWidth: NARROW_W + 18, maxLines: 2, anim: fadeUp(0.75) }),
@@ -326,7 +333,7 @@ const RECIPES = {
           ...nameLayers(spec, { big: 50, y: 250, gap: 52, align: 'left', x: L, joinerScale: 0.38 }),
           bar(420, { anim: growWidth(1.3) }),
         ] },
-        photoScene({ x: L, y: 184, w: 280, h: 244, radius: 2, anchorX: MID, anchorY: 306 }),
+        photoScene({ x: L, y: 148, w: 280, h: 336, radius: 2 }),
         { id: 'when', duration: 5, layers: [
           text({ align: 'left', x: L, text: '{{dateLong}}', font: 'display', weight: 600, size: 34, color: '@ink', y: 288, maxWidth: 276, maxLines: 2, lineHeight: 1.15, minSize: 18, anim: fadeUp(0.25) }),
           text({ align: 'left', x: L, text: '{{timeLabel}} {{timeText}}', font: 'body', size: 18, color: '@muted', y: 346, maxWidth: 276, anim: fadeUp(0.7) }),
@@ -364,7 +371,7 @@ const RECIPES = {
           ...nameLayers(spec, { big: 66, y: 250, gap: 54, joinerStyle: 'label', joinerColor: '@accentDark' }),
           rule(424, 140, { width: 0.8, anim: growWidth(1.6, 1.1) }),
         ] },
-        photoScene({ x: L, y: 148, w: 280, h: 312, radius: 0, anchorX: MID, anchorY: 304 }),
+        photoScene({ x: L, y: 140, w: 280, h: 348, radius: 0 }),
         { id: 'when', duration: 5, layers: [
           text({ text: '{{dateLong}}', font: 'display', size: 42, color: '@ink', y: 290, maxWidth: DISPLAY_W, maxLines: 2, lineHeight: 1.1, minSize: 20, anim: fadeUp(0.25) }),
           text({ text: '{{timeLabel}} {{timeText}}', font: 'body', size: 15, letterSpacing: 2.4, uppercase: true, color: '@muted', y: 348, maxWidth: DISPLAY_W, anim: fadeUp(0.8) }),
@@ -407,7 +414,7 @@ const RECIPES = {
           ...nameLayers(spec, { big: 42, y: 256, gap: 44, maxWidth: PANEL_W + 14 }),
           rule(392, 24, { anim: growWidth(1.4) }),
         ] },
-        photoScene({ x: 72, y: 180, w: 216, h: 248, radius: 2, stroke: '@accent', width: 1, anchorX: MID, anchorY: 304 }),
+        photoScene({ x: 60, y: 146, w: 240, h: 324, radius: 2, stroke: '@accent', width: 1 }),
         { id: 'when', duration: 5, layers: [
           text({ text: '{{dateLong}}', font: 'body', weight: 600, size: 24, color: '@ink', y: 288, maxWidth: PANEL_W + 14, maxLines: 2, lineHeight: 1.25, minSize: 15, anim: fadeUp(0.3) }),
           text({ text: '{{timeLabel}} {{timeText}}', font: 'body', size: 17, color: '@muted', y: 334, maxWidth: PANEL_W + 14, maxLines: 2, anim: fadeUp(0.75) }),
@@ -453,7 +460,7 @@ const RECIPES = {
         { id: 'names', duration: 6.5, layers: [
           ...nameLayers(spec, { big: 40, y: 276, gap: 44, color: '@bg', joinerColor: '@bg', subtitleColor: '@bg', joinerScale: 0.4, maxWidth: BODY_W }),
         ] },
-        photoScene({ x: 0, y: 0, w: W, h: top, anchorX: MID, anchorY: top / 2 }),
+        photoScene({ x: 0, y: 0, w: W, h: top, gap: 4 }),
         { id: 'when', duration: 5, layers: [
           text({ text: '{{dateLong}}', font: 'display', size: 30, color: '@bg', y: 296, maxWidth: BODY_W, maxLines: 2, lineHeight: 1.2, minSize: 17, anim: fadeUp(0.3) }),
           text({ text: '{{timeLabel}} {{timeText}}', font: 'body', size: 16, letterSpacing: 2, uppercase: true, color: '@bg', y: 348, maxWidth: BODY_W, anim: fadeUp(0.8) }),
@@ -474,7 +481,7 @@ const RECIPES = {
     return {
       background: [
         ground(spec),
-        { type: 'photo', slot: 'main', x: 0, y: 0, w: W, h: H, placeholderFill: '@bg',
+        { type: 'photo', slot: 'p1', x: 0, y: 0, w: W, h: H, placeholderFill: '@bg',
           motion: { preset: 'zoom-in', amount: 0.05 }, anim: fadeIn(0, 1) },
         // Keeps text readable whether or not a picture was added. A gradient
         // falloff, never a hard-edged box behind the caption.
@@ -507,6 +514,17 @@ const RECIPES = {
     };
   },
 };
+
+/**
+ * Four pictures, no more. Past four the slide stops being a card and starts
+ * being a contact sheet, and on a 360px frame each one is already small.
+ */
+const PHOTO_SLOTS = [
+  { key: 'p1', label: 'Photo', hint: 'A picture of the people this is about' },
+  { key: 'p2', label: 'Photo 2', hint: 'Optional' },
+  { key: 'p3', label: 'Photo 3', hint: 'Optional' },
+  { key: 'p4', label: 'Photo 4', hint: 'Optional' },
+];
 
 /* --------------------------------------------------------------- defaults */
 
@@ -703,7 +721,12 @@ export function buildTemplate(spec, fail = (m) => { throw new Error(`${spec.id}:
     design: { width: W, height: H },
     palette,
     fonts: spec.fonts,
-    photoSlots: [{ key: 'main', label: 'Photo', hint: 'A picture of the people this is about' }],
+    photoSlots: PHOTO_SLOTS,
+    // Strong enough that every colour in the palette still reads over a busy
+    // photograph, weak enough that the family can see the photograph. Measured
+    // against a deliberately awful test image: past about 0.78 the picture
+    // disappears, under about 0.6 the names start to fight it.
+    photoGround: { fill: '@bg', alpha: 0.7 },
     transition: 0.5,
     background,
     scenes,

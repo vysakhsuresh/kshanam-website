@@ -20,14 +20,80 @@ export const OUTPUT = { width: 720, height: 1280, fps: 30 };
 const DEFAULT_TRANSITION = 0.5;
 
 /**
+ * Where the family's pictures go. One control, three answers, because the
+ * question people actually ask is "can I use my own photo" and the three
+ * useful answers are: on a page of their own, behind the whole thing, or both.
+ */
+export const PHOTO_MODES = ['slide', 'background', 'both'];
+
+/**
+ * The arrangements, by how many pictures there are. Nobody is asked to pick a
+ * layout: one picture fills the panel, two stand side by side, three put the
+ * best one on top, four make a square. More than four stops being a card.
+ */
+function photoBoxes(area, count, gap) {
+  const { x, y, w, h } = area;
+  const g = gap;
+  if (count <= 1) return [{ x, y, w, h }];
+  if (count === 2) {
+    const cw = (w - g) / 2;
+    return [{ x, y, w: cw, h }, { x: x + cw + g, y, w: cw, h }];
+  }
+  if (count === 3) {
+    const topH = Math.round((h - g) * 0.56);
+    const botH = h - g - topH;
+    const cw = (w - g) / 2;
+    return [
+      { x, y, w, h: topH },
+      { x, y: y + topH + g, w: cw, h: botH },
+      { x: x + cw + g, y: y + topH + g, w: cw, h: botH },
+    ];
+  }
+  const cw = (w - g) / 2;
+  const ch = (h - g) / 2;
+  return [
+    { x, y, w: cw, h: ch }, { x: x + cw + g, y, w: cw, h: ch },
+    { x, y: y + ch + g, w: cw, h: ch }, { x: x + cw + g, y: y + ch + g, w: cw, h: ch },
+  ];
+}
+
+/** The photo page's layers, built for the pictures that actually exist. */
+function photoPageLayers(page, slots) {
+  const area = { x: page.x, y: page.y, w: page.w, h: page.h };
+  const boxes = photoBoxes(area, slots.length, page.gap != null ? page.gap : 10);
+  // One shape for one picture, squarer shapes for a grid: an arch is a
+  // portrait idea and reads as a doorway only when it has the room for one.
+  const shape = slots.length === 1 ? page.shape : (page.shape === 'circle' ? 'circle' : 'rect');
+  return boxes.map((box, i) => ({
+    type: 'photo',
+    slot: slots[i],
+    ...box,
+    shape,
+    radius: page.radius,
+    stroke: page.stroke,
+    width: page.width,
+    placeholderFill: '@bg',
+    anchorX: 180,
+    anchorY: box.y + box.h / 2,
+    motion: slots.length === 1 ? { preset: 'zoom-in', amount: 0.06 } : undefined,
+    anim: { in: { preset: 'scale-in', at: 0.1 + i * 0.12, dur: 0.8 } },
+  }));
+}
+
+/**
  * Normalise a design once, so per-frame work stays cheap.
  *
  * @param {object} template
  * @param {object} [opts]
- * @param {string[]} [opts.photos]  slot names that actually have a picture
+ * @param {string[]} [opts.photos]     slot names that actually have a picture
+ * @param {string}   [opts.photoMode]  'slide' | 'background' | 'both'
  */
 export function prepare(template, opts = {}) {
   const filled = new Set(opts.photos || []);
+  const order = (template.photoSlots || []).map((p) => p.key).filter((k) => filled.has(k));
+  const mode = PHOTO_MODES.includes(opts.photoMode) ? opts.photoMode : 'slide';
+  const wantsSlide = order.length > 0 && (mode === 'slide' || mode === 'both');
+  const wantsGround = order.length > 0 && (mode === 'background' || mode === 'both');
   const transition = template.transition != null ? template.transition : DEFAULT_TRANSITION;
 
   const scenes = [];
@@ -37,15 +103,19 @@ export function prepare(template, opts = {}) {
     // A scene needing a photo the family has not supplied is dropped rather
     // than shown empty; the invite simply gets shorter.
     if (scene.requires && !filled.has(scene.requires)) continue;
+    if (scene.photoPage && !wantsSlide) continue;
 
     const fadeOut = scene.fadeOut != null ? scene.fadeOut : transition;
+    const layers = scene.photoPage
+      ? photoPageLayers(scene.photoPage, order.slice(0, 4))
+      : scene.layers;
     scenes.push({
       id: scene.id,
       start,
       duration: scene.duration,
       end: start + scene.duration,
       background: scene.background || null,
-      layers: scene.layers.map((layer) => withDefaultOut(layer, fadeOut)),
+      layers: layers.map((layer) => withDefaultOut(layer, fadeOut)),
     });
     start += scene.duration;
   }
@@ -56,10 +126,47 @@ export function prepare(template, opts = {}) {
     design: template.design || DESIGN,
     palette: template.palette || {},
     fonts: template.fonts || {},
-    background: (template.background || []).map((l) => ({ ...l })),
+    background: groundLayers(template, wantsGround ? order[0] : null),
     scenes,
     duration: start,
   };
+}
+
+/**
+ * The design's own background, with the family's picture under it if they
+ * asked for one.
+ *
+ * The picture goes in just above the ground colour and is then washed with
+ * that same colour. That is what keeps every text colour in the design
+ * readable: the photograph becomes the paper's texture rather than a second
+ * thing competing with the words. A full-strength photograph behind an
+ * invitation is how every free template ruins a good picture.
+ */
+function groundLayers(template, slot) {
+  const base = (template.background || []).map((l) => ({ ...l }));
+  if (!slot) return base;
+  // A design whose ground is already the photograph - photoLed - has its own
+  // scrim and its own idea about where the text sits. Washing a second copy
+  // underneath it achieves nothing except a slower frame.
+  if (base.some((l) => l.type === 'photo')) return base;
+  const wash = template.photoGround || {};
+  const under = [
+    {
+      type: 'photo', slot, x: 0, y: 0, w: 360, h: 640,
+      placeholder: false,
+      anchorX: 180, anchorY: 320,
+      motion: { preset: 'zoom-in', amount: 0.04 },
+      anim: { in: { preset: 'fade', dur: 1.1 } },
+    },
+    {
+      type: 'rect', x: 0, y: 0, w: 360, h: 640,
+      fill: wash.fill || '@bg',
+      alpha: wash.alpha != null ? wash.alpha : 0.82,
+    },
+  ];
+  // After the ground colour, before the frame and the texture, so the design
+  // still draws its own border over the family's picture.
+  return [base[0], ...under, ...base.slice(1)];
 }
 
 function withDefaultOut(layer, fadeOut) {
@@ -111,7 +218,7 @@ function makeEnv(prepared, values) {
     design: prepared.design,
 
     photo(slot) {
-      const p = photos[slot || 'main'];
+      const p = photos[slot || 'p1'];
       return p && p.bitmap ? p : null;
     },
 
