@@ -87,9 +87,26 @@ a:hover { color: var(--brand-dark); }
   max-width: var(--maxw); margin-inline: auto; padding: 10px var(--gutter);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
-.brand { display: inline-flex; align-items: center; gap: 9px; min-height: var(--tap); color: var(--ink); }
+/* The brand has to read as the brand, not as a fourth nav item. At 21px
+   against 15px links it did not: only a 1.4x step, which the eye takes as
+   emphasis rather than as a different kind of thing. 27px on a laptop is the
+   size where it stops competing and starts leading, and it steps back to 22px
+   on a phone where it shares the bar with the nav and the call to action. */
+.brand {
+  display: inline-flex; align-items: center;
+  gap: clamp(9px, 0.5vw + 7px, 11px);
+  min-height: var(--tap); color: var(--ink);
+}
 .brand:hover { color: var(--ink); }
-.brand-word { font-size: 21px; font-weight: 700; letter-spacing: -0.035em; }
+.brand-word {
+  font-size: clamp(22px, 1.1vw + 18px, 27px);
+  font-weight: 700; letter-spacing: -0.035em;
+}
+.brand-mark {
+  width: clamp(25px, 1.25vw + 21px, 31px);
+  height: clamp(25px, 1.25vw + 21px, 31px);
+  flex: none;
+}
 .brand-dot { color: var(--brand); }
 
 .header-nav { display: flex; align-items: center; gap: 4px; }
@@ -109,8 +126,16 @@ a:hover { color: var(--brand-dark); }
 .header-nav a.btn-primary { color: var(--beige); }
 .header-nav a.btn-primary:hover { color: var(--beige); background: #000; }
 
+/* The one thing in this header that must never be clipped is the button. It
+   was: on a 390px phone "Make an invite" read "Make an invit", because the
+   nav kept all four items at every width. Links drop out as the bar narrows,
+   starting with the ones that have another way in — Help is a floating button
+   on every page now, and the gallery is the first thing below the fold. */
 @media (max-width: 560px) {
   .header-nav a.hide-sm { display: none; }
+}
+@media (max-width: 430px) {
+  .header-nav a.hide-xs { display: none; }
 }
 
 /* ------------------------------------------------------------- buttons */
@@ -536,6 +561,11 @@ a:hover { color: var(--brand-dark); }
 .help-option-text span { color: var(--muted); font-size: 13px; }
 
 body.help-open { overflow: hidden; }
+
+/* The help button is fixed to the bottom right, so at the end of the page it
+   sat on top of the Layerbit credit. The footer keeps a button's height clear
+   underneath itself wherever the button exists. */
+body:has(.help-fab) .site-footer { padding-bottom: 76px; }
 
 /* Nothing floats over the download and share buttons — the same rule the ads
    follow. On the ready screen the help button steps aside; the footer link

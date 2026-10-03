@@ -89,6 +89,20 @@ async function main() {
            await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
            await page.evaluate(() => `${document.documentElement.scrollWidth} vs ${window.innerWidth}`));
 
+        // The page not scrolling sideways is not the same as the header
+        // fitting: a flex row can run its last child off the edge and clip it
+        // without the document widening at all. "Make an invite" read "Make an
+        // invit" on every phone narrower than 430px for exactly that reason.
+        const clipped = await page.evaluate(() => {
+          const w = document.documentElement.clientWidth;
+          return [...document.querySelectorAll('.site-header a, .site-header button')]
+            .filter((el) => el.offsetParent !== null)
+            .map((el) => ({ text: el.textContent.trim().slice(0, 20), right: Math.round(el.getBoundingClientRect().right), w }))
+            .filter((b) => b.right > b.w + 1);
+        });
+        ok(`${size.name}/${name} header fits, nothing clipped`, clipped.length === 0,
+           clipped.map((c) => `"${c.text}" ends at ${c.right} of ${c.w}`).join('; '));
+
         const small = await page.evaluate(() => {
           const bad = [];
           for (const el of document.querySelectorAll('button, a.btn, input:not([type=range]):not([type=file]), select, .cat, .choice')) {
