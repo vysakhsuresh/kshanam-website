@@ -141,6 +141,39 @@ async function main() {
     ok('the design count on the page is the real one',
        counts.shown.length > 0 && counts.shown.every((v) => Number(v) === counts.real),
        `page says ${counts.shown.join(', ')}; gallery has ${counts.real}`);
+
+    // Every button on every page, measured rather than assumed. The header's
+    // own link colour once beat .btn-primary on specificity and left the one
+    // call to action at 1.9:1 - grey on near-black - which is precisely the
+    // "dark feel" it was supposed to fix.
+    const buttons = [];
+    for (const name of ['', 'studio.html', 'guest.html', 'help.html']) {
+      await page.goto(`${base}/${name}`, { waitUntil: 'load' });
+      buttons.push(...await page.evaluate((where) => {
+        const lum = (c) => {
+          const [r, g, b] = c.match(/\d+/g).slice(0, 3).map((v) => {
+            const x = v / 255;
+            return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+          });
+          return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        };
+        return [...document.querySelectorAll('.btn')].map((b) => {
+          const s = getComputedStyle(b);
+          const [x, y] = [lum(s.color), lum(s.backgroundColor)].sort((m, n) => n - m);
+          return {
+            where: where || 'home',
+            text: b.textContent.trim().slice(0, 26),
+            ratio: Number(((x + 0.05) / (y + 0.05)).toFixed(2)),
+          };
+        });
+      }, name));
+    }
+    const dim = buttons.filter((b) => b.ratio < 4.5);
+    ok('every button clears 4.5:1', dim.length === 0,
+       dim.length ? dim.map((b) => `${b.where}/"${b.text}" ${b.ratio}:1`).join('; ')
+                  : `${buttons.length} buttons checked`);
+
+    await page.goto(base + '/', { waitUntil: 'networkidle' });
     const total = await page.locator('#design-list .design').count();
     ok('the gallery is full', total >= 25, `${total} designs`);
 
@@ -156,6 +189,7 @@ async function main() {
     ok('a design links into the studio', (href || '').includes('studio.html?t='), href || 'none');
     ok('no ad markup is rendered while the slot is empty',
        await page.locator('.ad-slot:visible').count() === 0);
+
     ok('home stayed clean', errors.length === 0, errors.slice(0, 2).join(' | '));
     await page.close();
 

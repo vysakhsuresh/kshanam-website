@@ -100,7 +100,14 @@ a:hover { color: var(--brand-dark); }
 }
 .header-nav a:hover { color: var(--ink); background: var(--cream); }
 .header-nav a.is-current { color: var(--ink); }
+
+/* A button in the header is a button, not a nav link. Without this the
+   `.header-nav a` colour above wins on specificity and the one call to
+   action on the page sets in muted grey on near-black - 1.9:1, which is
+   both unreadable and the "dark feel" it was changed to beige to fix. */
 .header-nav .btn { margin-left: 6px; }
+.header-nav a.btn-primary { color: var(--beige); }
+.header-nav a.btn-primary:hover { color: var(--beige); background: #000; }
 
 @media (max-width: 560px) {
   .header-nav a.hide-sm { display: none; }
@@ -121,8 +128,12 @@ a:hover { color: var(--brand-dark); }
 .btn-primary:hover:not(:disabled) { background: #000; color: var(--beige); box-shadow: var(--shadow); }
 .btn-brand { background: var(--brand); color: #fff; }
 .btn-brand:hover:not(:disabled) { background: var(--brand-dark); color: #fff; }
-.btn-whatsapp { background: #1FA855; color: #fff; }
-.btn-whatsapp:hover:not(:disabled) { background: #178040; color: #fff; }
+/* Darker than WhatsApp's own green on purpose: white on #1FA855 is 3.09:1,
+   and the brief sets 4.5:1 for everybody who has to read this on a cheap
+   screen in daylight. #15853C is 4.72:1 and still unmistakably the green
+   that means WhatsApp. */
+.btn-whatsapp { background: #15853C; color: #fff; }
+.btn-whatsapp:hover:not(:disabled) { background: #0E7034; color: #fff; }
 .btn-ghost { background: var(--paper); color: var(--ink); border-color: var(--line); }
 .btn-ghost:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
 .btn-quiet { background: var(--cream); color: var(--ink); }
