@@ -3,7 +3,7 @@
   "id": "smoked-champagne",
   "name": "Smoked Champagne",
   "tagline": "Champagne wreath on smoked charcoal, evening dress",
-  "idea": "A smoked charcoal card for an evening jubilee, where a champagne wreath and a beaded hairline are the only light in the frame.",
+  "idea": "Fifty years dressed for evening: on smoked charcoal, a champagne wreath and one beaded hairline are the only light on the sheet.",
   "categories": [
     "anniversary",
     "reception"
@@ -12,10 +12,10 @@
   "defaults": {
     "date": "2027-10-16",
     "time": "20:00",
-    "timeLabel": "Dinner at",
+    "timeLabel": "Dinner from",
     "joiner": "&",
     "eyebrow": "Golden Jubilee",
-    "intro": "The family requests the honour of your company at dinner, marking fifty years of marriage",
+    "intro": "Fifty years this October, and their children ask you to dinner, black tie, under the lights on the lawn",
     "name1": "Margaret",
     "name2": "Alexander",
     "venue": "Rose Garden Lawn, Kodaikanal Club, Kodaikanal",

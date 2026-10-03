@@ -2,7 +2,7 @@
 
 A website where a family makes an invitation video for any celebration and
 sends it on WhatsApp. Weddings, birthdays, naming days, housewarmings,
-graduations, festivals — 48 designs across 13 kinds of occasion.
+graduations, festivals — 44 designs across 13 kinds of occasion.
 
 Everything happens in the browser. No server, no database, no account. The
 photos and names somebody types never leave their device.
@@ -86,7 +86,7 @@ Two ways, both supported:
 2. **From a spec.** Add an entry to `scripts/design-specs.json` (palette,
    typefaces, ornaments, one of eight layout recipes, and its own sample copy)
    and run `npm run designs`. This is how the current library was made, and it
-   is why they look like one family rather than 48 arguments.
+   is why they look like one family rather than 44 arguments.
 
 ### The eight recipes
 

@@ -319,7 +319,7 @@
   {
     "id": "muhurtham-sindoor",
     "name": "Muhurtham Sindoor",
-    "idea": "A single mandala struck in marigold gold on an oxblood ground, centred on the same axis the names use, and nothing else.",
+    "idea": "The most ornate genre at its quietest: one mandala struck in marigold gold on the names' own axis, a scalloped hairline, and nothing else on the oxblood sheet.",
     "recipe": "classic",
     "fieldset": "couple",
     "categories": [
@@ -336,31 +336,31 @@
       "accentDark": "#E9B949"
     },
     "fonts": {
-      "display": "Cinzel",
+      "display": "Marcellus",
       "body": "Outfit"
     },
-    "frame": "ornate",
     "motif": "mandala",
     "closeMotif": "diya",
+    "frame": "scallop",
     "texture": "vignette",
     "foil": true,
     "defaults": {
       "eyebrow": "Shubha Muhurtham",
-      "intro": "Our two families have fixed the day with the temple astrologer, and we would like you standing with us at the muhurtham hour",
+      "intro": "The muhurtham is at half past ten and it will not wait, so come in time to see them tie the thaali",
       "name1": "Keerthana",
       "joiner": "&",
       "name2": "Mahadevan",
-      "date": "2027-04-25",
+      "date": "2027-05-09",
       "time": "10:30",
       "timeLabel": "Muhurtham at",
-      "venue": "Sree Padmanabhaswamy Kalyana Mandapam, Thiruvananthapuram",
-      "closing": "May the lamps stay lit"
+      "venue": "Ananthapuri Kalyana Mandapam, East Fort, Thiruvananthapuram",
+      "closing": "With the blessings of both tharavads"
     }
   },
   {
     "id": "kalpathy-arch",
     "name": "Kalpathy Arch",
-    "idea": "One cocoa hairline arch standing for the mandapam doorway, drawn on turmeric-washed sandal paper with no metal anywhere.",
+    "idea": "One cocoa hairline arch standing for the temple doorway, drawn on turmeric-washed sandal paper with no metal anywhere.",
     "recipe": "arch",
     "fieldset": "couple",
     "categories": [
@@ -386,15 +386,15 @@
     "texture": "paper",
     "defaults": {
       "eyebrow": "Kalyanam",
-      "intro": "The lamps will be lit at the Kalpathy temple before dawn, and our daughter will be married as the sun comes up",
-      "name1": "Lakshmipriya",
+      "intro": "Our daughter will be married at the Kalpathy temple as the sun comes up over the agraharam",
+      "name1": "Haripriya",
       "joiner": "and",
       "name2": "Unnikrishnan",
       "date": "2027-01-24",
       "time": "06:40",
       "timeLabel": "Lagnam at",
       "venue": "Sree Visalakshi Sametha Viswanatha Swamy Temple, Kalpathy",
-      "closing": "With the blessings of the elders"
+      "closing": "Our elders will be glad to see you"
     }
   },
   {
@@ -405,8 +405,7 @@
     "fieldset": "event",
     "categories": [
       "festival",
-      "reception",
-      "anniversary"
+      "reception"
     ],
     "tagline": "Gold kasavu bands on Mysore peacock teal",
     "palette": {
@@ -426,20 +425,20 @@
     "foil": true,
     "defaults": {
       "eyebrow": "Thiruvonam",
-      "intro": "The sadya is at noon on Thiruvonam, served on plantain leaves, and there is a place at the table kept for you",
+      "intro": "The sadya is at noon on Thiruvonam, served on plantain leaves, and there is a place kept for you",
       "name1": "Onasadya",
       "subtitle": "twenty-six at one table",
       "date": "2027-08-28",
       "time": "12:15",
       "timeLabel": "Sadya from",
       "venue": "Puthenveedu Tharavad, Haripad, Alappuzha",
-      "closing": "Come hungry, stay late"
+      "closing": "There is always more rice"
     }
   },
   {
     "id": "gruhapravesham-letterhead",
     "name": "Dawn Letterhead",
-    "idea": "A gruhapravesham set as a letterhead: the house's own name large on warm chalk, one bronze bar, and the lamp as the only mark.",
+    "idea": "A gruhapravesham set as a letterhead: the house's own name large on warm chalk, one bronze bar, and the house itself as the only mark.",
     "recipe": "modern",
     "fieldset": "event",
     "categories": [
@@ -462,54 +461,14 @@
     "texture": "linen",
     "defaults": {
       "eyebrow": "Gruhapravesham",
-      "intro": "Thirty years of saving, one lamp, and a house that finally has a name. We would like you in it on the first morning",
+      "intro": "Thirty years of saving, and the house finally has a name. We would like you in it on the first morning",
       "name1": "Sreevalsam",
-      "subtitle": "the lamp is lit at dawn",
+      "subtitle": "first light, first pooja",
       "date": "2027-06-13",
       "time": "06:15",
       "timeLabel": "From",
       "venue": "Door 14, Kuruppath Lane, Tripunithura",
-      "closing": "Come and eat with us"
-    }
-  },
-  {
-    "id": "temple-cream-masthead",
-    "name": "Temple Cream",
-    "idea": "One sindoor-maroon name at the full measure of temple cream, a gold hairline under it, and two thirds of the sheet left bare.",
-    "recipe": "masthead",
-    "fieldset": "couple",
-    "categories": [
-      "save-the-date",
-      "wedding",
-      "engagement"
-    ],
-    "tagline": "One enormous name on temple cream",
-    "palette": {
-      "bg": "#FFFBF2",
-      "ink": "#6E1622",
-      "muted": "#6A4F4A",
-      "accent": "#B07D15",
-      "accentDark": "#8A5A0A"
-    },
-    "fonts": {
-      "display": "Cormorant Garamond",
-      "body": "Space Grotesk"
-    },
-    "motif": "filigree",
-    "texture": "paper",
-    "displayScale": 1.18,
-    "foil": true,
-    "defaults": {
-      "eyebrow": "A Date to Keep",
-      "intro": "We are marrying at home after the rains, and nothing else is fixed yet except the month and the two of us",
-      "name1": "Parvathy",
-      "joiner": "and",
-      "name2": "Anand",
-      "date": "2027-11-21",
-      "time": "09:00",
-      "timeLabel": "from",
-      "venue": "At home in Mavelikkara, after the rains",
-      "closing": "Keep the morning free"
+      "closing": "No gifts, just come early"
     }
   },
   {
@@ -534,9 +493,9 @@
       "display": "Fraunces",
       "body": "Outfit"
     },
-    "frame": "inset-panel",
     "motif": "lotus",
     "closeMotif": "sprig",
+    "frame": "inset-panel",
     "texture": "linen",
     "defaults": {
       "eyebrow": "Choroonu",
@@ -577,65 +536,26 @@
     "texture": "paper",
     "defaults": {
       "eyebrow": "Vivaham",
-      "intro": "The elders have read the panchangam and settled the hour. Our families ask for your presence and your blessing",
-      "name1": "Visalakshi",
+      "intro": "The panchangam has been read and the hour fixed. Both houses ask you to be there when it comes",
+      "name1": "Alamelu",
       "joiner": "&",
       "name2": "Chidambaram",
       "date": "2027-02-07",
       "time": "09:50",
       "timeLabel": "Muhurtham at",
       "venue": "Sarangapani Sannidhi Street, Kumbakonam",
-      "closing": "Come with your families"
-    }
-  },
-  {
-    "id": "kanchipuram-dusk",
-    "name": "Kanchipuram Dusk",
-    "idea": "The photograph is the design: Kanchipuram aubergine and rose gold, never yellow gold, with the type held down in the lower third.",
-    "recipe": "photoLed",
-    "fieldset": "couple",
-    "categories": [
-      "reception",
-      "wedding",
-      "anniversary"
-    ],
-    "tagline": "Kanchipuram aubergine and rose gold at dusk",
-    "palette": {
-      "bg": "#38102E",
-      "ink": "#FBEFEA",
-      "muted": "#DDB9C4",
-      "accent": "#E9B08C",
-      "accentDark": "#E9B08C"
-    },
-    "fonts": {
-      "display": "Playfair Display",
-      "body": "Outfit"
-    },
-    "motif": "paisley",
-    "texture": "vignette",
-    "defaults": {
-      "eyebrow": "Reception Dinner",
-      "intro": "After the temple, after the silk and the sandalwood, there is dinner, and we would rather have you there than not",
-      "name1": "Sowmya",
-      "joiner": "&",
-      "name2": "Vishnuprasad",
-      "date": "2027-03-14",
-      "time": "19:30",
-      "timeLabel": "Dinner from",
-      "venue": "Kamakshi Hall, Gandhi Road, Kanchipuram",
-      "closing": "With gratitude, from both houses"
+      "closing": "Awaiting you at the mandapam"
     }
   },
   {
     "id": "shashtipoorthi-smoke",
     "name": "Smoke & Sun",
-    "idea": "Sixty years marked once: a single sun in champagne gold above the name, on smoked charcoal that darkens towards the foot of the card.",
+    "idea": "Sixty years marked once: a single sun in champagne gold above the name, on smoked charcoal that deepens towards the foot of the card.",
     "recipe": "classic",
     "fieldset": "person",
     "categories": [
       "birthday",
-      "anniversary",
-      "festival"
+      "anniversary"
     ],
     "tagline": "Smoked charcoal and champagne gold for sixty years",
     "palette": {
@@ -650,9 +570,9 @@
       "display": "Cormorant Garamond",
       "body": "Outfit"
     },
-    "frame": "beaded",
     "motif": "sun",
-    "closeMotif": "lamp",
+    "closeMotif": "dot-rule",
+    "frame": "beaded",
     "texture": "grain",
     "foil": true,
     "gradient": true,
@@ -660,13 +580,13 @@
     "defaults": {
       "eyebrow": "Shashtipoorthi",
       "intro": "Sixty years, and he has never once asked for a party. We are having one anyway, and it is not complete without you",
-      "name1": "Vasudevan Namboothiri",
-      "subtitle": "sixty years, one lamp",
+      "name1": "Narayanan Namboothiri",
+      "subtitle": "sixty years, one quiet man",
       "date": "2027-07-04",
       "time": "10:00",
       "timeLabel": "from",
       "venue": "Chottanikkara Devi Temple hall, Ernakulam",
-      "closing": "Sixty years, and the lamp still lit"
+      "closing": "He will pretend he did not want this"
     }
   },
   {
@@ -699,8 +619,8 @@
     "foil": true,
     "displayScale": 1.15,
     "defaults": {
-      "eyebrow": "Nikah Ceremony",
-      "intro": "By the grace of Allah, the families of Kozhikode and Vadakara invite you to the nikah of our children",
+      "eyebrow": "Nikah",
+      "intro": "By the grace of Allah the date is fixed, and both families, Kozhikode and Vadakara, hope to see you at the nikah",
       "name1": "Zoya",
       "joiner": "&",
       "name2": "Rayan",
@@ -740,7 +660,7 @@
     "texture": "paper",
     "defaults": {
       "eyebrow": "Holy Qurbana",
-      "intro": "After the betrothal at home in December, the marriage itself, and we would be glad of you at the Qurbana",
+      "intro": "We were betrothed at home in December. The marriage is in January at half past nine, and the church is big enough for everybody",
       "name1": "Elizabeth",
       "joiner": "&",
       "name2": "Jacob",
@@ -774,8 +694,7 @@
       "body": "Outfit"
     },
     "motif": "deco-fan",
-    "closeMotif": "lotus",
-    "frame": "beaded",
+    "closeMotif": "chandelier",
     "texture": "grain",
     "foil": true,
     "defaults": {
@@ -821,7 +740,7 @@
       "eyebrow": "Holy Baptism",
       "intro": "We are bringing our daughter to be baptised on the second Sunday of January, and we would like you at the font",
       "name1": "Elsa Mariam",
-      "subtitle": "receives her baptism",
+      "subtitle": "our daughter, baptised",
       "date": "2027-01-10",
       "time": "10:00",
       "timeLabel": "Baptism at",
@@ -832,7 +751,7 @@
   {
     "id": "vesper-press",
     "name": "Vesper Press",
-    "idea": "The masthead inverted: one enormous bone name on a near-black sheet with a pewter hairline under it.",
+    "idea": "An evening wedding with no gold in it at all: one enormous bone name on near-black, a pewter hairline, and two thirds of the sheet left dark.",
     "recipe": "masthead",
     "fieldset": "couple",
     "categories": [
@@ -840,7 +759,7 @@
       "reception",
       "engagement"
     ],
-    "tagline": "Bone type on near-black, dressed for evening",
+    "tagline": "Bone and pewter on near-black, no gold",
     "palette": {
       "bg": "#121214",
       "ink": "#F4F1EA",
@@ -865,45 +784,6 @@
       "timeLabel": "Blessing at",
       "venue": "San Thome Basilica, Chennai",
       "closing": "In His light, and in good company"
-    }
-  },
-  {
-    "id": "mangni-brass",
-    "name": "Mangni Brass",
-    "idea": "The mangni handled as a formal note, flush left in midnight navy with a single brass bar.",
-    "recipe": "modern",
-    "fieldset": "couple",
-    "categories": [
-      "engagement",
-      "save-the-date",
-      "wedding"
-    ],
-    "tagline": "A flush-left brass note for the mangni",
-    "palette": {
-      "bg": "#F3F1EA",
-      "ink": "#16233C",
-      "muted": "#4C5873",
-      "accent": "#B08D57",
-      "accentDark": "#3E4A63"
-    },
-    "fonts": {
-      "display": "Cormorant Garamond",
-      "body": "Space Grotesk"
-    },
-    "motif": "filigree",
-    "texture": "paper",
-    "displayScale": 1.18,
-    "defaults": {
-      "eyebrow": "Mangni",
-      "intro": "The two families have agreed, alhamdulillah, and the reading will be at home in Thalangara that morning",
-      "name1": "Safiya",
-      "joiner": "&",
-      "name2": "Shameem",
-      "date": "2027-01-17",
-      "time": "11:00",
-      "timeLabel": "Reading at",
-      "venue": "The family home, Thalangara, Kasaragod",
-      "closing": "By His will, we begin"
     }
   },
   {
@@ -945,44 +825,6 @@
     }
   },
   {
-    "id": "sharjah-nightfall",
-    "name": "Sharjah Nightfall",
-    "idea": "For families who would rather not put a portrait on an invitation, the photograph is the place and the gold caption does the talking.",
-    "recipe": "photoLed",
-    "fieldset": "couple",
-    "categories": [
-      "save-the-date",
-      "wedding",
-      "reception"
-    ],
-    "tagline": "The place carries it, not the portrait",
-    "palette": {
-      "bg": "#0B3741",
-      "ink": "#FBF3E3",
-      "muted": "#B6D0CD",
-      "accent": "#E4B861",
-      "accentDark": "#E4B861"
-    },
-    "fonts": {
-      "display": "Cinzel",
-      "body": "Outfit"
-    },
-    "motif": "diamond",
-    "texture": "vignette",
-    "defaults": {
-      "eyebrow": "Nikah in Sharjah",
-      "intro": "A nikah in Sharjah this autumn, with the walima the evening after. The printed card will follow",
-      "name1": "Hafsa",
-      "joiner": "&",
-      "name2": "Irshad",
-      "date": "2027-10-16",
-      "time": "17:00",
-      "timeLabel": "Nikah at",
-      "venue": "Al Noor Ballroom, Al Majaz, Sharjah",
-      "closing": "Inshallah, we will see you there"
-    }
-  },
-  {
     "id": "private-view-press",
     "name": "Private View",
     "idea": "A gallery's private-view card: the title of the show set enormous in Didone on near-black stock, with two thirds of the sheet left dark and empty.",
@@ -1019,47 +861,9 @@
     }
   },
   {
-    "id": "red-dateline",
-    "name": "Red Dateline",
-    "idea": "A save the date that spends everything on scale: two short names across the full measure and one vermilion hairline under them.",
-    "recipe": "masthead",
-    "fieldset": "couple",
-    "categories": [
-      "save-the-date",
-      "wedding",
-      "engagement"
-    ],
-    "tagline": "Two names, one red rule, poster sized",
-    "palette": {
-      "bg": "#FBF7F2",
-      "ink": "#1A1614",
-      "muted": "#6A5F58",
-      "accent": "#C8402A",
-      "accentDark": "#A5301A"
-    },
-    "fonts": {
-      "display": "Italiana",
-      "body": "Space Grotesk"
-    },
-    "motif": "dot-rule",
-    "texture": "paper",
-    "defaults": {
-      "eyebrow": "Save The Date",
-      "intro": "The wedding is in Lisbon in October, at the end of the harvest. Invitation to follow, book the flights first.",
-      "name1": "Noor",
-      "joiner": "and",
-      "name2": "Kabir",
-      "date": "2027-10-16",
-      "time": "17:30",
-      "timeLabel": "Vows at",
-      "venue": "Palacio do Grilo, Lisbon",
-      "closing": "Wear something you can dance in"
-    }
-  },
-  {
     "id": "naming-day-blue",
     "name": "Naming Day",
-    "idea": "A child's name set as large as an exhibition title, in chalk blue and ultramarine instead of nursery pastel.",
+    "idea": "A child's name set as large as an exhibition title, in chalk blue and ultramarine with one lotus, instead of nursery pastel.",
     "recipe": "masthead",
     "fieldset": "person",
     "categories": [
@@ -1078,18 +882,18 @@
       "display": "Cormorant Garamond",
       "body": "Outfit"
     },
-    "motif": "dot-rule",
+    "motif": "lotus",
     "texture": "paper",
     "displayScale": 1.15,
     "defaults": {
       "eyebrow": "A Naming Day",
       "intro": "She has a name at last, and we would like you in the room when we say it out loud for the first time.",
-      "name1": "Ilaria",
+      "name1": "Meera",
       "subtitle": "born the fourth of April",
       "date": "2027-06-12",
       "time": "11:00",
-      "timeLabel": "From",
-      "venue": "Flat 2, Dundas Street, Edinburgh",
+      "timeLabel": "Any time after",
+      "venue": "Flat 3, Panampilly Nagar, Kochi",
       "closing": "Bring nothing, she has plenty"
     }
   },
@@ -1165,7 +969,7 @@
       "time": "13:00",
       "timeLabel": "Lunch at",
       "venue": "The Bangalore Club, Residency Road",
-      "closing": "No speeches, only toasts"
+      "closing": "With love, from both our houses"
     }
   },
   {
@@ -1194,72 +998,33 @@
     "texture": "paper",
     "defaults": {
       "eyebrow": "A Fortieth",
-      "intro": "No speeches and no cake with sparklers in it. A long table, one room, and everybody I actually like.",
+      "intro": "A room upstairs, forty people I actually want there, and a playlist I have been building since March.",
       "name1": "Priya Raghunathan",
       "subtitle": "forty, and glad of it",
       "date": "2027-09-18",
       "time": "20:00",
       "timeLabel": "Table from",
       "venue": "The Lighthouse, Dubai Design District",
-      "closing": "Come hungry, stay late"
+      "closing": "No gifts, just come"
     }
   },
   {
-    "id": "table-card-oyster",
-    "name": "Table Card",
-    "idea": "An anniversary printed on a sheet laid a shade darker than the ground, so the card reads as an edge and a shadow rather than a box.",
-    "recipe": "panel",
-    "fieldset": "couple",
-    "categories": [
-      "anniversary",
-      "reception"
-    ],
-    "tagline": "A darker sheet laid on laid oyster paper",
-    "palette": {
-      "bg": "#F2EFE9",
-      "ink": "#22262B",
-      "muted": "#5B6168",
-      "accent": "#B9B2A6",
-      "accentDark": "#64594C"
-    },
-    "fonts": {
-      "display": "Marcellus",
-      "body": "Space Grotesk"
-    },
-    "frame": "thin",
-    "motif": "monogram-ring",
-    "closeMotif": "dot-rule",
-    "texture": "linen",
-    "defaults": {
-      "eyebrow": "An Anniversary Dinner",
-      "intro": "Fifteen years this October, and the first time we have asked anyone to mark it with us. One table, one evening.",
-      "name1": "Reema",
-      "joiner": "and",
-      "name2": "Oliver",
-      "date": "2027-10-30",
-      "time": "20:30",
-      "timeLabel": "Dinner at",
-      "venue": "Raffles Hotel, 1 Beach Road, Singapore",
-      "closing": "Fifteen years, one evening"
-    }
-  },
-  {
-    "id": "laurel-hall-blue",
+    "id": "laurel-hall-sage",
     "name": "Laurel Hall",
-    "idea": "A convocation in inscriptional capitals on chalk blue, carrying the one ornament a degree day has actually earned.",
+    "idea": "A convocation in inscriptional capitals on dry sage with a single laurel, refusing the navy and gold every other degree card uses.",
     "recipe": "classic",
     "fieldset": "person",
     "categories": [
       "graduation",
       "farewell"
     ],
-    "tagline": "Inscriptional capitals on chalk blue, one laurel",
+    "tagline": "Inscriptional capitals on dry sage, one laurel",
     "palette": {
-      "bg": "#ECEEF1",
-      "ink": "#10203A",
-      "muted": "#4A5A72",
-      "accent": "#6B81A0",
-      "accentDark": "#35506E"
+      "bg": "#E8E8DC",
+      "ink": "#292E24",
+      "muted": "#5C6350",
+      "accent": "#A9B095",
+      "accentDark": "#55603F"
     },
     "fonts": {
       "display": "Cinzel",
@@ -1267,7 +1032,6 @@
     },
     "frame": "rules",
     "motif": "laurel",
-    "closeMotif": "olive-branch",
     "texture": "paper",
     "defaults": {
       "eyebrow": "Commencement",
@@ -1284,7 +1048,7 @@
   {
     "id": "charcoal-chandelier",
     "name": "Charcoal Chandelier",
-    "idea": "One champagne-gold chandelier in foil on smoked charcoal, with the rest of the sheet left dark and empty.",
+    "idea": "A single champagne chandelier hung inside a beaded hairline on flat smoked charcoal, the rest of the sheet left dark and empty.",
     "recipe": "classic",
     "fieldset": "couple",
     "categories": [
@@ -1295,7 +1059,6 @@
     "tagline": "Champagne gold on smoked charcoal, for the dinner",
     "palette": {
       "bg": "#1B1E22",
-      "bg2": "#2A2E33",
       "ink": "#EDE7DC",
       "muted": "#A9A298",
       "accent": "#C6A96B",
@@ -1305,12 +1068,11 @@
       "display": "Marcellus",
       "body": "Outfit"
     },
-    "frame": "beaded",
     "motif": "chandelier",
     "closeMotif": "monogram-ring",
+    "frame": "beaded",
     "texture": "grain",
     "foil": true,
-    "gradient": true,
     "defaults": {
       "eyebrow": "Reception Dinner",
       "intro": "The morning is for the families. The evening is for everyone, and we would like you at the table",
@@ -1332,8 +1094,7 @@
     "fieldset": "couple",
     "categories": [
       "wedding",
-      "engagement",
-      "reception"
+      "engagement"
     ],
     "tagline": "An aged-gold arch on Mysore peacock teal",
     "palette": {
@@ -1355,7 +1116,7 @@
     "displayScale": 1.15,
     "defaults": {
       "eyebrow": "Evening Muhurta",
-      "intro": "At the hour the lamps are lit, both our families invite you to the wedding of",
+      "intro": "The lamps go up at dusk and the nadaswaram starts soon after; we would be glad of you in the mantapa",
       "name1": "Lakshmipriya",
       "joiner": "&",
       "name2": "Raghavendra",
@@ -1363,7 +1124,7 @@
       "time": "18:45",
       "timeLabel": "Muhurta at",
       "venue": "Kalyana Mantapa, Palace Road, Mysuru",
-      "closing": "Come for the lamps, stay for the feast"
+      "closing": "With the blessings of both our homes"
     }
   },
   {
@@ -1405,42 +1166,6 @@
     }
   },
   {
-    "id": "near-midnight",
-    "name": "Near Midnight",
-    "idea": "One word, Midnight, set enormous in Didone on near-black, and nothing else allowed on the sheet.",
-    "recipe": "masthead",
-    "fieldset": "event",
-    "categories": [
-      "festival",
-      "corporate"
-    ],
-    "tagline": "One word, enormous, for New Year's Eve",
-    "palette": {
-      "bg": "#121214",
-      "ink": "#F4F1EA",
-      "muted": "#A9A49A",
-      "accent": "#8C8779",
-      "accentDark": "#C9C2B2"
-    },
-    "fonts": {
-      "display": "Playfair Display",
-      "body": "Outfit"
-    },
-    "motif": "deco-fan",
-    "texture": "grain",
-    "defaults": {
-      "eyebrow": "New Year's Eve",
-      "intro": "Black tie, a short speech at eleven, and the terrace open until the fireworks are done",
-      "name1": "Midnight",
-      "subtitle": "a new year's eve party",
-      "date": "2027-12-31",
-      "time": "21:00",
-      "timeLabel": "from",
-      "venue": "Durbar Hall, Falaknuma, Hyderabad",
-      "closing": "See the old year out with us"
-    }
-  },
-  {
     "id": "marigold-kasavu",
     "name": "Marigold Kasavu",
     "idea": "The kasavu band rewoven in marigold gold on an oxblood ground, for the half of the wedding that happens after dark.",
@@ -1460,21 +1185,21 @@
       "accentDark": "#E9B949"
     },
     "fonts": {
-      "display": "Cinzel",
+      "display": "Marcellus",
       "body": "Space Grotesk"
     },
-    "motif": "diya",
+    "motif": "lamp",
     "texture": "linen",
     "foil": true,
     "defaults": {
-      "eyebrow": "The Evening Reception",
+      "eyebrow": "Evening Sadya",
       "intro": "The muhurtham is at dawn; the sadya and the music are at night, and that is the half we want you for",
       "name1": "Anjana",
       "joiner": "&",
       "name2": "Vinayak",
       "date": "2027-04-25",
       "time": "19:00",
-      "timeLabel": "from",
+      "timeLabel": "Sadya from",
       "venue": "Lake Pavilion, Punnamada, Alappuzha",
       "closing": "Come hungry, leave late"
     }
@@ -1517,47 +1242,9 @@
     }
   },
   {
-    "id": "champagne-crescent",
-    "name": "Champagne Crescent",
-    "idea": "A paler charcoal sheet with a scalloped edge and a single champagne crescent, for supper after Eid prayers.",
-    "recipe": "panel",
-    "fieldset": "event",
-    "categories": [
-      "festival",
-      "housewarming"
-    ],
-    "tagline": "A scalloped charcoal sheet, one champagne crescent",
-    "palette": {
-      "bg": "#1B1E22",
-      "ink": "#EDE7DC",
-      "muted": "#A9A298",
-      "accent": "#C6A96B",
-      "accentDark": "#D4BC87"
-    },
-    "fonts": {
-      "display": "Marcellus",
-      "body": "Cormorant Garamond"
-    },
-    "frame": "scallop",
-    "motif": "crescent",
-    "texture": "linen",
-    "foil": true,
-    "defaults": {
-      "eyebrow": "Eid al-Fitr",
-      "intro": "The fast is done. Come to us after the prayers for biryani, sheer khurma and a long evening",
-      "name1": "Eid Mubarak",
-      "subtitle": "supper after the prayers",
-      "date": "2027-03-20",
-      "time": "19:30",
-      "timeLabel": "from",
-      "venue": "Our home, 14 Ibrahimpura, Bhopal",
-      "closing": "Eid Mubarak from all of us"
-    }
-  },
-  {
     "id": "oyster-crest",
     "name": "Oyster Crest",
-    "idea": "A graphite crest engraved on a laid oyster sheet that floats a shade above its own ground, with no metal anywhere in the design.",
+    "idea": "A wedding card with no metal in it at all — a graphite crest engraved on laid oyster, the sheet floating one shade above its own ground.",
     "recipe": "panel",
     "fieldset": "couple",
     "categories": [
@@ -1582,22 +1269,22 @@
     "frame": "rules",
     "texture": "linen",
     "defaults": {
-      "eyebrow": "Marriage Invitation",
-      "intro": "Mr and Mrs Fernandes request the pleasure of your company at the marriage of their daughter",
+      "eyebrow": "Holy Matrimony",
+      "intro": "The Fernandes family asks you to the nuptial Mass for their daughter, and to the long lunch that follows at the house",
       "name1": "Rosemary",
       "joiner": "to",
-      "name2": "Gautam",
-      "date": "2027-11-27",
-      "time": "18:30",
-      "timeLabel": "Ceremony at",
-      "venue": "St Andrew's Church, Cubbon Road, Bengaluru",
-      "closing": "With the compliments of both families"
+      "name2": "Clement",
+      "date": "2027-11-13",
+      "time": "10:30",
+      "timeLabel": "Mass at",
+      "venue": "Our Lady of Miracles Church, Milagres, Mangaluru",
+      "closing": "No gifts, only your blessing"
     }
   },
   {
     "id": "claret-monogram",
     "name": "Claret Monogram",
-    "idea": "One monogram ring in a single hairline of antique gold, with the claret ink saved for the two names and spent nowhere else.",
+    "idea": "One gold monogram, no frame at all, and claret ink spent on the two names and nothing else.",
     "recipe": "panel",
     "fieldset": "couple",
     "categories": [
@@ -1605,7 +1292,7 @@
       "save-the-date",
       "engagement"
     ],
-    "tagline": "Foil monogram, claret names, bone card afloat",
+    "tagline": "One gold monogram, claret names, no frame",
     "palette": {
       "bg": "#F6F1E8",
       "ink": "#4A1220",
@@ -1619,13 +1306,12 @@
     },
     "motif": "monogram-ring",
     "closeMotif": "sprig",
-    "frame": "inset-panel",
     "texture": "paper",
     "foil": true,
     "displayScale": 1.16,
     "defaults": {
-      "eyebrow": "The Wedding Ceremony",
-      "intro": "Dr and Mrs Sundaram request the honour of your presence at the marriage of their daughter",
+      "eyebrow": "Vivaham",
+      "intro": "Both houses have settled the muhurtham, and ask you to be seated well before the mangalyam is tied",
       "name1": "Priyamvada",
       "joiner": "&",
       "name2": "Anantharaman",
@@ -1639,7 +1325,7 @@
   {
     "id": "midnight-correspondence",
     "name": "Midnight Correspondence",
-    "idea": "A visiting card enlarged until it fills the frame: midnight capitals inside brass corners, one small diamond, and no second mark.",
+    "idea": "A visiting card enlarged until it fills the sheet: inscriptional navy letterforms, four brass corners, one small diamond and no second mark.",
     "recipe": "classic",
     "fieldset": "couple",
     "categories": [
@@ -1647,7 +1333,7 @@
       "wedding",
       "anniversary"
     ],
-    "tagline": "Midnight capitals, brass corners, a single diamond",
+    "tagline": "Navy letterforms, brass corners, one small diamond",
     "palette": {
       "bg": "#F3F1EA",
       "ink": "#16233C",
@@ -1665,67 +1351,26 @@
     "texture": "paper",
     "foil": true,
     "defaults": {
-      "eyebrow": "Wedding Reception",
-      "intro": "Mr and Mrs Pereira request the pleasure of your company at a reception held for their daughter",
-      "name1": "Aaliyah",
+      "eyebrow": "Lagan Reception",
+      "intro": "They were married quietly that morning; the evening belongs to everyone, in the ballroom, from half past seven",
+      "name1": "Delna",
       "joiner": "&",
-      "name2": "Edward",
+      "name2": "Rustom",
       "date": "2027-12-19",
-      "time": "19:00",
+      "time": "19:30",
       "timeLabel": "Reception from",
-      "venue": "The Ballroom, Taj Connemara, Binny Road, Chennai",
+      "venue": "The Ballroom, Taj Mahal Palace, Apollo Bunder, Mumbai",
       "closing": "Carriages at midnight"
-    }
-  },
-  {
-    "id": "shell-betrothal",
-    "name": "Shell Betrothal",
-    "idea": "The only mark on a blush card is two small interlocking rings in rose copper, set well above an otherwise empty measure.",
-    "recipe": "panel",
-    "fieldset": "couple",
-    "categories": [
-      "engagement",
-      "save-the-date",
-      "wedding"
-    ],
-    "tagline": "Rose copper rings on warm shell blush",
-    "palette": {
-      "bg": "#F7EFE8",
-      "ink": "#3A2A22",
-      "muted": "#6B544A",
-      "accent": "#D9B8A3",
-      "accentDark": "#8A4F32"
-    },
-    "fonts": {
-      "display": "Marcellus",
-      "body": "Space Grotesk"
-    },
-    "motif": "rings",
-    "closeMotif": "olive-branch",
-    "frame": "thin",
-    "texture": "paper",
-    "defaults": {
-      "eyebrow": "The Betrothal",
-      "intro": "Mr and Mrs D'Souza invite you to the blessing of their son's engagement",
-      "name1": "Shalini",
-      "joiner": "and",
-      "name2": "Joseph",
-      "date": "2027-03-07",
-      "time": "16:00",
-      "timeLabel": "Blessing at",
-      "venue": "Rosario Cathedral Hall, Mangaluru",
-      "closing": "Kindly keep the evening free"
     }
   },
   {
     "id": "chalk-copperplate",
     "name": "Chalk Copperplate",
-    "idea": "A copperplate hand on warm chalk, each name written in one unbroken line, with a bronze filigree no bigger than a thumbnail.",
+    "idea": "Both names written in one unbroken copperplate line on warm chalk, with a bronze filigree no bigger than a thumbnail.",
     "recipe": "classic",
     "fieldset": "couple",
     "categories": [
       "anniversary",
-      "wedding",
       "reception"
     ],
     "tagline": "Copperplate names on warm chalk, bronze filigree",
@@ -1746,22 +1391,22 @@
     "texture": "linen",
     "displayScale": 1.45,
     "defaults": {
-      "eyebrow": "Silver Jubilee",
-      "intro": "The family requests the pleasure of your company at a thanksgiving for twenty-five years",
-      "name1": "Rukmini",
+      "eyebrow": "Silver Wedding",
+      "intro": "Twenty-five years in the same house, and the children would like one evening made of it",
+      "name1": "Girija",
       "joiner": "&",
-      "name2": "Vasudevan",
+      "name2": "Madhavan",
       "date": "2027-08-22",
-      "time": "17:30",
-      "timeLabel": "Thanksgiving at",
-      "venue": "Malabar Palace Hall, Kannur",
-      "closing": "With gratitude for twenty-five years"
+      "time": "18:00",
+      "timeLabel": "Evening from",
+      "venue": "Sangeetha Hall, Shoranur Road, Palakkad",
+      "closing": "Twenty-five years, and the same two chairs"
     }
   },
   {
     "id": "smoked-champagne",
     "name": "Smoked Champagne",
-    "idea": "A smoked charcoal card for an evening jubilee, where a champagne wreath and a beaded hairline are the only light in the frame.",
+    "idea": "Fifty years dressed for evening: on smoked charcoal, a champagne wreath and one beaded hairline are the only light on the sheet.",
     "recipe": "classic",
     "fieldset": "couple",
     "categories": [
@@ -1787,95 +1432,280 @@
     "foil": true,
     "defaults": {
       "eyebrow": "Golden Jubilee",
-      "intro": "The family requests the honour of your company at dinner, marking fifty years of marriage",
+      "intro": "Fifty years this October, and their children ask you to dinner, black tie, under the lights on the lawn",
       "name1": "Margaret",
       "joiner": "&",
       "name2": "Alexander",
       "date": "2027-10-16",
       "time": "20:00",
-      "timeLabel": "Dinner at",
+      "timeLabel": "Dinner from",
       "venue": "Rose Garden Lawn, Kodaikanal Club, Kodaikanal",
       "closing": "Fifty years, and still at home to you"
     }
   },
   {
-    "id": "paper-olive",
-    "name": "Paper Olive",
-    "idea": "A save-the-date sent a year ahead, carrying one olive branch on paper white because the date is the only thing settled.",
-    "recipe": "classic",
-    "fieldset": "couple",
+    "id": "one-candle",
+    "name": "One Candle",
+    "idea": "A first birthday on a left rail with a single hairline candle for the single year, and not one balloon on the sheet.",
+    "recipe": "modern",
+    "fieldset": "person",
     "categories": [
-      "save-the-date",
-      "wedding",
-      "reception"
+      "first-birthday",
+      "birthday",
+      "baby"
     ],
-    "tagline": "One olive branch on paper white, a year ahead",
+    "tagline": "One candle for one year, no balloons",
     "palette": {
-      "bg": "#FBFAF7",
-      "ink": "#16151A",
-      "muted": "#5A5862",
-      "accent": "#8E8A7F",
-      "accentDark": "#4F4C45"
+      "bg": "#F1E4DE",
+      "ink": "#382A2B",
+      "muted": "#6E5756",
+      "accent": "#CFAAA0",
+      "accentDark": "#7A4A40"
+    },
+    "fonts": {
+      "display": "Fraunces",
+      "body": "Outfit"
+    },
+    "motif": "candle",
+    "texture": "paper",
+    "defaults": {
+      "eyebrow": "First Birthday",
+      "intro": "Ira is one on Sunday, and there will be far more cake than people",
+      "name1": "Ira",
+      "subtitle": "one whole year",
+      "date": "2027-01-17",
+      "time": "16:30",
+      "timeLabel": "from",
+      "venue": "Flat 3, 14 Vazhuthacaud, Thiruvananthapuram",
+      "closing": "Come and make a fuss of her"
+    }
+  },
+  {
+    "id": "sage-doorway",
+    "name": "Sage Doorway",
+    "idea": "A gruhapravesham given the arch it deserves: one sage hairline doorway over the house's own name, with mango leaves closing the card.",
+    "recipe": "arch",
+    "fieldset": "event",
+    "categories": [
+      "housewarming",
+      "festival"
+    ],
+    "tagline": "A hairline arch for a new front door",
+    "palette": {
+      "bg": "#E8E8DC",
+      "ink": "#292E24",
+      "muted": "#5C6350",
+      "accent": "#A9B095",
+      "accentDark": "#55603F"
+    },
+    "fonts": {
+      "display": "Fraunces",
+      "body": "Space Grotesk"
+    },
+    "motif": "house",
+    "closeMotif": "flourish-leaf",
+    "divider": "dot-rule",
+    "texture": "linen",
+    "defaults": {
+      "eyebrow": "Gruhapravesham",
+      "intro": "The paint is dry and the kitchen works, so the house would like some noise in it",
+      "name1": "Thottathil",
+      "subtitle": "our new house",
+      "date": "2027-05-09",
+      "time": "10:00",
+      "timeLabel": "from",
+      "venue": "Door 4/271, Panampilly Nagar, Kochi",
+      "closing": "Our new door is open to you"
+    }
+  },
+  {
+    "id": "chalk-blue-cradle",
+    "name": "Chalk Blue Cradle",
+    "idea": "A cradle ceremony as a chalk-blue sheet lying on a darker one, with a single ultramarine rattle at its head and no nursery pastel anywhere.",
+    "recipe": "panel",
+    "fieldset": "person",
+    "categories": [
+      "baby",
+      "first-birthday"
+    ],
+    "tagline": "Ultramarine rattle on a chalk blue sheet",
+    "palette": {
+      "bg": "#ECEEF1",
+      "ink": "#10203A",
+      "muted": "#4A5A72",
+      "accent": "#6B81A0",
+      "accentDark": "#35506E"
     },
     "fonts": {
       "display": "Cormorant Garamond",
       "body": "Space Grotesk"
     },
-    "motif": "olive-branch",
-    "closeMotif": "sprig",
-    "frame": "rules",
-    "texture": "paper",
-    "displayScale": 1.14,
+    "frame": "double",
+    "motif": "rattle",
+    "texture": "linen",
+    "displayScale": 1.15,
     "defaults": {
-      "eyebrow": "Save The Date",
-      "intro": "The card follows in the spring; until then the family asks you to keep the day free",
-      "name1": "Nadia",
-      "joiner": "&",
-      "name2": "Theodore",
-      "date": "2028-01-23",
-      "time": "11:00",
-      "timeLabel": "From",
-      "venue": "The Old Harbour Lawn, Fort Kochi",
-      "closing": "With love, a year in advance"
+      "eyebrow": "Cradle Ceremony",
+      "intro": "The cradle goes up on Thursday morning, and we would like the house full",
+      "name1": "Meher",
+      "subtitle": "three weeks old",
+      "date": "2027-03-04",
+      "time": "09:30",
+      "timeLabel": "from",
+      "venue": "7 Pali Hill, Bandra West, Mumbai",
+      "closing": "Come bless the little one"
     }
   },
   {
-    "id": "navy-laurel",
-    "name": "Navy Laurel",
-    "idea": "A navy sheet lying on ivory for a nikah, with a brass laurel standing in for any symbol belonging to one faith alone.",
-    "recipe": "panel",
+    "id": "pongal-ochre",
+    "name": "Pongal Ochre",
+    "idea": "A Thai Pongal card the colour of the pot: ochre bands woven top and bottom of turmeric paper, with the sun alone on the sheet between them.",
+    "recipe": "banner",
+    "fieldset": "event",
+    "categories": [
+      "festival",
+      "housewarming"
+    ],
+    "tagline": "Ochre bands and the Pongal sun",
+    "palette": {
+      "bg": "#FAF0D8",
+      "ink": "#43250F",
+      "muted": "#705030",
+      "accent": "#A87414",
+      "accentDark": "#8A5A12"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Space Grotesk"
+    },
+    "motif": "sun",
+    "closeMotif": "lotus",
+    "texture": "linen",
+    "displayScale": 1.15,
+    "defaults": {
+      "eyebrow": "Harvest Morning",
+      "intro": "The pot goes on at first light and the sugarcane is already standing in the corner",
+      "name1": "Thai Pongal",
+      "subtitle": "the pot boils at sunrise",
+      "date": "2027-01-15",
+      "time": "07:00",
+      "timeLabel": "From",
+      "venue": "8 Thillai Nagar, Thanjavur",
+      "closing": "May the year boil over"
+    }
+  },
+  {
+    "id": "oyster-emeritus",
+    "name": "Oyster Emeritus",
+    "idea": "A retirement given a gallery card instead of a party: the teacher's name alone across the full measure of warm chalk, thirty-one years the only other line.",
+    "recipe": "masthead",
+    "fieldset": "person",
+    "categories": [
+      "farewell",
+      "corporate"
+    ],
+    "tagline": "A teacher's name alone on warm chalk",
+    "palette": {
+      "bg": "#F3EEE5",
+      "ink": "#2E2A23",
+      "muted": "#6A6155",
+      "accent": "#C9B99B",
+      "accentDark": "#6B5636"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Outfit"
+    },
+    "motif": "laurel",
+    "texture": "linen",
+    "displayScale": 1.15,
+    "defaults": {
+      "eyebrow": "Retirement",
+      "intro": "Thirty-one years of other people's children, and now a free Monday morning",
+      "name1": "Padmavathy",
+      "subtitle": "retires from teaching",
+      "date": "2027-03-28",
+      "time": "12:30",
+      "timeLabel": "Lunch from",
+      "venue": "Ammu Nivas, 8 Thevara Ferry Road, Kochi",
+      "closing": "With thanks from her classes"
+    }
+  },
+  {
+    "id": "shell-copper-forty",
+    "name": "Shell & Copper",
+    "idea": "Forty years of marriage reversed out of one deep umber band, with a rose-copper foil hairline above and below it and nothing else on the sheet.",
+    "recipe": "band",
     "fieldset": "couple",
     "categories": [
-      "wedding",
+      "anniversary",
       "reception"
     ],
-    "tagline": "Navy card on ivory, brass laurel, nikah formality",
+    "tagline": "Forty years knocked out of an umber band",
     "palette": {
-      "bg": "#F3F1EA",
-      "ink": "#16233C",
-      "muted": "#4C5873",
-      "accent": "#B08D57",
-      "accentDark": "#3E4A63"
+      "bg": "#F7EFE8",
+      "ink": "#3A2A22",
+      "muted": "#6B544A",
+      "accent": "#D9B8A3",
+      "accentDark": "#8A4F32"
     },
     "fonts": {
       "display": "Marcellus",
       "body": "Cormorant Garamond"
     },
-    "motif": "laurel",
-    "closeMotif": "diamond",
-    "frame": "double",
-    "texture": "linen",
+    "motif": "olive-branch",
+    "texture": "paper",
+    "foil": true,
     "defaults": {
-      "eyebrow": "Nikah Ceremony",
-      "intro": "Mr and Mrs Rahman request the honour of your presence at the nikah of their daughter",
-      "name1": "Noor",
-      "joiner": "with",
-      "name2": "Imran",
-      "date": "2027-09-11",
-      "time": "17:15",
-      "timeLabel": "Nikah at",
-      "venue": "Khairiyath Hall, Beach Road, Kozhikode",
-      "closing": "By the grace of the Almighty"
+      "eyebrow": "Fortieth Anniversary",
+      "intro": "Forty years in the same house, four grandchildren, and the same two chairs on the veranda",
+      "name1": "Susheela",
+      "joiner": "&",
+      "name2": "Raghavan",
+      "date": "2027-08-22",
+      "time": "13:00",
+      "timeLabel": "Lunch at",
+      "venue": "Thekkeparambil, 22 Besant Nagar, Chennai",
+      "closing": "With love from both of us"
+    }
+  },
+  {
+    "id": "maghrib-crescent",
+    "name": "Maghrib Crescent",
+    "idea": "An iftar put on a burnt-wood ground because the fast breaks after dark, with the hour of maghrib as the only number and one copper crescent above it.",
+    "recipe": "modern",
+    "fieldset": "event",
+    "categories": [
+      "festival",
+      "reception"
+    ],
+    "tagline": "Dusk ground, one copper crescent, the hour of maghrib",
+    "palette": {
+      "bg": "#241F1A",
+      "bg2": "#171310",
+      "ink": "#EFE7D9",
+      "muted": "#AC9F8E",
+      "accent": "#CBB392",
+      "accentDark": "#CBB392"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Outfit"
+    },
+    "motif": "crescent",
+    "texture": "vignette",
+    "gradient": true,
+    "displayScale": 1.15,
+    "defaults": {
+      "eyebrow": "Ramadan 1448",
+      "intro": "We break the fast at six forty, and there is more than enough for everybody",
+      "name1": "Iftar",
+      "subtitle": "on the twenty-third night",
+      "date": "2027-03-13",
+      "time": "18:40",
+      "timeLabel": "Maghrib at",
+      "venue": "Thazhathu Veedu, Kuttichira, Kozhikode",
+      "closing": "Peace be upon your house"
     }
   }
 ]

@@ -128,6 +128,24 @@ async function main() {
       Buffer.from(mlUrl.split(',')[1], 'base64'));
     console.log('  wrote a Latin design with Malayalam typed into it');
 
+    // A name is shrunk to fit, never broken across lines. "Padmavathy" set as
+    // "Padmava / thy" is worse than any font size, and it shipped that way
+    // because the wrapper broke the word before the shrink loop ever ran.
+    const fits = await page.evaluate(async () => {
+      const { layoutText } = await import('/src/engine/text.js');
+      const ctx = document.createElement('canvas').getContext('2d');
+      const run = (text) => layoutText(ctx, text, {
+        family: '"Marcellus", serif', size: 60, maxWidth: 280, maxLines: 2, minSize: 24,
+      });
+      return ['Padmavathy', 'Harikrishnan', 'Lakshmipriya', 'Venkataraman', 'Unnikrishnan']
+        .map((n) => ({ name: n, ...run(n) }));
+    });
+    const broken = fits.filter((f) => f.lines.length > 1);
+    ok(results, 'a long single name shrinks rather than breaking mid-word',
+       broken.length === 0,
+       broken.length ? broken.map((f) => f.lines.join('/')).join(' ')
+                     : fits.map((f) => `${f.name} ${f.size}px`).join(', '));
+
     // A very long name is the quality-bar case that breaks naive layouts.
     const longUrl = await page.evaluate(async () => {
       await window.drawFrame(12, { entered: {

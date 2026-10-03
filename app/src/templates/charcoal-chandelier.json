@@ -3,7 +3,7 @@
   "id": "charcoal-chandelier",
   "name": "Charcoal Chandelier",
   "tagline": "Champagne gold on smoked charcoal, for the dinner",
-  "idea": "One champagne-gold chandelier in foil on smoked charcoal, with the rest of the sheet left dark and empty.",
+  "idea": "A single champagne chandelier hung inside a beaded hairline on flat smoked charcoal, the rest of the sheet left dark and empty.",
   "categories": [
     "reception",
     "wedding",
@@ -28,7 +28,6 @@
   },
   "palette": {
     "bg": "#1B1E22",
-    "bg2": "#2A2E33",
     "ink": "#EDE7DC",
     "muted": "#A9A298",
     "accent": "#C6A96B",
@@ -91,27 +90,7 @@
       "y": 0,
       "w": 360,
       "h": 640,
-      "fill": {
-        "type": "linear",
-        "from": [
-          0,
-          0
-        ],
-        "to": [
-          0,
-          640
-        ],
-        "stops": [
-          [
-            0,
-            "@bg"
-          ],
-          [
-            1,
-            "@bg2"
-          ]
-        ]
-      }
+      "fill": "@bg"
     },
     {
       "type": "frame",

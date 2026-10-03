@@ -6,8 +6,7 @@
   "idea": "An aged-gold hairline arch on Mysore peacock teal, standing in for the mandapam doorway at lamp-lighting hour.",
   "categories": [
     "wedding",
-    "engagement",
-    "reception"
+    "engagement"
   ],
   "fieldset": "couple",
   "defaults": {
@@ -16,11 +15,11 @@
     "timeLabel": "Muhurta at",
     "joiner": "&",
     "eyebrow": "Evening Muhurta",
-    "intro": "At the hour the lamps are lit, both our families invite you to the wedding of",
+    "intro": "The lamps go up at dusk and the nadaswaram starts soon after; we would be glad of you in the mantapa",
     "name1": "Lakshmipriya",
     "name2": "Raghavendra",
     "venue": "Kalyana Mantapa, Palace Road, Mysuru",
-    "closing": "Come for the lamps, stay for the feast"
+    "closing": "With the blessings of both our homes"
   },
   "design": {
     "width": 360,

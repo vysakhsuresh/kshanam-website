@@ -13,9 +13,9 @@
   "defaults": {
     "date": "2027-04-25",
     "time": "19:00",
-    "timeLabel": "from",
+    "timeLabel": "Sadya from",
     "joiner": "&",
-    "eyebrow": "The Evening Reception",
+    "eyebrow": "Evening Sadya",
     "intro": "The muhurtham is at dawn; the sadya and the music are at night, and that is the half we want you for",
     "name1": "Anjana",
     "name2": "Vinayak",
@@ -72,7 +72,7 @@
     }
   },
   "fonts": {
-    "display": "Cinzel",
+    "display": "Marcellus",
     "body": "Space Grotesk"
   },
   "photoSlots": [
@@ -260,7 +260,7 @@
       "layers": [
         {
           "type": "motif",
-          "name": "diya",
+          "name": "lamp",
           "x": 180,
           "y": 238,
           "size": 62,
@@ -573,7 +573,7 @@
         },
         {
           "type": "motif",
-          "name": "diya",
+          "name": "lamp",
           "x": 180,
           "y": 366,
           "size": 42,

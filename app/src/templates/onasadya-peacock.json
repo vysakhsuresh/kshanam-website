@@ -6,8 +6,7 @@
   "idea": "The kasavu border moved off the mundu and onto a Mysore peacock-teal card: gold woven bands top and bottom, a lotus alone between them.",
   "categories": [
     "festival",
-    "reception",
-    "anniversary"
+    "reception"
   ],
   "fieldset": "event",
   "defaults": {
@@ -15,11 +14,11 @@
     "time": "12:15",
     "timeLabel": "Sadya from",
     "eyebrow": "Thiruvonam",
-    "intro": "The sadya is at noon on Thiruvonam, served on plantain leaves, and there is a place at the table kept for you",
+    "intro": "The sadya is at noon on Thiruvonam, served on plantain leaves, and there is a place kept for you",
     "name1": "Onasadya",
     "subtitle": "twenty-six at one table",
     "venue": "Puthenveedu Tharavad, Haripad, Alappuzha",
-    "closing": "Come hungry, stay late"
+    "closing": "There is always more rice"
   },
   "design": {
     "width": 360,

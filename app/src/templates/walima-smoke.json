@@ -112,7 +112,7 @@
     },
     {
       "type": "frame",
-      "name": "beaded",
+      "name": "thin",
       "x": 44,
       "y": 104,
       "w": 272,
@@ -428,7 +428,7 @@
         },
         {
           "type": "motif",
-          "name": "lotus",
+          "name": "chandelier",
           "x": 180,
           "y": 370,
           "size": 38,

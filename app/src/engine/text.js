@@ -7,7 +7,14 @@
  * right font is loaded; fitting is ours.
  */
 
-/** Break `text` into at most `maxLines` lines that each fit `maxWidth`. */
+/**
+ * Break `text` into at most `maxLines` lines that each fit `maxWidth`.
+ *
+ * Breaks on spaces only. A word too long for the box is left long on purpose,
+ * so the caller can shrink the type instead: breaking "Padmavathy" into
+ * "Padmava / thy" is worse than any font size, and it is what this did until
+ * the hard wrap was moved out of here and made a last resort.
+ */
 export function wrapLines(ctx, text, maxWidth, maxLines) {
   const words = String(text).split(/\s+/).filter(Boolean);
   if (!words.length) return [''];
@@ -26,16 +33,15 @@ export function wrapLines(ctx, text, maxWidth, maxLines) {
     }
   }
   if (lines.length < maxLines && line) lines.push(line);
-
-  // A single word longer than the box (one very long name) cannot be broken on
-  // spaces, so break it on characters rather than letting it run off the edge.
-  if (lines.length === 1 && ctx.measureText(lines[0]).width > maxWidth && maxLines > 1) {
-    return hardWrap(ctx, lines[0], maxWidth, maxLines);
-  }
   return lines;
 }
 
-function hardWrap(ctx, text, maxWidth, maxLines) {
+/**
+ * Break on characters. Only ever reached once the type is already as small as
+ * the design permits and a single word still will not fit - a 30-character
+ * unbroken name at minSize. Running off the edge of the card is worse.
+ */
+export function hardWrap(ctx, text, maxWidth, maxLines) {
   const lines = [];
   let line = '';
   for (const ch of text) {
@@ -77,6 +83,12 @@ export function layoutText(ctx, text, opts) {
     if (widest <= maxWidth || s <= minSize) break;
     // Step proportionally: a 3x-too-wide name should not take 200 iterations.
     s = Math.max(minSize, Math.min(s - 1, Math.floor(s * (maxWidth / widest))));
+  }
+
+  // Shrinking has gone as far as the design allows and one word still does not
+  // fit. Now, and only now, break it on characters.
+  if (maxLines > 1 && lines.length === 1 && ctx.measureText(lines[0]).width > maxWidth) {
+    lines = hardWrap(ctx, lines[0], maxWidth, maxLines);
   }
 
   ctx.font = `${weight} ${s}px ${family}`;

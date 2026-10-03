@@ -3,24 +3,23 @@
   "id": "chalk-copperplate",
   "name": "Chalk Copperplate",
   "tagline": "Copperplate names on warm chalk, bronze filigree",
-  "idea": "A copperplate hand on warm chalk, each name written in one unbroken line, with a bronze filigree no bigger than a thumbnail.",
+  "idea": "Both names written in one unbroken copperplate line on warm chalk, with a bronze filigree no bigger than a thumbnail.",
   "categories": [
     "anniversary",
-    "wedding",
     "reception"
   ],
   "fieldset": "couple",
   "defaults": {
     "date": "2027-08-22",
-    "time": "17:30",
-    "timeLabel": "Thanksgiving at",
+    "time": "18:00",
+    "timeLabel": "Evening from",
     "joiner": "&",
-    "eyebrow": "Silver Jubilee",
-    "intro": "The family requests the pleasure of your company at a thanksgiving for twenty-five years",
-    "name1": "Rukmini",
-    "name2": "Vasudevan",
-    "venue": "Malabar Palace Hall, Kannur",
-    "closing": "With gratitude for twenty-five years"
+    "eyebrow": "Silver Wedding",
+    "intro": "Twenty-five years in the same house, and the children would like one evening made of it",
+    "name1": "Girija",
+    "name2": "Madhavan",
+    "venue": "Sangeetha Hall, Shoranur Road, Palakkad",
+    "closing": "Twenty-five years, and the same two chairs"
   },
   "design": {
     "width": 360,

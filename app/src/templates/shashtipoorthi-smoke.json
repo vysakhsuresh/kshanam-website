@@ -3,11 +3,10 @@
   "id": "shashtipoorthi-smoke",
   "name": "Smoke & Sun",
   "tagline": "Smoked charcoal and champagne gold for sixty years",
-  "idea": "Sixty years marked once: a single sun in champagne gold above the name, on smoked charcoal that darkens towards the foot of the card.",
+  "idea": "Sixty years marked once: a single sun in champagne gold above the name, on smoked charcoal that deepens towards the foot of the card.",
   "categories": [
     "birthday",
-    "anniversary",
-    "festival"
+    "anniversary"
   ],
   "fieldset": "person",
   "defaults": {
@@ -16,10 +15,10 @@
     "timeLabel": "from",
     "eyebrow": "Shashtipoorthi",
     "intro": "Sixty years, and he has never once asked for a party. We are having one anyway, and it is not complete without you",
-    "name1": "Vasudevan Namboothiri",
-    "subtitle": "sixty years, one lamp",
+    "name1": "Narayanan Namboothiri",
+    "subtitle": "sixty years, one quiet man",
     "venue": "Chottanikkara Devi Temple hall, Ernakulam",
-    "closing": "Sixty years, and the lamp still lit"
+    "closing": "He will pretend he did not want this"
   },
   "design": {
     "width": 360,
@@ -449,7 +448,7 @@
         },
         {
           "type": "motif",
-          "name": "lamp",
+          "name": "dot-rule",
           "x": 180,
           "y": 366,
           "size": 42,

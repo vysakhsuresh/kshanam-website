@@ -3,7 +3,7 @@
   "id": "naming-day-blue",
   "name": "Naming Day",
   "tagline": "A child's name set as large as a title",
-  "idea": "A child's name set as large as an exhibition title, in chalk blue and ultramarine instead of nursery pastel.",
+  "idea": "A child's name set as large as an exhibition title, in chalk blue and ultramarine with one lotus, instead of nursery pastel.",
   "categories": [
     "baby",
     "first-birthday"
@@ -12,12 +12,12 @@
   "defaults": {
     "date": "2027-06-12",
     "time": "11:00",
-    "timeLabel": "From",
+    "timeLabel": "Any time after",
     "eyebrow": "A Naming Day",
     "intro": "She has a name at last, and we would like you in the room when we say it out loud for the first time.",
-    "name1": "Ilaria",
+    "name1": "Meera",
     "subtitle": "born the fourth of April",
-    "venue": "Flat 2, Dundas Street, Edinburgh",
+    "venue": "Flat 3, Panampilly Nagar, Kochi",
     "closing": "Bring nothing, she has plenty"
   },
   "design": {

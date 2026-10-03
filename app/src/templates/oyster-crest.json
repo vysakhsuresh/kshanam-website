@@ -3,7 +3,7 @@
   "id": "oyster-crest",
   "name": "Oyster Crest",
   "tagline": "Graphite crest on laid oyster, no metal anywhere",
-  "idea": "A graphite crest engraved on a laid oyster sheet that floats a shade above its own ground, with no metal anywhere in the design.",
+  "idea": "A wedding card with no metal in it at all — a graphite crest engraved on laid oyster, the sheet floating one shade above its own ground.",
   "categories": [
     "wedding",
     "engagement",
@@ -11,16 +11,16 @@
   ],
   "fieldset": "couple",
   "defaults": {
-    "date": "2027-11-27",
-    "time": "18:30",
-    "timeLabel": "Ceremony at",
+    "date": "2027-11-13",
+    "time": "10:30",
+    "timeLabel": "Mass at",
     "joiner": "to",
-    "eyebrow": "Marriage Invitation",
-    "intro": "Mr and Mrs Fernandes request the pleasure of your company at the marriage of their daughter",
+    "eyebrow": "Holy Matrimony",
+    "intro": "The Fernandes family asks you to the nuptial Mass for their daughter, and to the long lunch that follows at the house",
     "name1": "Rosemary",
-    "name2": "Gautam",
-    "venue": "St Andrew's Church, Cubbon Road, Bengaluru",
-    "closing": "With the compliments of both families"
+    "name2": "Clement",
+    "venue": "Our Lady of Miracles Church, Milagres, Mangaluru",
+    "closing": "No gifts, only your blessing"
   },
   "design": {
     "width": 360,

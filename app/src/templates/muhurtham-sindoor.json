@@ -3,7 +3,7 @@
   "id": "muhurtham-sindoor",
   "name": "Muhurtham Sindoor",
   "tagline": "Oxblood and marigold gold, struck for a muhurtham",
-  "idea": "A single mandala struck in marigold gold on an oxblood ground, centred on the same axis the names use, and nothing else.",
+  "idea": "The most ornate genre at its quietest: one mandala struck in marigold gold on the names' own axis, a scalloped hairline, and nothing else on the oxblood sheet.",
   "categories": [
     "wedding",
     "engagement",
@@ -11,16 +11,16 @@
   ],
   "fieldset": "couple",
   "defaults": {
-    "date": "2027-04-25",
+    "date": "2027-05-09",
     "time": "10:30",
     "timeLabel": "Muhurtham at",
     "joiner": "&",
     "eyebrow": "Shubha Muhurtham",
-    "intro": "Our two families have fixed the day with the temple astrologer, and we would like you standing with us at the muhurtham hour",
+    "intro": "The muhurtham is at half past ten and it will not wait, so come in time to see them tie the thaali",
     "name1": "Keerthana",
     "name2": "Mahadevan",
-    "venue": "Sree Padmanabhaswamy Kalyana Mandapam, Thiruvananthapuram",
-    "closing": "May the lamps stay lit"
+    "venue": "Ananthapuri Kalyana Mandapam, East Fort, Thiruvananthapuram",
+    "closing": "With the blessings of both tharavads"
   },
   "design": {
     "width": 360,
@@ -72,7 +72,7 @@
     }
   },
   "fonts": {
-    "display": "Cinzel",
+    "display": "Marcellus",
     "body": "Outfit"
   },
   "photoSlots": [
@@ -94,7 +94,7 @@
     },
     {
       "type": "frame",
-      "name": "ornate",
+      "name": "scallop",
       "inset": 24,
       "stroke": "@foil",
       "width": 1,
