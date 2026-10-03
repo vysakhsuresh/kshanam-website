@@ -27,7 +27,7 @@
     "height": 640
   },
   "palette": {
-    "bg": "#1B1E22",
+    "bg": "#121214",
     "ink": "#EDE7DC",
     "muted": "#A9A298",
     "accent": "#C6A96B",
@@ -462,7 +462,7 @@
     }
   ],
   "contrast": {
-    "inkOnBg": 13.59,
-    "labelOnBg": 9.03
+    "inkOnBg": 15.2,
+    "labelOnBg": 10.11
   }
 }

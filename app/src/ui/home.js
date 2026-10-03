@@ -113,19 +113,21 @@ function renderDesigns() {
     : null;
 
   let shown = 0;
-  const addPage = () => {
-    for (const template of list.slice(shown, shown + FIRST_PAGE)) {
+  const add = (count) => {
+    for (const template of list.slice(shown, shown + count)) {
       host.appendChild(card(template));
     }
-    shown = Math.min(shown + FIRST_PAGE, list.length);
+    shown = Math.min(shown + count, list.length);
     if (!more) return;
     const left = list.length - shown;
     more.hidden = left <= 0;
     more.textContent = left > 0 ? `Show the other ${left} designs` : '';
   };
 
-  if (more) more.onclick = addPage;
-  addPage();
+  // The button says "Show the other 38 designs", so it shows the other 38.
+  // Paging again from there would make a liar of its own label.
+  if (more) more.onclick = () => add(list.length - shown);
+  add(FIRST_PAGE);
 }
 
 function card(template) {

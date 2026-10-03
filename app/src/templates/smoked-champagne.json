@@ -3,7 +3,7 @@
   "id": "smoked-champagne",
   "name": "Smoked Champagne",
   "tagline": "Champagne wreath on smoked charcoal, evening dress",
-  "idea": "Fifty years dressed for evening: on smoked charcoal, a champagne wreath and one beaded hairline are the only light on the sheet.",
+  "idea": "Champagne beading across one charcoal band, with the names reversed out of it and bone paper above and below.",
   "categories": [
     "anniversary",
     "reception"
@@ -92,22 +92,54 @@
       "fill": "@bg"
     },
     {
-      "type": "frame",
-      "name": "beaded",
-      "inset": 24,
+      "type": "rect",
+      "x": 0,
+      "y": 232,
+      "w": 360,
+      "h": 176,
+      "fill": "@ink",
+      "anchorX": 180,
+      "anchorY": 320,
+      "anim": {
+        "in": {
+          "preset": "grow-height",
+          "dur": 0.8
+        }
+      }
+    },
+    {
+      "type": "line",
+      "x1": 40,
+      "y1": 218,
+      "x2": 320,
+      "y2": 218,
       "stroke": "@foil",
       "width": 1,
       "anchorX": 180,
-      "anchorY": 320,
-      "motion": {
-        "preset": "zoom-in",
-        "amount": 0.018
-      },
+      "anchorY": 218,
       "anim": {
         "in": {
-          "preset": "fade",
-          "at": 0.4,
-          "dur": 1
+          "preset": "grow-width",
+          "at": 0.7,
+          "dur": 0.8
+        }
+      }
+    },
+    {
+      "type": "line",
+      "x1": 40,
+      "y1": 422,
+      "x2": 320,
+      "y2": 422,
+      "stroke": "@foil",
+      "width": 1,
+      "anchorX": 180,
+      "anchorY": 422,
+      "anim": {
+        "in": {
+          "preset": "grow-width",
+          "at": 0.8,
+          "dur": 0.8
         }
       }
     },
@@ -130,14 +162,14 @@
           "type": "motif",
           "name": "wreath",
           "x": 180,
-          "y": 238,
-          "size": 62,
-          "stroke": "@foil",
+          "y": 300,
+          "size": 56,
+          "stroke": "@bg",
           "width": 1.3,
           "anim": {
             "in": {
               "preset": "scale-in",
-              "at": 0.45,
+              "at": 0.5,
               "dur": 0.9
             }
           }
@@ -151,32 +183,14 @@
           "size": 13,
           "letterSpacing": 3.2,
           "uppercase": true,
-          "color": "@accentDark",
-          "y": 330,
-          "maxWidth": 280,
+          "color": "@bg",
+          "y": 366,
+          "maxWidth": 268,
           "anim": {
             "in": {
               "preset": "fade-up",
               "at": 1.05,
               "dur": 0.85
-            }
-          }
-        },
-        {
-          "type": "line",
-          "x1": 148,
-          "y1": 362,
-          "x2": 212,
-          "y2": 362,
-          "stroke": "@foil",
-          "width": 1,
-          "anchorX": 180,
-          "anchorY": 362,
-          "anim": {
-            "in": {
-              "preset": "grow-width",
-              "at": 1.5,
-              "dur": 0.8
             }
           }
         }
@@ -192,9 +206,9 @@
           "x": 180,
           "text": "{{intro}}",
           "font": "body",
-          "size": 19,
-          "color": "@muted",
-          "y": 302,
+          "size": 18,
+          "color": "@bg",
+          "y": 318,
           "maxWidth": 268,
           "maxLines": 4,
           "lineHeight": 1.45,
@@ -216,14 +230,14 @@
           "type": "text",
           "align": "center",
           "x": 180,
-          "maxWidth": 280,
+          "maxWidth": 268,
           "text": "{{name1}}",
           "font": "display",
-          "size": 52,
-          "color": "@ink",
+          "size": 40,
+          "color": "@bg",
           "minSize": 24,
           "maxLines": 1,
-          "y": 252,
+          "y": 276,
           "anim": {
             "in": {
               "preset": "fade-up",
@@ -239,9 +253,9 @@
           "maxWidth": 120,
           "text": "{{joiner}}",
           "font": "display",
-          "size": 23,
-          "color": "@accentDark",
-          "y": 300,
+          "size": 16,
+          "color": "@bg",
+          "y": 320,
           "anim": {
             "in": {
               "preset": "scale-in",
@@ -254,37 +268,19 @@
           "type": "text",
           "align": "center",
           "x": 180,
-          "maxWidth": 280,
+          "maxWidth": 268,
           "text": "{{name2}}",
           "font": "display",
-          "size": 52,
-          "color": "@ink",
+          "size": 40,
+          "color": "@bg",
           "minSize": 24,
           "maxLines": 1,
-          "y": 348,
+          "y": 364,
           "anim": {
             "in": {
               "preset": "fade-up",
               "at": 0.8,
               "dur": 0.85
-            }
-          }
-        },
-        {
-          "type": "line",
-          "x1": 154,
-          "y1": 404,
-          "x2": 206,
-          "y2": 404,
-          "stroke": "@foil",
-          "width": 1,
-          "anchorX": 180,
-          "anchorY": 404,
-          "anim": {
-            "in": {
-              "preset": "grow-width",
-              "at": 1.4,
-              "dur": 0.8
             }
           }
         }
@@ -309,15 +305,12 @@
               "dur": 0.9
             }
           },
-          "x": 90,
-          "y": 186,
-          "w": 180,
-          "h": 240,
-          "radius": 3,
-          "stroke": "@foil",
-          "width": 1,
+          "x": 0,
+          "y": 0,
+          "w": 360,
+          "h": 232,
           "anchorX": 180,
-          "anchorY": 306
+          "anchorY": 116
         }
       ]
     },
@@ -330,15 +323,14 @@
           "align": "center",
           "x": 180,
           "text": "{{dateLong}}",
-          "font": "body",
-          "weight": 600,
-          "size": 26,
-          "color": "@ink",
-          "y": 284,
-          "maxWidth": 280,
+          "font": "display",
+          "size": 30,
+          "color": "@bg",
+          "y": 296,
+          "maxWidth": 268,
           "maxLines": 2,
-          "lineHeight": 1.25,
-          "minSize": 16,
+          "lineHeight": 1.2,
+          "minSize": 17,
           "anim": {
             "in": {
               "preset": "fade-up",
@@ -353,15 +345,16 @@
           "x": 180,
           "text": "{{timeLabel}} {{timeText}}",
           "font": "body",
-          "size": 18,
-          "color": "@muted",
-          "y": 334,
-          "maxWidth": 280,
-          "maxLines": 2,
+          "size": 16,
+          "letterSpacing": 2,
+          "uppercase": true,
+          "color": "@bg",
+          "y": 348,
+          "maxWidth": 268,
           "anim": {
             "in": {
               "preset": "fade-up",
-              "at": 0.75,
+              "at": 0.8,
               "dur": 0.85
             }
           }
@@ -378,14 +371,13 @@
           "x": 180,
           "text": "{{venue}}",
           "font": "body",
-          "weight": 500,
-          "size": 22,
-          "color": "@ink",
-          "y": 302,
+          "size": 20,
+          "color": "@bg",
+          "y": 318,
           "maxWidth": 268,
           "maxLines": 3,
           "lineHeight": 1.4,
-          "minSize": 15,
+          "minSize": 14,
           "anim": {
             "in": {
               "preset": "fade-up",
@@ -406,13 +398,13 @@
           "x": 180,
           "text": "{{closing}}",
           "font": "display",
-          "size": 25,
-          "color": "@accentDark",
-          "y": 270,
-          "maxWidth": 268,
+          "size": 24,
+          "color": "@bg",
+          "y": 304,
+          "maxWidth": 262,
           "maxLines": 3,
           "lineHeight": 1.35,
-          "minSize": 16,
+          "minSize": 15,
           "anim": {
             "in": {
               "preset": "fade-up",
@@ -423,34 +415,18 @@
         },
         {
           "type": "line",
-          "x1": 160,
-          "y1": 316,
-          "x2": 200,
-          "y2": 316,
-          "stroke": "@foil",
+          "x1": 158,
+          "y1": 376,
+          "x2": 202,
+          "y2": 376,
+          "stroke": "@bg",
           "width": 1,
           "anchorX": 180,
-          "anchorY": 316,
+          "anchorY": 376,
           "anim": {
             "in": {
               "preset": "grow-width",
-              "at": 0.7,
-              "dur": 0.8
-            }
-          }
-        },
-        {
-          "type": "motif",
-          "name": "diamond",
-          "x": 180,
-          "y": 366,
-          "size": 42,
-          "stroke": "@foil",
-          "width": 1.3,
-          "anim": {
-            "in": {
-              "preset": "fade",
-              "at": 1,
+              "at": 0.9,
               "dur": 0.8
             }
           }

@@ -192,7 +192,7 @@
       "date": "2027-11-06",
       "time": "16:00",
       "timeLabel": "from",
-      "venue": "Jaipur — invitation to follow",
+      "venue": "Jaipur \u2014 invitation to follow",
       "closing": "Do join us"
     }
   },
@@ -827,7 +827,7 @@
   {
     "id": "private-view-press",
     "name": "Private View",
-    "idea": "A gallery's private-view card: the title of the show set enormous in Didone on near-black stock, with two thirds of the sheet left dark and empty.",
+    "idea": "A private-view card on smoked charcoal: one enormous name across the full measure, one pewter hairline, and the rest of the sheet left dark.",
     "recipe": "masthead",
     "fieldset": "event",
     "categories": [
@@ -836,7 +836,7 @@
     ],
     "tagline": "Near-black stock, one Didone line, nothing else",
     "palette": {
-      "bg": "#121214",
+      "bg": "#1B1E22",
       "ink": "#F4F1EA",
       "muted": "#A9A49A",
       "accent": "#8C8779",
@@ -888,7 +888,7 @@
     "defaults": {
       "eyebrow": "A Naming Day",
       "intro": "She has a name at last, and we would like you in the room when we say it out loud for the first time.",
-      "name1": "Meera",
+      "name1": "Thara",
       "subtitle": "born the fourth of April",
       "date": "2027-06-12",
       "time": "11:00",
@@ -1058,7 +1058,7 @@
     ],
     "tagline": "Champagne gold on smoked charcoal, for the dinner",
     "palette": {
-      "bg": "#1B1E22",
+      "bg": "#121214",
       "ink": "#EDE7DC",
       "muted": "#A9A298",
       "accent": "#C6A96B",
@@ -1090,7 +1090,7 @@
     "id": "peacock-arch",
     "name": "Peacock Arch",
     "idea": "An aged-gold hairline arch on Mysore peacock teal, standing in for the mandapam doorway at lamp-lighting hour.",
-    "recipe": "arch",
+    "recipe": "panel",
     "fieldset": "couple",
     "categories": [
       "wedding",
@@ -1244,7 +1244,7 @@
   {
     "id": "oyster-crest",
     "name": "Oyster Crest",
-    "idea": "A wedding card with no metal in it at all — a graphite crest engraved on laid oyster, the sheet floating one shade above its own ground.",
+    "idea": "A wedding card with no metal in it at all \u2014 a graphite crest engraved on laid oyster, the sheet floating one shade above its own ground.",
     "recipe": "panel",
     "fieldset": "couple",
     "categories": [
@@ -1406,8 +1406,8 @@
   {
     "id": "smoked-champagne",
     "name": "Smoked Champagne",
-    "idea": "Fifty years dressed for evening: on smoked charcoal, a champagne wreath and one beaded hairline are the only light on the sheet.",
-    "recipe": "classic",
+    "idea": "Champagne beading across one charcoal band, with the names reversed out of it and bone paper above and below.",
+    "recipe": "band",
     "fieldset": "couple",
     "categories": [
       "anniversary",
@@ -1672,8 +1672,8 @@
   {
     "id": "maghrib-crescent",
     "name": "Maghrib Crescent",
-    "idea": "An iftar put on a burnt-wood ground because the fast breaks after dark, with the hour of maghrib as the only number and one copper crescent above it.",
-    "recipe": "modern",
+    "idea": "One bronze mihrab arch on burnt umber with a crescent at its crown, for the meal that breaks the fast after dark.",
+    "recipe": "arch",
     "fieldset": "event",
     "categories": [
       "festival",
@@ -1707,5 +1707,710 @@
       "venue": "Thazhathu Veedu, Kuttichira, Kozhikode",
       "closing": "Peace be upon your house"
     }
+  },
+  {
+    "id": "ivory-paisley",
+    "name": "Ivory Paisley",
+    "tagline": "Claret on cream, two gold rules",
+    "recipe": "classic",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "engagement"
+    ],
+    "palette": {
+      "bg": "#FFFBF2",
+      "ink": "#6E1622",
+      "muted": "#6A4F4A",
+      "accent": "#B07D15",
+      "accentDark": "#8A5A0A"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 1.15,
+    "frame": "rules",
+    "texture": "paper",
+    "foil": true,
+    "motif": "paisley",
+    "closeMotif": "lotus",
+    "defaults": {
+      "eyebrow": "The Wedding",
+      "intro": "Our families invite you, with gratitude, to the wedding of",
+      "name1": "Indulekha",
+      "joiner": "&",
+      "name2": "Sreeram",
+      "timeLabel": "Muhurtham at",
+      "venue": "Sree Poornathrayeesa Mandapam, Tripunithura",
+      "closing": "Come and bless them both"
+    },
+    "contrastNote": "Recomputed on #FFFBF2: ink 11.29:1, muted 7.18:1, accentDark 5.73:1 \u2014 all clear 4.5:1, no hex changed. accent 3.51:1, so it is spent only on the two foiled rules, the hairline frame and the paisley, never on a word.",
+    "idea": "Kept, with its defaults replaced: Parvathy and Unnikrishnan are already the defaults of temple-cream-masthead and kalpathy-arch, and repeated names make a library look generated. The idea survives the deletion test \u2014 two gold rules where a border would be, one mango paisley, and claret names set large in an old-style face chosen because the name is the only thing a family can break; Kasavu Ivory with the classic recipe is also the one piece of open ground left in that family, since kasavu-gold owns the banner and temple-cream owns the masthead."
+  },
+  {
+    "id": "mandapam-lamp",
+    "name": "Mandapam Lamp",
+    "tagline": "One brass lamp in an oxblood doorway",
+    "recipe": "arch",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "engagement",
+      "reception"
+    ],
+    "palette": {
+      "bg": "#4A0F1B",
+      "ink": "#FFF3E2",
+      "muted": "#E6C3A8",
+      "accent": "#E9B949",
+      "accentDark": "#E9B949"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Outfit"
+    },
+    "displayScale": 1.05,
+    "frame": "arch",
+    "texture": "vignette",
+    "foil": true,
+    "motif": "lamp",
+    "closeMotif": "diya",
+    "divider": "dot-rule",
+    "defaults": {
+      "eyebrow": "The Muhurtham",
+      "intro": "With the blessings of our elders, we invite you to the wedding of",
+      "name1": "Gayathri",
+      "joiner": "&",
+      "name2": "Vishnu",
+      "timeLabel": "Muhurtham at",
+      "venue": "Sree Vallabha Kalyana Mandapam, Thiruvalla",
+      "closing": "Light a lamp with us"
+    },
+    "contrastNote": "Recomputed on #4A0F1B: ink 13.94:1, muted 9.26:1, accentDark 8.36:1 \u2014 all clear 4.5:1, no hex changed. accent is the same marigold at 8.36:1 but stays on the 1.3px arch, the dot-rule and the lamp, so no read line depends on it.",
+    "idea": "Replaces oxblood-brass, which was the existing muhurtham-sindoor with a different frame: same recipe, same family, same Cinzel/Outfit, same vignette, same closing diya \u2014 indistinguishable at 90x160. This keeps the oxblood register but changes the object: the mandapam doorway drawn as one hairline arch with a single standing lamp inside it, Marcellus instead of carved capitals so a Malayalam or compound name still composes, and the arch base at 1.05 so the names render near 46px and hold the three-to-one step over the detail lines."
+  },
+  {
+    "id": "oyster-kasavu",
+    "name": "Oyster Kasavu",
+    "tagline": "A kasavu band woven in bronze",
+    "recipe": "banner",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "engagement",
+      "reception"
+    ],
+    "palette": {
+      "bg": "#F3EEE5",
+      "ink": "#2E2A23",
+      "muted": "#6A6155",
+      "accent": "#C9B99B",
+      "accentDark": "#6B5636"
+    },
+    "fonts": {
+      "display": "Cinzel",
+      "body": "Cormorant Garamond"
+    },
+    "displayScale": 0.9,
+    "frame": "thin",
+    "texture": "linen",
+    "motif": "sprig",
+    "closeMotif": "sprig",
+    "defaults": {
+      "eyebrow": "Holy Matrimony",
+      "intro": "Both our families invite you to the marriage of",
+      "name1": "Merin",
+      "joiner": "and",
+      "name2": "Abin",
+      "timeLabel": "Blessing at",
+      "venue": "St Mary's Forane Church, Kuravilangad",
+      "closing": "In His name, and gladly"
+    },
+    "contrastNote": "Recomputed on #F3EEE5: ink 12.35:1, muted 5.26:1, accentDark 6.04:1 \u2014 all clear 4.5:1, no hex changed. accent 1.67:1, which is only ever the woven band, the hairline box and the sprig; the band carries no text, and the dark 3px edge under it is ink.",
+    "idea": "Replaces champagne-smoke, which was a third Ink Smoke centred classic with a Playfair headline \u2014 smoked-champagne, charcoal-chandelier and shashtipoorthi-smoke already hold that exact ground, recipe and register. This takes the one shape nothing else in the formal set uses: a kasavu border in bronze instead of gold, for the Kerala Christian house that wears the same mundu as its Hindu neighbours. Two heavy horizontal bands survive the squint test outright, foil is off because a highlight travelling across a pale bronze band would read as a swatch, and Cinzel sits at 0.9 rather than the usual 0.85 so the names clear 46px."
+  },
+  {
+    "id": "chalk-chapel",
+    "name": "Chalk Chapel",
+    "tagline": "An ultramarine cross on a chalk panel",
+    "recipe": "classic",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "engagement",
+      "save-the-date"
+    ],
+    "palette": {
+      "bg": "#ECEEF1",
+      "ink": "#10203A",
+      "muted": "#4A5A72",
+      "accent": "#6B81A0",
+      "accentDark": "#35506E"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 1,
+    "frame": "inset-panel",
+    "texture": "paper",
+    "motif": "cross",
+    "closeMotif": "dove",
+    "defaults": {
+      "eyebrow": "Nuptial Mass",
+      "intro": "You are warmly invited to the marriage of",
+      "name1": "Maria",
+      "joiner": "to",
+      "name2": "Jerome",
+      "timeLabel": "Mass at",
+      "venue": "St George Forane Church, Edappally",
+      "closing": "Blessed in His house"
+    },
+    "contrastNote": "Recomputed on #ECEEF1: ink 14.01:1, muted 6.03:1, accentDark 7.16:1 \u2014 all clear 4.5:1, no hex changed. accent 3.43:1, so it strokes the inset panel, the cross and the dove and carries no word.",
+    "idea": "Replaces slate-chapel, which would have been the gallery's third pale church arch beside lily-and-bells and qurbana-graphite \u2014 in a thumbnail those are one design. Same Christian register, different object: an ultramarine cross standing inside a floating chalk panel, so the shape that survives the squint is a rectangle rather than a dome, and the deletion test holds because removing the panel removes the card. Marcellus at 1.0 keeps a Syriac Christian double-barrelled name or a Malayalam conjunct stack intact where Cinzel capitals or a finer face would not."
+  },
+  {
+    "id": "dusk-register",
+    "name": "Dusk Register",
+    "tagline": "Bone type, flush left on charcoal",
+    "recipe": "modern",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "reception",
+      "anniversary"
+    ],
+    "palette": {
+      "bg": "#1B1E22",
+      "ink": "#EDE7DC",
+      "muted": "#A9A298",
+      "accent": "#C6A96B",
+      "accentDark": "#D4BC87"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Outfit"
+    },
+    "displayScale": 1.15,
+    "texture": "vignette",
+    "motif": "monogram-ring",
+    "closeMotif": "monogram-ring",
+    "defaults": {
+      "eyebrow": "Civil Marriage",
+      "intro": "We are signing the register at dusk, and we would like you there",
+      "name1": "Naomi",
+      "joiner": "and",
+      "name2": "Varun",
+      "timeLabel": "Signing at",
+      "venue": "Registrar of Marriages, Bandra West, Mumbai",
+      "closing": "Just the people we love"
+    },
+    "contrastNote": "Recomputed on #1B1E22: ink 13.59:1, muted 6.62:1, accentDark 9.03:1 \u2014 all clear 4.5:1, no hex changed. accent 7.40:1 but still only the 52px bar and the signet. Flat ground, so there is no second end to check; ink is bone, never white.",
+    "idea": "Replaces brass-rail twice over: it was the existing mangni-brass \u2014 same Ivory Midnight ground, same modern recipe, same brass bar \u2014 and it put Italiana on a design listed for weddings, where a twenty-two character compound name autofits down and that face collapses. The civil register keeps its flush-left letterhead idea and moves it to the one piece of Ink Smoke nothing else occupies, left-aligned with no frame, so a dark card with type pushed to one rail reads nothing like the three centred smoke classics. Foil is off because the engine's accent bar is 2px and foil on a bar is a swatch; the gradient is off because a wash behind a single column adds a phone wallpaper and no idea."
+  },
+  {
+    "id": "zamarrud-nikah",
+    "name": "Emerald Nikah",
+    "tagline": "One gold crescent on emerald",
+    "recipe": "classic",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "reception"
+    ],
+    "palette": {
+      "bg": "#0C2E22",
+      "ink": "#F4EEDF",
+      "muted": "#BFCFBF",
+      "accent": "#DCB65A",
+      "accentDark": "#DCB65A"
+    },
+    "fonts": {
+      "display": "Cinzel",
+      "body": "Cormorant Garamond"
+    },
+    "displayScale": 0.9,
+    "frame": "deco",
+    "texture": "vignette",
+    "motif": "crescent",
+    "closeMotif": "crescent",
+    "foil": true,
+    "defaults": {
+      "eyebrow": "The Nikah",
+      "intro": "Two families, one nikah, and your duas",
+      "name1": "Sadia",
+      "joiner": "&",
+      "name2": "Arsalan",
+      "timeLabel": "Nikah from",
+      "venue": "Darussalam Convention Centre, Malappuram",
+      "closing": "Barakallahu lakuma"
+    },
+    "contrastNote": "Computed with the generator's WCAG function against bg #0C2E22: ink #F4EEDF is 12.69:1, muted 9.02:1, accentDark 7.61:1 \u2014 all clear 4.5:1, no hex altered. accent is the same gold at 7.61:1, so the deco frame, the rule and the crescent all survive a five-inch screen at half brightness.",
+    "idea": "Deep emerald with a single gold crescent and carved Cinzel capitals kept to two short names, which is the one register the library has never had, and the whole card is three marks \u2014 frame, rule, crescent \u2014 with nothing competing for the middle."
+  },
+  {
+    "id": "mysore-peacock",
+    "name": "Mysore Peacock",
+    "tagline": "Teal, aged gold, set to the left",
+    "recipe": "modern",
+    "fieldset": "couple",
+    "categories": [
+      "engagement",
+      "reception"
+    ],
+    "palette": {
+      "bg": "#0B3741",
+      "ink": "#FBF3E3",
+      "muted": "#B6D0CD",
+      "accent": "#E4B861",
+      "accentDark": "#E4B861"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 1.18,
+    "texture": "vignette",
+    "motif": "deco-fan",
+    "foil": false,
+    "defaults": {
+      "eyebrow": "Ring Ceremony",
+      "intro": "Two houses meet in Mysuru on Sunday",
+      "name1": "Shruti",
+      "joiner": "and",
+      "name2": "Aniruddh",
+      "timeLabel": "Ceremony from",
+      "venue": "Lalitha Mahal Palace, Mysuru",
+      "closing": "Stay for lunch after"
+    },
+    "contrastNote": "Computed against bg #0B3741: ink #FBF3E3 is 11.63:1, muted 7.88:1, accentDark 6.92:1 \u2014 all clear 4.5:1, nothing changed. accent is the same aged gold at 6.92:1 and is spent only on the 2px rail bar and the fan; foil is off because the engine would put a travelling highlight inside a 2px bar, which is a swatch, not metal.",
+    "idea": "The only design in the set that is not centred: Mysore teal with the names set against a left margin and one aged-gold fan marking the top of the column, so the composition is an asymmetry you can name rather than a frame you can buy."
+  },
+  {
+    "id": "aubergine-vine",
+    "name": "Aubergine Vine",
+    "tagline": "A rose gold vine on aubergine silk",
+    "recipe": "classic",
+    "fieldset": "couple",
+    "categories": [
+      "engagement",
+      "anniversary"
+    ],
+    "palette": {
+      "bg": "#38102E",
+      "ink": "#FBEFEA",
+      "muted": "#DDB9C4",
+      "accent": "#E9B08C",
+      "accentDark": "#E9B08C"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 1,
+    "frame": "beaded",
+    "texture": "vignette",
+    "motif": "flourish-leaf",
+    "closeMotif": "flourish-leaf",
+    "foil": false,
+    "defaults": {
+      "eyebrow": "Nischayam",
+      "intro": "Our two houses meet this Sunday morning",
+      "name1": "Pallavi",
+      "joiner": "&",
+      "name2": "Raghav",
+      "timeLabel": "Begins at",
+      "venue": "Sri Devi Mandapam, T Nagar, Chennai",
+      "closing": "We would love you there"
+    },
+    "contrastNote": "Computed against bg #38102E: ink #FBEFEA is 14.54:1, muted 9.22:1, accentDark 8.62:1 \u2014 the highest ink ratio in the set and all clear 4.5:1, no hex changed. accent is the same rose gold at 8.62:1, carrying the beaded border and one drawn vine and never a word.",
+    "idea": "Rose gold instead of yellow gold on Kanchipuram aubergine, kept deliberately flat with no foil so the copper reads as a printed ink, and one vine drawn at two sizes is the only ornament the card is allowed."
+  },
+  {
+    "id": "burnt-oudh",
+    "name": "Burnt Oudh",
+    "tagline": "Burnt wood, the name the only bright thing",
+    "recipe": "classic",
+    "fieldset": "couple",
+    "categories": [
+      "wedding",
+      "save-the-date"
+    ],
+    "palette": {
+      "bg": "#241F1A",
+      "ink": "#EFE7D9",
+      "muted": "#AC9F8E",
+      "accent": "#8C7251",
+      "accentDark": "#CBB392"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Outfit"
+    },
+    "displayScale": 1,
+    "frame": "thin",
+    "texture": "vignette",
+    "foil": false,
+    "gradient": false,
+    "motif": "filigree",
+    "closeMotif": "filigree",
+    "defaults": {
+      "eyebrow": "The Nikah",
+      "intro": "Two families, one evening, insha'Allah",
+      "name1": "Jameela",
+      "joiner": "&",
+      "name2": "Yusuf",
+      "timeLabel": "Begins at",
+      "venue": "Dar Al Majlis, Jumeirah, Dubai",
+      "closing": "Alhamdulillah, we ask your duas"
+    },
+    "contrastNote": "Computed with the generator's own WCAG contrast() on bg #241F1A \u2014 ink 13.30:1, muted 6.30:1, accentDark 8.09:1, all clearing the 4.5:1 floor. accent #8C7251 is 3.61:1 and therefore below the floor: it is strokes only, the hairline box and the filigree, and the eyebrow and the closing line are both carried by accentDark, which the classic recipe already paints them in. gradient and bg2 are dropped, so there is one flat ground and one ratio to answer for.",
+    "idea": "Umber Dusk is the one family whose bronze cannot legally carry text, so the hairline box and the interlace are tuned to sit just below legibility while the name burns bright above them \u2014 ornament deliberately quieter than the information it decorates, which is the exact inversion of every cheap invitation, and a six-word intro leaves most of the burnt-wood sheet as one contiguous pocket of air."
+  },
+  {
+    "id": "dusk-doorway",
+    "name": "Dusk Doorway",
+    "tagline": "A bronze doorway on burnt wood",
+    "recipe": "masthead",
+    "fieldset": "couple",
+    "categories": [
+      "save-the-date"
+    ],
+    "palette": {
+      "bg": "#241F1A",
+      "bg2": "#171310",
+      "ink": "#EFE7D9",
+      "muted": "#AC9F8E",
+      "accent": "#8C7251",
+      "accentDark": "#CBB392"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 1.05,
+    "gradient": true,
+    "motif": "candle",
+    "closeMotif": "candle",
+    "divider": "dot-rule",
+    "texture": "vignette",
+    "defaults": {
+      "eyebrow": "Mark the Date",
+      "intro": "We are marrying by the sea in the new year",
+      "name1": "Swathi",
+      "joiner": "&",
+      "name2": "Nirmal",
+      "timeLabel": "from",
+      "venue": "Mahabalipuram, Tamil Nadu",
+      "closing": "Keep the day for us"
+    },
+    "contrastNote": "Computed with the generator's own WCAG function against the worse ground bg #241F1A \u2014 ink 13.30:1, muted 6.30:1, accentDark 8.09:1, all clear the 4.5:1 floor; against bg2 #171310 they rise to 15.04:1, 7.13:1 and 9.15:1, so the barely perceptible wash never costs a reading. accent 3.61:1 is strokes only \u2014 the arch and the candle \u2014 and accentDark carries the eyebrow and the closing.",
+    "idea": "A save-the-date at dusk: two names set enormous on burnt umber, one bronze hairline under them, and nothing else until the day itself."
+  },
+  {
+    "id": "smoke-sixty",
+    "name": "Smoke Sixty",
+    "tagline": "His photograph, one champagne hairline",
+    "recipe": "photoLed",
+    "fieldset": "person",
+    "categories": [
+      "birthday",
+      "anniversary"
+    ],
+    "palette": {
+      "bg": "#1B1E22",
+      "ink": "#EDE7DC",
+      "muted": "#A9A298",
+      "accent": "#C6A96B",
+      "accentDark": "#D4BC87"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "Outfit"
+    },
+    "displayScale": 1,
+    "motif": "monogram-ring",
+    "texture": "vignette",
+    "foil": true,
+    "defaults": {
+      "eyebrow": "Black Tie",
+      "intro": "A dinner for Benny, who would rather we did not",
+      "name1": "Benny Kurien",
+      "subtitle": "sixty years",
+      "timeLabel": "Dinner at",
+      "venue": "The Rice Boat, Kumarakom",
+      "closing": "One toast, then dinner"
+    },
+    "contrastNote": "On bg #1B1E22 (flat, no gradient, so bg is the only ground): ink #EDE7DC 13.59:1, muted #A9A298 6.62:1, accentDark #D4BC87 9.03:1, accent #C6A96B 7.40:1 \u2014 all clear 4.5:1, nothing changed. photoLed also puts every line on the scrim, which the generator checks at #1A1A1A: onPhoto resolves to ink at 14.14:1 and accent at 7.70:1, both clear, which is why this is an Ink Smoke photoLed and not an Umber Dusk one \u2014 Umber Dusk's accent #8C7251 is only 3.85:1 on that scrim and would fail the gate.",
+    "idea": "An ordinary phone snap survives because the smoked scrim is bottom-weighted and the only metal is one champagne ring above the name, so a Didone gets the dark ground it needs with no drop shadow anywhere near a letterform."
+  },
+  {
+    "id": "sandal-noon",
+    "name": "Sandal Noon",
+    "tagline": "Turmeric ground, one cut branch",
+    "recipe": "classic",
+    "fieldset": "person",
+    "categories": [
+      "birthday",
+      "farewell"
+    ],
+    "palette": {
+      "bg": "#FAF0D8",
+      "ink": "#43250F",
+      "muted": "#705030",
+      "accent": "#A87414",
+      "accentDark": "#8A5A12"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Outfit"
+    },
+    "displayScale": 1,
+    "frame": "rules",
+    "motif": "olive-branch",
+    "texture": "paper",
+    "foil": false,
+    "defaults": {
+      "eyebrow": "Lunch at Home",
+      "intro": "Amma has asked for no fuss, so the door is simply open",
+      "name1": "Sarojini Pillai",
+      "subtitle": "seventy years",
+      "timeLabel": "Lunch from",
+      "venue": "Nalukettu, Pattathanam, Kollam",
+      "closing": "Come at noon, stay for coffee"
+    },
+    "contrastNote": "On bg #FAF0D8: ink #43250F 12.26:1, muted #705030 6.43:1, accentDark #8A5A12 5.21:1 \u2014 all clear 4.5:1, nothing changed. accent #A87414 is 3.58:1, so it stays on the two rules of the frame, the name rule and the branch stroke; the closing line is painted @accentDark by every recipe in the engine, so nothing readable lands in accent. No foil: a metallic highlight on a 1px ochre hairline over warm cream is invisible at 720p and only risks H.264 banding.",
+    "idea": "The daytime, at-home milestone that the library had no card for: ochre on sandalwood with one cut branch and two rules, warm without being a pastel and ceremonial without being a wedding."
+  },
+  {
+    "id": "slate-font",
+    "name": "Chalk Baptistry",
+    "tagline": "A church doorway in chalk blue",
+    "recipe": "arch",
+    "fieldset": "person",
+    "categories": [
+      "baby"
+    ],
+    "palette": {
+      "bg": "#ECEEF1",
+      "ink": "#10203A",
+      "muted": "#4A5A72",
+      "accent": "#6B81A0",
+      "accentDark": "#35506E"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Outfit"
+    },
+    "displayScale": 1.05,
+    "frame": "arch",
+    "texture": "paper",
+    "motif": "dove",
+    "closeMotif": "dove",
+    "foil": false,
+    "gradient": false,
+    "defaults": {
+      "eyebrow": "A Christening",
+      "intro": "We carry our daughter to the font, and we would like you beside us",
+      "name1": "Hannah Tresa",
+      "subtitle": "is christened",
+      "timeLabel": "Holy mass at",
+      "venue": "St George Church, Edappally",
+      "closing": "Welcomed into His grace"
+    },
+    "contrastNote": "Computed with the generator's WCAG contrast() against bg #ECEEF1 \u2014 ink #10203A 14.01:1, muted #4A5A72 6.03:1, accentDark #35506E 7.16:1, all clear 4.5:1. No hex changed. accent #6B81A0 is 3.43:1, so it carries only the 1.3px arch and the drawn dove and never a letter; the arch recipe paints the closing line in @accentDark, so no text sits on accent.",
+    "idea": "The whole card is one 1.3px doorway with a single drawn dove inside its crown \u2014 I deleted the diamond divider that was sitting under the name, because with the arch already marking the top of the column the divider was a third mark doing a job the arch had done, and two marks on a chalk blue-grey sheet is what keeps a baptism card from turning pastel."
+  },
+  {
+    "id": "shell-silver-column",
+    "name": "Silver Column",
+    "tagline": "Blush paper, one column, hard left",
+    "recipe": "modern",
+    "fieldset": "couple",
+    "categories": [
+      "anniversary"
+    ],
+    "palette": {
+      "bg": "#F7EFE8",
+      "ink": "#3A2A22",
+      "muted": "#6B544A",
+      "accent": "#D9B8A3",
+      "accentDark": "#8A4F32"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 1.15,
+    "texture": "paper",
+    "motif": "sprig",
+    "closeMotif": "sprig",
+    "foil": false,
+    "gradient": false,
+    "defaults": {
+      "eyebrow": "Silver Anniversary",
+      "intro": "Twenty-five years on, our parents would like their friends around them again.",
+      "name1": "Perpetua",
+      "joiner": "&",
+      "name2": "Caetano",
+      "timeLabel": "Thanksgiving at",
+      "venue": "St Anne's Church, Saligao",
+      "closing": "Still walking the same road"
+    },
+    "contrastNote": "Computed on bg #F7EFE8: ink #3A2A22 12.04:1, muted #6B544A 6.17:1, accentDark #8A4F32 5.69:1 \u2014 all clear 4.5:1. accent #D9B8A3 is 1.63:1, so it is confined to the sprig stroke and the 52x2px rule and never carries text; the modern recipe paints the closing line in @accentDark, so no light-ground accent-as-text override is needed.",
+    "idea": "A twenty-five-year card set as a left-ranged editorial column on blush stock \u2014 asymmetric where every anniversary design in the category is centred \u2014 with one copper sprig marking the top of the column and nothing else on the sheet."
+  },
+  {
+    "id": "oxblood-jubilee",
+    "name": "Oxblood Jubilee",
+    "tagline": "Their photograph, oxblood and gold lamp",
+    "recipe": "photoLed",
+    "fieldset": "couple",
+    "categories": [
+      "anniversary"
+    ],
+    "palette": {
+      "bg": "#4A0F1B",
+      "ink": "#FFF3E2",
+      "muted": "#E6C3A8",
+      "accent": "#E9B949",
+      "accentDark": "#E9B949"
+    },
+    "fonts": {
+      "display": "Marcellus",
+      "body": "Outfit"
+    },
+    "displayScale": 1,
+    "texture": "vignette",
+    "motif": "lamp",
+    "closeMotif": "diya",
+    "foil": false,
+    "gradient": false,
+    "defaults": {
+      "eyebrow": "Golden Anniversary",
+      "intro": "Fifty years after the muhurtham, and the same two at the head of the table.",
+      "name1": "Rukmini",
+      "joiner": "&",
+      "name2": "Gopalakrishnan",
+      "timeLabel": "Pooja at",
+      "venue": "Sree Vallabha Hall, Thiruvalla",
+      "closing": "Fifty years of one home"
+    },
+    "contrastNote": "Computed on bg #4A0F1B: ink #FFF3E2 13.94:1, muted #E6C3A8 9.26:1, accentDark #E9B949 8.36:1 \u2014 all clear 4.5:1. Checked again on the engine's photo scrim #1A1A1A, where reversed text runs 15.89:1, muted 10.56:1 and the gold 9.53:1, so the lamp and the tracked label still read over an ordinary phone snap.",
+    "idea": "The couple's own old photograph does the work under a bottom-weighted oxblood scrim with a single gold lamp standing over it, and the names are set in Marcellus so a fourteen-character Malayali surname still holds its size instead of a Didone hairline collapsing under autofit."
+  },
+  {
+    "id": "threshold-lamp",
+    "name": "Threshold Lamp",
+    "tagline": "A gold doorway and one clay lamp",
+    "recipe": "arch",
+    "fieldset": "event",
+    "categories": [
+      "housewarming"
+    ],
+    "palette": {
+      "bg": "#FFFBF2",
+      "ink": "#6E1622",
+      "muted": "#6A4F4A",
+      "accent": "#B07D15",
+      "accentDark": "#8A5A0A"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Outfit"
+    },
+    "displayScale": 1.15,
+    "motif": "diya",
+    "closeMotif": "diya",
+    "divider": "diamond",
+    "texture": "paper",
+    "foil": true,
+    "defaults": {
+      "eyebrow": "Paal Kaachal",
+      "intro": "We have a door of our own at last, and we would like you to come through it",
+      "name1": "Padmasree",
+      "subtitle": "the Varriers' new house",
+      "timeLabel": "Milk boils at",
+      "venue": "Mullassery Canal Road, Thrissur",
+      "closing": "Come and bless the new house"
+    },
+    "contrastNote": "Computed with the generator's own contrast() on bg #FFFBF2 - ink 11.29:1, muted 7.18:1, accentDark 5.73:1, all clear 4.5:1. accent 3.51:1, used only for the 1.3px gold arch, the 11px divider and the lamp stroke.",
+    "idea": "The arch is the new doorway itself, one gold hairline on uncoated cream with a single clay lamp lit on the threshold and nothing else inside it."
+  },
+  {
+    "id": "sadya-sandalwood",
+    "name": "Noon Sandalwood",
+    "tagline": "Turmeric paper, every line hard left",
+    "recipe": "modern",
+    "fieldset": "event",
+    "categories": [
+      "festival"
+    ],
+    "palette": {
+      "bg": "#FAF0D8",
+      "ink": "#43250F",
+      "muted": "#705030",
+      "accent": "#A87414",
+      "accentDark": "#8A5A12"
+    },
+    "fonts": {
+      "display": "Fraunces",
+      "body": "Outfit"
+    },
+    "displayScale": 0.95,
+    "texture": "paper",
+    "foil": false,
+    "motif": "lotus",
+    "closeMotif": "lotus",
+    "defaults": {
+      "eyebrow": "Onam at home",
+      "intro": "The pookalam is laid at six and the sadya at noon, on twenty-two leaves",
+      "name1": "Thiruvonam",
+      "subtitle": "sadya at noon, on leaves",
+      "timeLabel": "Sadya from",
+      "venue": "Varikkasseri Mana, Ottapalam",
+      "closing": "Our door is open all day"
+    },
+    "contrastNote": "Computed against bg #FAF0D8: ink #43250F 12.26:1, muted #705030 6.43:1, accentDark #8A5A12 5.21:1 - all clear 4.5:1, nothing changed. accent #A87414 is 3.58:1, so it is confined to the 52x2px rail and the lotus stroke and never carries text; the closing line is painted accentDark by the recipe, which is the ratio that passes.",
+    "idea": "The lotus is the pookalam seen from directly above, drawn once at the top of a hard-left column on turmeric-washed paper, so an Onam invitation reads as a note from the house rather than a festival poster."
+  },
+  {
+    "id": "vermilion-hairline",
+    "name": "Vermilion Hairline",
+    "tagline": "Bone stock inside one vermilion hairline",
+    "recipe": "classic",
+    "fieldset": "event",
+    "categories": [
+      "corporate"
+    ],
+    "palette": {
+      "bg": "#FBF7F2",
+      "ink": "#1A1614",
+      "muted": "#6A5F58",
+      "accent": "#C8402A",
+      "accentDark": "#A5301A"
+    },
+    "fonts": {
+      "display": "Outfit",
+      "body": "Space Grotesk"
+    },
+    "displayScale": 0.9,
+    "foil": false,
+    "texture": "paper",
+    "frame": "thin",
+    "motif": "dot-rule",
+    "closeMotif": "dot-rule",
+    "defaults": {
+      "eyebrow": "An Opening",
+      "intro": "Two years of scaffolding, and a working lift at last",
+      "name1": "Number Nine",
+      "subtitle": "the new floor opens",
+      "timeLabel": "Doors from",
+      "venue": "Number Nine, Hungerford Street, Kolkata",
+      "closing": "Tea, then something stronger"
+    },
+    "contrastNote": "On the bone ground #FBF7F2 \u2014 ink #1A1614 16.85:1, muted #6A5F58 5.81:1, accentDark #A5301A 6.48:1, all clear 4.5:1. accent #C8402A measures 4.66:1 and is the one accent in the library permitted to carry read text, so the closing line this recipe paints in accent needs no override; it is still held to the hairline frame, the rule and the dot-rule mark. No hex changed, and 48.6px name over 15px details keeps the 3:1 ratio.",
+    "idea": "Every mark on the sheet is the same 1px vermilion at the same weight \u2014 frame, rule, dot-rule \u2014 so the red reads as one decision repeated rather than decoration added, and the near-black geometric name is left to do all the talking on bare paper stock."
   }
 ]

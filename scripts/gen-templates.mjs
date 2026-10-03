@@ -728,6 +728,8 @@ async function main() {
   const written = new Set();
   const problems = [];
   const subjects = new Map();
+  const firstNames = new Map();
+  const pairs = new Map();
 
   for (const spec of SPECS) {
     if (ids.has(spec.id)) throw new Error(`duplicate design id: ${spec.id}`);
@@ -743,11 +745,23 @@ async function main() {
     }
 
     // Two designs with the same sample names look like one design listed
-    // twice, and the sample names are the first thing anybody sees.
+    // twice, and the sample names are the first thing anybody sees. The same
+    // goes for a first name on its own: two Shrutis in one gallery reads as
+    // carelessness even when the surnames differ.
     const d = spec.defaults || {};
     const subject = [d.name1, d.name2 || d.subtitle].filter(Boolean).join(' / ').toLowerCase();
     if (subjects.has(subject)) problems.push(`${spec.id}: shares its sample copy "${subject}" with ${subjects.get(subject)}`);
     subjects.set(subject, spec.id);
+
+    const first = String(d.name1 || '').toLowerCase().trim();
+    if (first && firstNames.has(first)) problems.push(`${spec.id}: sample name "${d.name1}" is already used by ${firstNames.get(first)}`);
+    if (first) firstNames.set(first, spec.id);
+
+    // Same ground, same layout: whatever else differs, the two read as one
+    // design shown twice when they sit next to each other in the gallery.
+    const pair = `${spec.palette.bg}|${spec.recipe}`;
+    if (pairs.has(pair)) problems.push(`${spec.id}: ${spec.recipe} on ${spec.palette.bg} is already ${pairs.get(pair)}`);
+    pairs.set(pair, spec.id);
 
     const file = `${spec.id}.json`;
     await writeFile(join(OUT, file), JSON.stringify(template, null, 2) + '\n');

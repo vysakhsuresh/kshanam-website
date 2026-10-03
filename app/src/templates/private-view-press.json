@@ -3,7 +3,7 @@
   "id": "private-view-press",
   "name": "Private View",
   "tagline": "Near-black stock, one Didone line, nothing else",
-  "idea": "A gallery's private-view card: the title of the show set enormous in Didone on near-black stock, with two thirds of the sheet left dark and empty.",
+  "idea": "A private-view card on smoked charcoal: one enormous name across the full measure, one pewter hairline, and the rest of the sheet left dark.",
   "categories": [
     "corporate",
     "festival"
@@ -25,7 +25,7 @@
     "height": 640
   },
   "palette": {
-    "bg": "#121214",
+    "bg": "#1B1E22",
     "ink": "#F4F1EA",
     "muted": "#A9A49A",
     "accent": "#8C8779",
@@ -352,7 +352,7 @@
     }
   ],
   "contrast": {
-    "inkOnBg": 16.59,
-    "labelOnBg": 10.55
+    "inkOnBg": 14.83,
+    "labelOnBg": 9.43
   }
 }
