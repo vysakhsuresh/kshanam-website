@@ -28,6 +28,22 @@ if (SUPPORT_URL) {
   }
 }
 
+/* --------------------------------------------------------------- counts */
+
+// The page used to say "29 designs" in three places as literal text, which
+// stayed at 29 while the library was being replaced. The numbers come from
+// the library now, so they cannot be wrong.
+function renderCounts() {
+  const values = {
+    designs: String(TEMPLATES.length),
+    categories: String(usedCategories().length),
+  };
+  for (const el of document.querySelectorAll('[data-count]')) {
+    const value = values[el.dataset.count];
+    if (value) el.textContent = value;
+  }
+}
+
 /* ----------------------------------------------------------- categories */
 
 function renderCategories() {
@@ -181,6 +197,10 @@ async function hero() {
   }
 }
 
+renderCounts();
 renderCategories();
 renderDesigns();
-hero().catch(() => {});
+// Never swallow this. A hero that fails silently is a hero that renders two
+// blank cards at the top of the page, which is what happened the one time it
+// was written as `.catch(() => {})`.
+hero().catch((err) => console.error("the hero cards did not render:", err));

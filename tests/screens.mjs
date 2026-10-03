@@ -118,6 +118,29 @@ async function main() {
 
     ok('categories are offered', await page.locator('#categories .cat').count() > 5,
        String(await page.locator('#categories .cat').count()));
+
+    // The hero cards are canvases. If the code that picks them throws, they
+    // render as two blank rectangles at the very top of the page and nothing
+    // else on the page looks wrong - which is exactly how it shipped once.
+    const heroPainted = await page.evaluate(() => ['hero-a', 'hero-b'].map((id) => {
+      const c = document.getElementById(id);
+      if (!c) return -1;
+      const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+      let lit = 0;
+      for (let i = 0; i < d.length; i += 4 * 997) if (d[i + 3] > 0) lit++;
+      return lit;
+    }));
+    ok('the hero cards actually draw', heroPainted.every((n) => n > 50), heroPainted.join(' / '));
+
+    // And the counts on the page come from the library, not from a number
+    // somebody typed when the library was a different size.
+    const counts = await page.evaluate(() => ({
+      shown: [...document.querySelectorAll('[data-count="designs"]')].map((e) => e.textContent.trim()),
+      real: document.querySelectorAll('#design-list .design').length,
+    }));
+    ok('the design count on the page is the real one',
+       counts.shown.length > 0 && counts.shown.every((v) => Number(v) === counts.real),
+       `page says ${counts.shown.join(', ')}; gallery has ${counts.real}`);
     const total = await page.locator('#design-list .design').count();
     ok('the gallery is full', total >= 25, `${total} designs`);
 

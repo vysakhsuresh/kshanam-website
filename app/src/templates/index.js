@@ -42,6 +42,15 @@ export function heroPicks(count = 2) {
   return picked;
 }
 
+/** WCAG relative luminance, for choosing a light ground against a dark one. */
+function isDarkHex(c) {
+  const h = String(c || '#FFFFFF').replace('#', '');
+  const n = h.length === 3 ? h.split('').map((x) => x + x).join('') : h;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16) / 255);
+  const f = (v) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b) < 0.4;
+}
+
 export const forCategory = (category) =>
   (!category || category === 'all'
     ? TEMPLATES
