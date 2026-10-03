@@ -136,7 +136,9 @@ async function main() {
     // somebody typed when the library was a different size.
     const counts = await page.evaluate(() => ({
       shown: [...document.querySelectorAll('[data-count="designs"]')].map((e) => e.textContent.trim()),
-      real: document.querySelectorAll('#design-list .design').length,
+      // The library total, from the "Everything" chip - not the number of
+      // cards painted, which the gallery deliberately caps.
+      real: Number(document.querySelector('#categories .cat .cat-count').textContent),
     }));
     ok('the design count on the page is the real one',
        counts.shown.length > 0 && counts.shown.every((v) => Number(v) === counts.real),
@@ -174,15 +176,32 @@ async function main() {
                   : `${buttons.length} buttons checked`);
 
     await page.goto(base + '/', { waitUntil: 'networkidle' });
-    const total = await page.locator('#design-list .design').count();
-    ok('the gallery is full', total >= 25, `${total} designs`);
+    // The gallery pages at 24 cards, so the library size comes from the
+    // "Everything" chip rather than from how many cards happen to be in the
+    // DOM - otherwise this reads 24 forever however big the library gets.
+    const libraryTotal = Number(await page.locator('#categories .cat').first()
+      .locator('.cat-count').textContent());
+    ok('the gallery is full', libraryTotal >= 40, `${libraryTotal} designs`);
+
+    const firstPage = await page.locator('#design-list .design').count();
+    ok('the gallery pages rather than painting the whole library at once',
+       firstPage === Math.min(24, libraryTotal), `${firstPage} cards on first paint`);
+    if (libraryTotal > 24) {
+      await page.locator('#design-more').click();
+      await page.waitForTimeout(200);
+      const afterMore = await page.locator('#design-list .design').count();
+      ok('"show the rest" reveals the rest', afterMore === libraryTotal,
+         `${afterMore} of ${libraryTotal}`);
+    }
+    const total = libraryTotal;
 
     await page.waitForFunction(`(${COLOURS})('#design-list canvas') > 4`, null, { timeout: 20000 }).catch(() => {});
     ok('gallery cards really draw', await page.evaluate(`(${COLOURS})('#design-list canvas')`) > 4);
 
     await page.locator('#categories .cat', { hasText: 'Birthday' }).first().click();
     await page.waitForTimeout(250);
-    const filtered = await page.locator('#design-list .design').count();
+    const filtered = Number(await page.locator('#categories .cat[aria-pressed="true"]')
+      .locator('.cat-count').textContent());
     ok('choosing a category narrows the gallery', filtered > 0 && filtered < total, `${filtered} of ${total}`);
 
     const href = await page.locator('#design-list .design').first().getAttribute('href');

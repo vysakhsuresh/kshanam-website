@@ -196,6 +196,8 @@ a:hover { color: var(--brand-dark); }
 .section-head h2 { font-size: clamp(24px, 3vw, 34px); }
 .section-head p { color: var(--muted); max-width: 54ch; margin-top: 8px; }
 
+.more-row { display: flex; justify-content: center; margin-top: 26px; }
+
 /* ------------------------------------------------------------- categories */
 
 .cat-rail {

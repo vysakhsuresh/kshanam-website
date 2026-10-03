@@ -80,9 +80,21 @@ function select(category) {
 
 let observer = null;
 
+/**
+ * How many cards go in before the "show the rest" button.
+ *
+ * Every card is a real canvas drawn by the engine, so a card costs about
+ * 590KB of canvas memory once it is painted. On the phone this is built for -
+ * a cheap Android on mobile data - putting the whole library on screen at
+ * once is tens of megabytes for designs nobody scrolled to. Browsing a
+ * category rarely goes past two dozen anyway.
+ */
+const FIRST_PAGE = 24;
+
 function renderDesigns() {
   const host = $('design-list');
   const empty = $('design-empty');
+  const more = $('design-more');
   if (observer) observer.disconnect();
   host.textContent = '';
 
@@ -99,9 +111,20 @@ function renderDesigns() {
     }, { rootMargin: '300px 0px' })
     : null;
 
-  for (const template of list) {
-    host.appendChild(card(template));
-  }
+  let shown = 0;
+  const addPage = () => {
+    for (const template of list.slice(shown, shown + FIRST_PAGE)) {
+      host.appendChild(card(template));
+    }
+    shown = Math.min(shown + FIRST_PAGE, list.length);
+    if (!more) return;
+    const left = list.length - shown;
+    more.hidden = left <= 0;
+    more.textContent = left > 0 ? `Show the other ${left} designs` : '';
+  };
+
+  if (more) more.onclick = addPage;
+  addPage();
 }
 
 function card(template) {
