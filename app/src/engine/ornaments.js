@@ -699,11 +699,24 @@ export const FRAMES = {
   },
 
   /** A border of beads rather than a line. */
+  /**
+   * A hairline threaded with pearls.
+   *
+   * Beads alone, small and far apart, read as a dashed border from a slide
+   * deck rather than as beading. The continuous rule underneath is what makes
+   * it a border; the pearls sitting on it are what make it beaded.
+   */
   beaded(ctx, x, y, w, h, o) {
-    const step = o.bead != null ? o.bead : 13;
-    const r = ctx.lineWidth * 0.9;
-    const fill = ctx.strokeStyle;
-    ctx.fillStyle = fill;
+    const step = o.bead != null ? o.bead : 11;
+    const r = Math.max(1.5, ctx.lineWidth * 1.5);
+    const line = ctx.lineWidth;
+
+    ctx.save();
+    ctx.lineWidth = line * 0.6;
+    ctx.strokeRect(x, y, w, h);
+    ctx.restore();
+
+    ctx.fillStyle = ctx.strokeStyle;
     const put = (px, py) => { ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2); ctx.fill(); };
     const across = Math.max(2, Math.round(w / step));
     const down = Math.max(2, Math.round(h / step));
