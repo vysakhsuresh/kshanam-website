@@ -451,7 +451,7 @@ const RECIPES = {
           text({ text: '{{intro}}', font: 'body', size: 18, color: '@bg', y: 318, maxWidth: BODY_W, maxLines: 4, lineHeight: 1.45, anim: fadeUp(0.2) }),
         ] },
         { id: 'names', duration: 6.5, layers: [
-          ...nameLayers(spec, { big: 40, y: 276, gap: 44, color: '@bg', joinerColor: '@bg', joinerScale: 0.4, maxWidth: BODY_W }),
+          ...nameLayers(spec, { big: 40, y: 276, gap: 44, color: '@bg', joinerColor: '@bg', subtitleColor: '@bg', joinerScale: 0.4, maxWidth: BODY_W }),
         ] },
         photoScene({ x: 0, y: 0, w: W, h: top, anchorX: MID, anchorY: top / 2 }),
         { id: 'when', duration: 5, layers: [

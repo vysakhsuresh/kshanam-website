@@ -677,7 +677,12 @@ export const FRAMES = {
   scallop(ctx, x, y, w, h, o) {
     const r = o.scallop != null ? o.scallop : 9;
     ctx.beginPath();
-    const run = (from, to, horizontal, flip) => {
+    // `side` names which edge is being drawn. It used to double as the
+    // "is this horizontal" flag, and 'left' and 'right' are truthy strings,
+    // so the two vertical edges were drawn with the horizontal formula and
+    // the frame came out as a scribble of diagonals across the card.
+    const run = (from, to, side, flip) => {
+      const horizontal = side === 'top' || side === 'bottom';
       const span = Math.abs(to - from);
       const n = Math.max(2, Math.round(span / (r * 2)));
       const step = span / n;
@@ -685,8 +690,8 @@ export const FRAMES = {
         const a = from + step * i * (to > from ? 1 : -1);
         const b = from + step * (i + 1) * (to > from ? 1 : -1);
         const mid = (a + b) / 2;
-        if (horizontal) ctx.quadraticCurveTo(mid, flip, b, horizontal === 'top' ? y : y + h);
-        else ctx.quadraticCurveTo(flip, mid, horizontal === 'left' ? x : x + w, b);
+        if (horizontal) ctx.quadraticCurveTo(mid, flip, b, side === 'top' ? y : y + h);
+        else ctx.quadraticCurveTo(flip, mid, side === 'left' ? x : x + w, b);
       }
     };
     ctx.moveTo(x, y);
