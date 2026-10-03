@@ -1,24 +1,32 @@
 /**
- * The few things the owner has to decide. Everything here is deliberately
- * empty rather than guessed, because a wrong value ships as if it were right.
+ * The handful of things only the owner can decide. Everything is empty or a
+ * placeholder on purpose: a guessed value ships as if it were right.
  */
 
-/** The live domain, shown on the end card. CLAUDE.md: use the placeholder. */
+export const BRAND = {
+  name: 'Festa',
+  tagline: 'Invitation videos for every celebration',
+};
+
+/** The live domain. Set it once the domain is registered. */
 export const SITE_DOMAIN = '[YOUR DOMAIN]';
 
 /**
- * Where "Something's wrong" sends feedback.
- *
- * Empty on purpose: CLAUDE.md says to start with a mailto or a free form
- * service *the owner chooses*, and to ask before adding any third party. Put
- * an address here and the feedback box starts working; leave it empty and the
- * screen says plainly that feedback is not switched on yet.
+ * Where "Buy us a coffee" points. Empty hides the button entirely rather than
+ * linking somewhere broken. Any of Buy Me a Coffee, Ko-fi or a UPI link works.
+ */
+export const SUPPORT_URL = '';
+
+/**
+ * Where "Something's wrong" sends feedback. Empty means the help page says
+ * plainly that feedback is not switched on yet. CLAUDE.md says to ask before
+ * adding any third-party form service, so none has been added.
  */
 export const FEEDBACK_EMAIL = '';
 
 /**
- * AdSense client id. Ads are allowed on gallery and occasion pages only -
- * never the editor, never the rendering screen, never beside download or
- * share. Empty means no ad code is loaded at all.
+ * AdSense client id. Ads are allowed on browsing pages only — never the
+ * editor, never the render screen, never beside download or share. Empty
+ * means no ad code is loaded at all.
  */
 export const ADSENSE_CLIENT = '';

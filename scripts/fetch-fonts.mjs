@@ -34,9 +34,25 @@ const UA = 'Mozilla/5.0 (Linux; Android 11) AppleWebKit/537.36 (KHTML, like Geck
 const KEEP_SUBSETS = new Set(['latin', 'latin-ext', 'malayalam']);
 
 const FAMILIES = [
-  { family: 'Anek Malayalam', spec: 'Anek+Malayalam:wght@400;500;600;700', slug: 'anek-malayalam', ofl: 'anekmalayalam' },
-  { family: 'Manjari', spec: 'Manjari:wght@400;700', slug: 'manjari', ofl: 'manjari' },
-  { family: 'Marcellus', spec: 'Marcellus', slug: 'marcellus', ofl: 'marcellus' },
+  // The interface. Space Grotesk, the same face layerbit uses.
+  { family: 'Space Grotesk', spec: 'Space+Grotesk:wght@400;500;600;700', slug: 'space-grotesk', ofl: 'spacegrotesk', role: 'ui' },
+
+  // Display faces the designs draw with. Each one is a different voice, so a
+  // birthday card and a formal wedding do not have to look like the same card
+  // in different colours.
+  { family: 'Cormorant Garamond', spec: 'Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400', slug: 'cormorant-garamond', ofl: 'cormorantgaramond', role: 'display' },
+  { family: 'Playfair Display', spec: 'Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400', slug: 'playfair-display', ofl: 'playfairdisplay', role: 'display' },
+  { family: 'Marcellus', spec: 'Marcellus', slug: 'marcellus', ofl: 'marcellus', role: 'display' },
+  { family: 'Italiana', spec: 'Italiana', slug: 'italiana', ofl: 'italiana', role: 'display' },
+  { family: 'Cinzel', spec: 'Cinzel:wght@400;500;600', slug: 'cinzel', ofl: 'cinzel', role: 'display' },
+  { family: 'Great Vibes', spec: 'Great+Vibes', slug: 'great-vibes', ofl: 'greatvibes', role: 'display' },
+  { family: 'Outfit', spec: 'Outfit:wght@300;400;500;600;700', slug: 'outfit', ofl: 'outfit', role: 'display' },
+  { family: 'Fraunces', spec: 'Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400', slug: 'fraunces', ofl: 'fraunces', role: 'display' },
+
+  // Malayalam, for text a family types themselves. The site is in English;
+  // what goes on the invite is whatever the user writes.
+  { family: 'Anek Malayalam', spec: 'Anek+Malayalam:wght@400;500;600;700', slug: 'anek-malayalam', ofl: 'anekmalayalam', role: 'script' },
+  { family: 'Manjari', spec: 'Manjari:wght@400;700', slug: 'manjari', ofl: 'manjari', role: 'script' },
 ];
 
 async function get(url, as = 'text') {
@@ -87,7 +103,8 @@ async function main() {
         continue;
       }
       byUrl.set(face.url, {
-        slug: fam.slug, subset: face.subset, face, weights: new Set([face.weight]),
+        slug: fam.slug, subset: face.subset, face, role: fam.role,
+        weights: new Set([face.weight]),
       });
     }
   }
@@ -96,17 +113,23 @@ async function main() {
   // (family, subset) pair really has more than one file.
   const perPair = new Map();
   for (const entry of byUrl.values()) {
-    const key = `${entry.slug}-${entry.subset}`;
+    const key = `${entry.slug}-${entry.subset}-${entry.face.style}`;
     perPair.set(key, (perPair.get(key) || 0) + 1);
   }
   for (const entry of byUrl.values()) {
-    const key = `${entry.slug}-${entry.subset}`;
+    // Must match the key used to count above, style included, or a family
+    // with two weights in one subset silently writes both to one file.
+    const key = `${entry.slug}-${entry.subset}-${entry.face.style}`;
     const weights = [...entry.weights].map(Number).sort((a, b) => a - b);
     entry.weights = weights;
     entry.weightDescriptor = weights.length > 1
       ? `${weights[0]} ${weights[weights.length - 1]}`
       : String(weights[0]);
-    entry.file = perPair.get(key) > 1 ? `${key}-${weights[0]}.woff2` : `${key}.woff2`;
+    const stem = `${entry.slug}-${entry.subset}`;
+    const italic = entry.face.style === 'italic' ? '-italic' : '';
+    entry.file = perPair.get(key) > 1
+      ? `${stem}${italic}-${weights[0]}.woff2`
+      : `${stem}${italic}.woff2`;
   }
 
   const manifest = [];
@@ -123,20 +146,25 @@ async function main() {
     written.add(entry.file);
 
     const { family, style, unicodeRange, subset } = entry.face;
-    cssOut.push(
-      '@font-face {',
-      `  font-family: '${family}';`,
-      `  font-style: ${style};`,
-      `  font-weight: ${entry.weightDescriptor};`,
-      '  font-display: swap;',
-      `  src: url('/fonts/${entry.file}') format('woff2');`,
-      `  unicode-range: ${unicodeRange};`,
-      '}',
-      '');
+    // Only the interface font goes in the global stylesheet. The display
+    // faces are fetched by the renderer when a design actually asks for one,
+    // so opening the site on mobile data does not pull down ten families.
+    if (entry.role === 'ui') {
+      cssOut.push(
+        '@font-face {',
+        `  font-family: '${family}';`,
+        `  font-style: ${style};`,
+        `  font-weight: ${entry.weightDescriptor};`,
+        '  font-display: swap;',
+        `  src: url('/fonts/${entry.file}') format('woff2');`,
+        `  unicode-range: ${unicodeRange};`,
+        '}',
+        '');
+    }
 
     manifest.push({
       family, style, weight: entry.weightDescriptor, subset, unicodeRange,
-      file: `fonts/${entry.file}`, bytes: bytes.length,
+      role: entry.role, file: `fonts/${entry.file}`, bytes: bytes.length,
     });
     console.log(`  ${entry.file.padEnd(34)} ${String(bytes.length).padStart(7)} bytes  (${family} ${entry.weightDescriptor})`);
   }

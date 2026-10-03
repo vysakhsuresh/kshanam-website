@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Make your invitation — Festa</title>
+  <meta name="description" content="Type the details and watch your invitation video play, slide by slide, before you make it." />
+  <meta name="theme-color" content="#17141D" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <script type="module" crossorigin src="/kshanam-website/assets/studio-CwmT367r.js"></script>
+  <link rel="modulepreload" crossorigin href="/kshanam-website/assets/player-SkxS0FgC.js">
+  <link rel="modulepreload" crossorigin href="/kshanam-website/assets/app-R32II2ZV.js">
+  <link rel="modulepreload" crossorigin href="/kshanam-website/assets/store-w_EleFs8.js">
+  <link rel="stylesheet" crossorigin href="/kshanam-website/assets/app-B9YOan8v.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2.6 14.6 9h6.8l-5.5 4 2.1 6.6L12 15.7 6 19.6 8.1 13 2.6 9h6.8z"
+                stroke="#8E1F46" stroke-width="1.6" stroke-linejoin="round" />
+        </svg>
+        <span class="brand-word">Festa<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="./#designs">Change design</a>
+        <a href="./help.html" class="hide-sm">Help</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ------------------------------------------------- editing -->
+    <div id="view-edit">
+      <div class="wrap studio">
+        <div class="stage">
+          <div class="stage-inner">
+            <div class="player">
+              <canvas id="player" width="360" height="640" role="img"
+                      aria-label="Your invitation, playing"></canvas>
+            </div>
+            <div class="player-controls">
+              <div class="transport">
+                <button type="button" class="play-btn" id="play" aria-label="Play the invitation">
+                  <svg id="play-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v13l11-6.5z" fill="currentColor"/></svg>
+                </button>
+                <label class="visually-hidden" for="scrub">Move through the invitation</label>
+                <input class="scrub" id="scrub" type="range" min="0" max="1000" value="0" />
+                <span class="time" id="time">0:00</span>
+              </div>
+              <div class="slides" id="slides" role="group" aria-label="Slides in your invitation"></div>
+              <p class="stage-hint" id="hint">Every slide, with your words already on it. Tap one to jump there.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor">
+          <h1 class="visually-hidden">Make your invitation</h1>
+
+          <div class="fieldgroup">
+            <h2 id="g-words">The words</h2>
+            <div class="fields" id="fields-words" aria-labelledby="g-words"></div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 id="g-when">When and where</h2>
+            <div class="fields" id="fields-when" aria-labelledby="g-when"></div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 id="g-photo">Photo</h2>
+            <div id="photos" aria-labelledby="g-photo"></div>
+          </div>
+
+          <div class="fieldgroup">
+            <h2 id="g-music">Music</h2>
+            <div class="choices" id="music" role="group" aria-labelledby="g-music"></div>
+            <input class="visually-hidden" id="song" type="file" accept="audio/*" />
+            <p class="stage-hint" id="song-name" style="margin-top:10px"></p>
+          </div>
+
+          <p class="field-error" id="form-error" role="alert"></p>
+          <div class="make-bar">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="make">Make my video</button>
+            <p class="stage-hint" style="margin-top:8px;text-align:center">Takes about ten seconds. Nothing is uploaded.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------- rendering -->
+    <section class="progress-card" id="view-progress" hidden>
+      <h2>Making your video</h2>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-pct" id="progress-pct" role="status" aria-live="polite">0%</p>
+      <p style="color:var(--muted);font-size:15px">Keep this screen open.</p>
+      <p style="margin-top:18px"><button type="button" class="btn btn-ghost" id="cancel">Cancel</button></p>
+    </section>
+
+    <!-- ------------------------------------------------- ready -->
+    <section class="wrap ready section" id="view-ready" hidden>
+      <div class="section-head"><h2>Your invitation is ready</h2></div>
+      <div class="ready-grid">
+        <video id="ready-video" controls playsinline></video>
+        <div>
+          <div class="btn-row" style="margin-bottom:10px">
+            <button type="button" class="btn btn-whatsapp btn-lg" id="share">Send on WhatsApp</button>
+            <a class="btn btn-ghost btn-lg" id="download" download="invitation.mp4">Download</a>
+          </div>
+          <p class="codec-warn" id="codec-warn" hidden></p>
+          <div class="note" style="margin-top:20px">
+            <div>
+              <strong>How this stays free</strong>
+              <p>Ads on the browsing pages cover the hosting. There are none in the editor, none while your video is made, and none beside these buttons.</p>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:18px">
+            <button type="button" class="btn btn-quiet" id="again">Change something</button>
+            <a class="btn btn-quiet" href="./#designs">Try another design</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ import {
 } from 'mediabunny';
 
 import { prepare, renderFrame, frameCount, OUTPUT } from './render.js';
-import { makeToneBed, fitPcm, interleave } from './music.js';
+import { renderTrack, fitPcm, interleave } from './music.js';
 
 /** Most wanted first. 'avc' is H.264, the only one WhatsApp is happy with. */
 export const VIDEO_PREFERENCE = ['avc', 'vp9', 'av1', 'vp8'];
@@ -70,8 +70,7 @@ class Cancelled extends Error {
  * @param {object}   o.values     { slots, lang, photo }
  * @param {HTMLCanvasElement|OffscreenCanvas} o.canvas  sized to the output
  * @param {number}   [o.fps]
- * @param {boolean}  [o.endCard]
- * @param {'none'|'tones'|'file'} [o.music]
+ * @param {string}   [o.music]    a track id from music.js, or 'file'
  * @param {{channels: Float32Array[], sampleRate: number}} [o.pcm]  decoded song
  * @param {(p: {phase: string, progress: number, frame: number, frames: number}) => void} [o.onProgress]
  * @param {{aborted: boolean}} [o.signal]
@@ -81,8 +80,7 @@ export async function renderToMp4(o) {
   const {
     template, values, canvas,
     fps = OUTPUT.fps,
-    endCard = true,
-    music = 'tones',
+    music = 'music-box',
     pcm = null,
     onProgress = () => {},
     signal = null,
@@ -92,7 +90,12 @@ export async function renderToMp4(o) {
   const ctx = canvas.getContext('2d', { alpha: false });
   if (!ctx) throw new Error('This browser gave us no 2D canvas to draw on.');
 
-  const prepared = prepare(template, { endCard, hasPhoto: !!(values && values.photo) });
+  // Only slots with a picture in them count; a design's photo scene is
+  // dropped rather than shown empty.
+  const photos = Object.entries((values && values.photos) || {})
+    .filter(([, p]) => p && p.bitmap)
+    .map(([slot]) => slot);
+  const prepared = prepare(template, { photos });
   const frames = frameCount(prepared, fps);
 
   const caps = await detectCapabilities({ width: canvas.width, height: canvas.height });
@@ -124,7 +127,7 @@ export async function renderToMp4(o) {
   if (wantsAudio) {
     audio = music === 'file' && pcm
       ? fitPcm(pcm.channels, pcm.sampleRate, prepared.duration)
-      : makeToneBed(prepared.duration, SAMPLE_RATE);
+      : renderTrack(music, prepared.duration, SAMPLE_RATE);
     audioSource = new AudioSampleSource({ codec: caps.audio, quality: QUALITY_MEDIUM });
     output.addAudioTrack(audioSource);
   }

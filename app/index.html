@@ -3,101 +3,140 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Invitation Video Maker — Wedding Invites | Kshanam</title>
-  <meta name="description" content="Make a wedding or housewarming invitation video free, in about two minutes. No sign-up, no watermark, and your photos never leave your phone." />
-  <meta name="theme-color" content="#7A1F2B" />
+  <title>Festa — Free Invitation Video Maker for Every Celebration</title>
+  <meta name="description" content="Make an invitation video free, in about two minutes. Weddings, birthdays, housewarmings and more. No sign-up, no watermark, and nothing ever leaves your device." />
+  <meta name="theme-color" content="#17141D" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Free invitation video maker — Kshanam" />
-  <meta property="og:description" content="Pick a design, type the names, send it on WhatsApp. Free forever, no sign-up, no watermark." />
+  <meta property="og:title" content="Festa — free invitation video maker" />
+  <meta property="og:description" content="Pick a design, type the details, watch it play, send it on WhatsApp. Free forever." />
   <link rel="stylesheet" href="./src/ui/app.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <a class="brand" href="./">
-      <svg width="22" height="30" viewBox="0 0 22 30" fill="none" stroke="#C9971C" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M11 2c3 4 3 7 0 9c-3-2-3-5 0-9z" /><path d="M3 13h16" />
-        <path d="M11 13v11" /><path d="M8 24h6" /><path d="M5 28h12" />
-      </svg>
-      <span class="brand-word" data-brand>Kshanam</span>
-    </a>
-    <div class="lang-toggle" role="group" aria-label="Site language">
-      <button type="button" data-lang="en" aria-pressed="true">English</button>
-      <button type="button" class="ml" data-lang="ml" aria-pressed="false">മലയാളം</button>
+    <div class="header-inner">
+      <a class="brand" href="./">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2.6 14.6 9h6.8l-5.5 4 2.1 6.6L12 15.7 6 19.6 8.1 13 2.6 9h6.8z"
+                stroke="#8E1F46" stroke-width="1.6" stroke-linejoin="round" />
+        </svg>
+        <span class="brand-word">Festa<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="#designs">Designs</a>
+        <a href="#how" class="hide-sm">How it works</a>
+        <a href="./help.html" class="hide-sm">Help</a>
+        <a class="btn btn-primary" href="#designs">Make an invite</a>
+      </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="section hero">
-      <p class="eyebrow" data-i18n="eyebrow">For every family function</p>
-      <h1 data-i18n="headline">Your invitation video, ready in 2 minutes</h1>
-      <p class="sub" data-i18n="sub">Pick a design, type the names and send it on WhatsApp.</p>
-      <div class="pills">
-        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="free">Free forever</span></span>
-        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="noSignup">No sign-up</span></span>
-        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="noWatermark">No watermark</span></span>
+    <section class="hero wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Free forever. No sign-up. No watermark.
+          </p>
+          <h1>Invitation videos for <em>every celebration</em></h1>
+          <p class="hero-sub">Pick a design, type the details, and watch the whole invitation play before you make anything. Then send it on WhatsApp.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary btn-lg" href="#designs">Browse the designs</a>
+            <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+          </div>
+          <div class="trust">
+            <span><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#10725A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>29 designs</span>
+            <span><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#10725A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>13 kinds of celebration</span>
+            <span><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#10725A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Nothing uploaded</span>
+          </div>
+        </div>
+        <div class="hero-stage">
+          <div class="hero-card"><canvas id="hero-a" width="360" height="640" role="img" aria-label="An invitation design playing"></canvas></div>
+          <div class="hero-card-2"><canvas id="hero-b" width="360" height="640" role="img" aria-label="A second invitation design playing"></canvas></div>
+        </div>
       </div>
-      <a class="btn btn-primary" href="#designs" data-i18n="startCta">Start with a design</a>
     </section>
 
-    <section class="section">
-      <h2 data-i18n="whatFunction">What's the function?</h2>
-      <div class="chips" id="occasions" role="group" aria-label="Choose the function"></div>
+    <section class="section wrap" id="designs">
+      <div class="section-head">
+        <div>
+          <h2>Choose what you are celebrating</h2>
+          <p>Every design works for any language — type in English, Malayalam, Hindi, Tamil, whatever you like.</p>
+        </div>
+      </div>
+      <div class="cat-rail" id="categories" role="group" aria-label="Kind of celebration"></div>
+      <div class="designs" id="design-list" style="margin-top:22px"></div>
+      <p class="empty-note" id="design-empty" hidden>No designs here yet.</p>
     </section>
 
-    <section class="section" id="designs">
-      <h2 id="designs-heading">Wedding designs</h2>
-      <div class="designs" id="design-list"></div>
-    </section>
+    <!-- Browsing page: ads allowed here, and nowhere in the editor. -->
+    <div class="ad-slot" id="ad-home" hidden>Advertisement</div>
 
-    <section class="section">
-      <h2 data-i18n="howItWorks">How it works</h2>
+    <section class="section wrap" id="how">
+      <div class="section-head"><h2>Three steps, about two minutes</h2></div>
       <div class="steps">
         <div class="step">
-          <span class="step-num">1</span>
-          <div>
-            <h3 data-i18n="step1">Pick a design</h3>
-            <p data-i18n="step1Body">Made for Kerala weddings, housewarmings, baptisms and more.</p>
-          </div>
+          <h3>Pick a design</h3>
+          <p>Twenty nine of them, across weddings, birthdays, baby days, housewarmings, festivals and more.</p>
         </div>
         <div class="step">
-          <span class="step-num">2</span>
-          <div>
-            <h3 data-i18n="step2">Type the details</h3>
-            <p data-i18n="step2Body">Names, date and venue. You see the invite change as you type.</p>
-          </div>
+          <h3>Type and watch</h3>
+          <p>Every line is yours to change. The invitation plays as you type, slide by slide, so there are no surprises.</p>
         </div>
         <div class="step">
-          <span class="step-num">3</span>
-          <div>
-            <h3 data-i18n="step3">Send on WhatsApp</h3>
-            <p data-i18n="step3Body">Download the video and share it with everyone in one tap.</p>
-          </div>
+          <h3>Send it</h3>
+          <p>One tap to WhatsApp, or download the file. No account, no watermark, no payment at any point.</p>
         </div>
       </div>
     </section>
 
-    <section class="note">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none">
-        <rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" />
-      </svg>
-      <div>
-        <strong data-i18n="privacyTitle">Your photos stay on your phone</strong>
-        <p data-i18n="privacyBody">The video is made right on your device. Nothing is uploaded to us.</p>
+    <section class="section wrap">
+      <div class="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#8E1F46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        </svg>
+        <div>
+          <strong>Your photos and details never leave your device</strong>
+          <p>The video is made inside your browser, on your own phone or laptop. Nothing is uploaded to us, because there is no server to upload it to.</p>
+        </div>
       </div>
     </section>
-
-    <!-- Ads are allowed here (a gallery page) and nowhere in the editor,
-         the rendering screen, or beside the download and share buttons. -->
-    <div class="ad-slot" id="ad-home" hidden>Advertisement</div>
   </main>
 
   <footer class="site-footer">
-    <p>Kshanam is free and always will be. No account, no watermark, nothing uploaded.</p>
+    <div class="footer-inner">
+      <div>
+        <span class="brand-word">Festa<span class="brand-dot">.</span></span>
+        <p style="color:var(--muted); font-size:15px; margin-top:8px; max-width:34ch">
+          Invitation videos for every celebration. Free, with no account and no watermark, for as long as it exists.
+        </p>
+      </div>
+      <div>
+        <h3>Make</h3>
+        <div class="footer-links">
+          <a href="#designs">All designs</a>
+          <a href="#how">How it works</a>
+          <a href="./help.html">Help</a>
+        </div>
+      </div>
+      <div>
+        <h3>About</h3>
+        <div class="footer-links">
+          <a href="./help.html#privacy">Privacy</a>
+          <a href="./help.html#free">Why it is free</a>
+          <a href="./help.html#support" id="footer-support" hidden>Buy us a coffee</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>&copy; 2026 Festa</p>
+      <p>Made for families, not for subscriptions.</p>
+    </div>
   </footer>
 
   <script type="module" src="./src/ui/home.js"></script>

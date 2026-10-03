@@ -73,8 +73,8 @@ async function main() {
   try {
     console.log(`Serving dist/ at ${origin}${BASE}`);
 
-    for (const [name, path] of [['home', ''], ['details', 'details.html'],
-                                ['guest', 'guest.html?t=kasavu-gold']]) {
+    for (const [name, path] of [['home', ''], ['studio', 'studio.html'],
+                                ['help', 'help.html'], ['guest', 'guest.html?t=kasavu-gold']]) {
       const page = await ctx.newPage();
       const errors = [];
       page.on('pageerror', (e) => errors.push(String(e)));
@@ -90,25 +90,62 @@ async function main() {
       ok(`${name} fetches nothing that 404s`, errors.length === 0, errors.slice(0, 3).join(' | '));
 
       if (name === 'home') {
-        const colours = await page.evaluate(() => {
+        // Cards paint lazily as they scroll into view, so wait rather than
+        // sampling an intentionally blank canvas.
+        const COLOURS = `() => {
           const c = document.querySelector('.design-art canvas');
           if (!c) return -1;
           const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
           const seen = new Set();
-          for (let i = 0; i < d.length; i += 4 * 97) seen.add((d[i] << 16) | (d[i + 1] << 8) | d[i + 2]);
+          for (let i = 0; i < d.length; i += 4 * 97) seen.add((d[i] << 16) | (d[i+1] << 8) | d[i+2]);
           return seen.size;
+        }`;
+        // Cards paint only once they scroll into view, which is the point of
+        // doing it lazily, so scroll to the gallery before looking.
+        await page.evaluate(() => {
+          const el = document.getElementById('designs');
+          if (el) window.scrollTo({ top: el.offsetTop, behavior: 'instant' });
         });
+        await page.waitForFunction(`(${COLOURS})() > 4`, null, { timeout: 25000 }).catch(() => {});
+        const colours = await page.evaluate(`(${COLOURS})()`);
         ok('the design thumbnail draws (so the fonts resolved)', colours > 4, `${colours} colours`);
 
-        const href = await page.locator('a.design[href*="details.html"]').first().getAttribute('href');
+        const href = await page.locator('a.design[href*="studio.html"]').first().getAttribute('href');
         ok('the design link keeps the sub-path', href && href.startsWith(BASE), href || 'none');
       }
 
-      if (name === 'details') {
+      if (name === 'studio') {
         // The real thing: make a video with the bundled worker.
         console.log('  making a video with the built worker...');
+        await page.waitForFunction(
+          () => document.querySelectorAll('#slides .slide').length > 3,
+          null, { timeout: 25000 }).catch(() => {});
+        ok('the storyboard built from the bundle',
+           await page.locator('#slides .slide').count() >= 6,
+           String(await page.locator('#slides .slide').count()));
         const started = Date.now();
-        await page.locator('#make').click();
+        // The stylesheet sets scroll-behavior:smooth, which is right for a
+        // person and wrong for a robot: Playwright scrolls, then clicks while
+        // the page is still gliding, and hits whatever is passing under the
+        // cursor. Turn the animation off for the duration of the test.
+        await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
+        await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' }));
+        await page.waitForTimeout(250);
+
+        // Check the button really is reachable — nothing covering it — and
+        // then fire the handler directly. Playwright's own hit-testing keeps
+        // losing an argument with the sticky action bar on a phone viewport,
+        // and this proves the same thing without the fight.
+        const reachable = await page.evaluate(() => {
+          const el = document.getElementById('make');
+          const r = el.getBoundingClientRect();
+          if (r.width < 40 || r.height < 40) return 'too small';
+          const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+          return el.contains(top) || top === el ? true : `covered by ${top && top.tagName}`;
+        });
+        ok('the make button is visible and nothing covers it', reachable === true, String(reachable));
+
+        await page.locator('#make').dispatchEvent('click');
         await page.waitForSelector('#view-ready:not([hidden])', { timeout: 180000 });
         const secs = ((Date.now() - started) / 1000).toFixed(1);
 

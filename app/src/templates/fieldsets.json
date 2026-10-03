@@ -1,0 +1,40 @@
+{
+  "_note": "Shared field vocabularies. Designs reference one and override the defaults, which means switching design keeps everything already typed — the single biggest reason people abandon an editor.",
+
+  "couple": [
+    { "key": "eyebrow",  "type": "text", "label": "Small heading",   "max": 44,  "scene": "open" },
+    { "key": "intro",    "type": "text", "label": "Invitation line", "max": 140, "scene": "intro", "multiline": true },
+    { "key": "name1",    "type": "text", "label": "First name",      "max": 28,  "scene": "names" },
+    { "key": "joiner",   "type": "text", "label": "Joining word",    "max": 10,  "scene": "names" },
+    { "key": "name2",    "type": "text", "label": "Second name",     "max": 28,  "scene": "names" },
+    { "key": "date",     "type": "date", "label": "Date",            "scene": "when" },
+    { "key": "time",     "type": "time", "label": "Time",            "scene": "when" },
+    { "key": "timeLabel","type": "text", "label": "Word before the time", "max": 24, "scene": "when" },
+    { "key": "venue",    "type": "text", "label": "Venue",           "max": 100, "scene": "where", "multiline": true },
+    { "key": "closing",  "type": "text", "label": "Closing line",    "max": 90,  "scene": "close", "multiline": true }
+  ],
+
+  "person": [
+    { "key": "eyebrow",  "type": "text", "label": "Small heading",   "max": 44,  "scene": "open" },
+    { "key": "intro",    "type": "text", "label": "Invitation line", "max": 140, "scene": "intro", "multiline": true },
+    { "key": "name1",    "type": "text", "label": "Name",            "max": 32,  "scene": "names" },
+    { "key": "subtitle", "type": "text", "label": "Line under the name", "max": 40, "scene": "names" },
+    { "key": "date",     "type": "date", "label": "Date",            "scene": "when" },
+    { "key": "time",     "type": "time", "label": "Time",            "scene": "when" },
+    { "key": "timeLabel","type": "text", "label": "Word before the time", "max": 24, "scene": "when" },
+    { "key": "venue",    "type": "text", "label": "Venue",           "max": 100, "scene": "where", "multiline": true },
+    { "key": "closing",  "type": "text", "label": "Closing line",    "max": 90,  "scene": "close", "multiline": true }
+  ],
+
+  "event": [
+    { "key": "eyebrow",  "type": "text", "label": "Small heading",   "max": 44,  "scene": "open" },
+    { "key": "intro",    "type": "text", "label": "Invitation line", "max": 140, "scene": "intro", "multiline": true },
+    { "key": "name1",    "type": "text", "label": "Occasion",        "max": 34,  "scene": "names" },
+    { "key": "subtitle", "type": "text", "label": "Line underneath", "max": 40,  "scene": "names" },
+    { "key": "date",     "type": "date", "label": "Date",            "scene": "when" },
+    { "key": "time",     "type": "time", "label": "Time",            "scene": "when" },
+    { "key": "timeLabel","type": "text", "label": "Word before the time", "max": 24, "scene": "when" },
+    { "key": "venue",    "type": "text", "label": "Venue",           "max": 100, "scene": "where", "multiline": true },
+    { "key": "closing",  "type": "text", "label": "Closing line",    "max": 90,  "scene": "close", "multiline": true }
+  ]
+}

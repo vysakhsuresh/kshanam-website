@@ -87,3 +87,38 @@ export function layerState(layer, t, sceneDur) {
     scaleY: tf.scaleY != null ? tf.scaleY : 1,
   };
 }
+
+/**
+ * Slow movement that runs for the whole time a layer is on screen.
+ *
+ * This is what stops a still frame from looking like a still frame: a photo
+ * drifting imperceptibly closer, a title easing upward. `anim` handles the
+ * entrance and exit; `motion` handles the middle.
+ */
+export const motions = {
+  'zoom-in': (p, a) => ({ scale: 1 + (a != null ? a : 0.08) * p }),
+  'zoom-out': (p, a) => ({ scale: 1 + (a != null ? a : 0.08) * (1 - p) }),
+  'pan-left': (p, a) => ({ dx: -(a != null ? a : 14) * p }),
+  'pan-right': (p, a) => ({ dx: (a != null ? a : 14) * p }),
+  'pan-up': (p, a) => ({ dy: -(a != null ? a : 14) * p }),
+  'drift-up': (p, a) => ({ dy: -(a != null ? a : 10) * p }),
+  'float': (p, a) => ({ dy: Math.sin(p * Math.PI * 2) * (a != null ? a : 4) }),
+  'sway': (p, a) => ({ dx: Math.sin(p * Math.PI * 2) * (a != null ? a : 5) }),
+  'spin-slow': (p, a) => ({ rotate: p * (a != null ? a : 0.08) }),
+};
+
+/** @returns {{dx:number, dy:number, scale:number, rotate:number}} */
+export function layerMotion(layer, t, sceneDur) {
+  const m = layer.motion;
+  if (!m) return null;
+  const fn = motions[typeof m === 'string' ? m : m.preset];
+  if (!fn) return null;
+  const p = sceneDur > 0 ? Math.max(0, Math.min(1, t / sceneDur)) : 0;
+  const out = fn(p, typeof m === 'object' ? m.amount : undefined);
+  return {
+    dx: out.dx || 0,
+    dy: out.dy || 0,
+    scale: out.scale != null ? out.scale : 1,
+    rotate: out.rotate || 0,
+  };
+}

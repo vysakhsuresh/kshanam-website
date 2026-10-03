@@ -1,160 +1,180 @@
 /**
- * The home page: choose a function, choose a design.
+ * The home page: choose a celebration, choose a design.
  *
- * The design thumbnails are drawn by the real renderer rather than being
- * saved pictures, so a template can never show a preview that differs from
- * what it actually produces.
+ * Gallery previews are drawn by the real engine rather than being saved
+ * pictures, so a card can never show something the editor would not produce.
+ * They render lazily as they scroll into view, and only then does that
+ * design's typeface get downloaded — opening this page on mobile data should
+ * not fetch nine font families.
  */
-import { t, OCCASIONS, occasionName } from './i18n.js';
-import { loadUi, saveUi, loadDetails, saveDetails } from './store.js';
-import { TEMPLATES, PLANNED, forOccasion, plannedForOccasion } from '../templates/index.js';
-import { loadFonts } from '../engine/fonts.js';
-import { prepare, renderFrame } from '../engine/render.js';
-import { sampleValues } from '../sample-values.js';
+import { TEMPLATES, forCategory, usedCategories, defaultValuesFor } from '../templates/index.js';
+import { categoryName } from '../templates/categories.js';
+import { drawStill, createPlayer } from './player.js';
+import { loadUi, saveUi } from './store.js';
+import { SUPPORT_URL } from '../config.js';
 
+const BASE = import.meta.env.BASE_URL;
 const ui = loadUi();
+const $ = (id) => document.getElementById(id);
 
-/** Swap every translated string on the page. */
-function applyLanguage(lang) {
-  document.documentElement.lang = lang === 'ml' ? 'ml' : 'en';
-  for (const el of document.querySelectorAll('[data-i18n]')) {
-    el.textContent = t(lang, el.dataset.i18n);
+if (SUPPORT_URL) {
+  const link = $('footer-support');
+  if (link) { link.hidden = false; link.href = SUPPORT_URL; }
+}
+
+/* ----------------------------------------------------------- categories */
+
+function renderCategories() {
+  const host = $('categories');
+  host.textContent = '';
+
+  const all = document.createElement('button');
+  all.type = 'button';
+  all.className = 'cat';
+  all.innerHTML = `Everything <span class="cat-count">${TEMPLATES.length}</span>`;
+  all.setAttribute('aria-pressed', String(ui.category === 'all'));
+  all.addEventListener('click', () => select('all'));
+  host.appendChild(all);
+
+  for (const c of usedCategories()) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cat';
+    b.innerHTML = `${c.name} <span class="cat-count">${forCategory(c.id).length}</span>`;
+    b.setAttribute('aria-pressed', String(ui.category === c.id));
+    b.addEventListener('click', () => select(c.id));
+    host.appendChild(b);
   }
-  const brand = document.querySelector('[data-brand]');
-  if (brand) {
-    brand.textContent = t(lang, 'brand');
-    brand.classList.toggle('is-ml', lang === 'ml');
-  }
-  for (const b of document.querySelectorAll('.lang-toggle button')) {
-    b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
-  }
-  renderOccasions();
+}
+
+function select(category) {
+  ui.category = category;
+  saveUi(ui);
+  renderCategories();
   renderDesigns();
 }
 
-function renderOccasions() {
-  const host = document.getElementById('occasions');
-  if (!host) return;
-  host.textContent = '';
-  for (const o of OCCASIONS) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'chip';
-    btn.textContent = occasionName(o.id, ui.lang);
-    btn.setAttribute('aria-pressed', String(o.id === ui.occasion));
-    btn.addEventListener('click', () => {
-      ui.occasion = o.id;
-      saveUi(ui);
-      renderOccasions();
-      renderDesigns();
-    });
-    host.appendChild(btn);
-  }
-}
+/* -------------------------------------------------------------- gallery */
 
-/** One thumbnail, drawn from the template itself. */
-function thumbnail(template) {
-  const canvas = document.createElement('canvas');
-  canvas.width = 270;
-  canvas.height = 480;
-  canvas.setAttribute('role', 'img');
-  canvas.setAttribute('aria-label', `${template.name} design preview`);
-
-  fontsReady.then(() => {
-    const ctx = canvas.getContext('2d', { alpha: false });
-    const prepared = prepare(template, { endCard: false });
-    // The names scene, a second in, is the frame that says most about a design.
-    const names = prepared.scenes.find((s) => s.id === 'names') || prepared.scenes[0];
-    renderFrame(ctx, prepared, sampleValues(template.defaultLanguage || 'both'),
-      names.start + Math.min(2.2, names.duration - 0.2));
-  });
-
-  return canvas;
-}
+let observer = null;
 
 function renderDesigns() {
-  const host = document.getElementById('design-list');
-  const heading = document.getElementById('designs-heading');
-  if (!host) return;
-
-  heading.textContent = `${occasionName(ui.occasion, ui.lang)} ${t(ui.lang, 'designsFor')}`;
+  const host = $('design-list');
+  const empty = $('design-empty');
+  if (observer) observer.disconnect();
   host.textContent = '';
 
-  for (const template of forOccasion(ui.occasion)) {
-    const a = document.createElement('a');
-    a.className = 'design';
-    a.href = `${import.meta.env.BASE_URL}details.html`
-      + `?t=${encodeURIComponent(template.id)}&o=${encodeURIComponent(ui.occasion)}`;
-    a.addEventListener('click', () => {
-      const details = loadDetails();
-      details.templateId = template.id;
-      details.occasion = ui.occasion;
-      saveDetails(details);
+  const list = forCategory(ui.category);
+  empty.hidden = list.length > 0;
+
+  observer = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        entry.target._paint();
+      }
+    }, { rootMargin: '300px 0px' })
+    : null;
+
+  for (const template of list) {
+    host.appendChild(card(template));
+  }
+}
+
+function card(template) {
+  const a = document.createElement('a');
+  a.className = 'design';
+  a.href = `${BASE}studio.html?t=${encodeURIComponent(template.id)}`;
+
+  const art = document.createElement('div');
+  art.className = 'design-art';
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 288;
+  canvas.height = 512;
+  canvas.setAttribute('role', 'img');
+  canvas.setAttribute('aria-label', `${template.name}: ${template.tagline}`);
+  art.appendChild(canvas);
+
+  const play = document.createElement('span');
+  play.className = 'design-play';
+  play.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.5v9l8-4.5z" fill="#17141D"/></svg>';
+  art.appendChild(play);
+
+  const meta = document.createElement('div');
+  meta.className = 'design-meta';
+  meta.innerHTML = `<span class="design-name"></span><span class="design-tag"></span>`;
+  meta.querySelector('.design-name').textContent = template.name;
+  meta.querySelector('.design-tag').textContent = template.tagline;
+
+  a.append(art, meta);
+
+  const entered = defaultValuesFor(template);
+  a._paint = () => drawStill(canvas, template, entered, { base: BASE }).catch(() => {});
+  if (observer) observer.observe(a);
+  else a._paint();
+
+  // Hovering plays the design. Only ever one at a time, so a gallery of
+  // twenty nine designs is not twenty nine animation loops.
+  let player = null;
+  const start = () => {
+    if (player || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    stopOthers();
+    player = createPlayer(canvas, { template, entered, base: BASE });
+    current = player;
+    player.ready(BASE).then(() => player && player.play());
+  };
+  const stop = () => {
+    if (!player) return;
+    player.destroy();
+    player = null;
+    if (current === player) current = null;
+    a._paint();
+  };
+  a.addEventListener('mouseenter', start);
+  a.addEventListener('mouseleave', stop);
+  a.addEventListener('focus', start);
+  a.addEventListener('blur', stop);
+
+  return a;
+}
+
+let current = null;
+function stopOthers() {
+  if (current) { current.destroy(); current = null; }
+}
+
+/* ----------------------------------------------------------- hero cards */
+
+async function hero() {
+  const picks = ['ivory-deco', 'confetti-pop'];
+  const canvases = [$('hero-a'), $('hero-b')];
+
+  for (let i = 0; i < picks.length; i++) {
+    const template = TEMPLATES.find((t) => t.id === picks[i]) || TEMPLATES[i];
+    const canvas = canvases[i];
+    if (!template || !canvas) continue;
+
+    const player = createPlayer(canvas, {
+      template,
+      entered: defaultValuesFor(template),
+      base: BASE,
+      onEnd: () => setTimeout(() => player.seek(0) || player.play(), 900),
     });
-
-    const art = document.createElement('div');
-    art.className = 'design-art';
-    art.appendChild(thumbnail(template));
-
-    const name = document.createElement('span');
-    name.className = 'design-name';
-    name.textContent = template.name;
-
-    const tag = document.createElement('span');
-    tag.className = 'design-tag';
-    tag.textContent = template.tagline ? (template.tagline[ui.lang] || template.tagline.en) : '';
-
-    a.append(art, name, tag);
-    host.appendChild(a);
-  }
-
-  // Designs from the mockups that are not built yet are shown, but plainly
-  // marked, so the gallery is honest about what you can actually make today.
-  for (const planned of plannedForOccasion(ui.occasion)) {
-    const card = document.createElement('div');
-    card.className = 'design is-planned';
-
-    const art = document.createElement('div');
-    art.className = 'design-art';
-    art.style.background = planned.swatch.bg;
-    art.style.color = planned.swatch.ink;
-
-    const badge = document.createElement('span');
-    badge.className = 'badge';
-    badge.textContent = t(ui.lang, 'comingSoon');
-
-    const label = document.createElement('span');
-    label.className = 'planned-art-name';
-    label.style.color = planned.swatch.ink;
-    label.textContent = planned.name;
-
-    art.append(badge, label);
-
-    const name = document.createElement('span');
-    name.className = 'design-name';
-    name.textContent = planned.name;
-
-    const tag = document.createElement('span');
-    tag.className = 'design-tag';
-    tag.textContent = planned.tagline[ui.lang] || planned.tagline.en;
-
-    card.append(art, name, tag);
-    host.appendChild(card);
-  }
-
-  if (!TEMPLATES.length) {
-    host.textContent = 'No designs yet.';
+    await player.ready(BASE);
+    // Start on the slide with the names, not on frame zero: at t=0 a design is
+    // legitimately just its background, and a hero card that opens blank reads
+    // as a broken image.
+    const opening = player.prepared.scenes.find((s) => s.id === 'names')
+      || player.prepared.scenes[0];
+    player.seek(opening.start + Math.min(1.6, opening.duration * 0.45));
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setTimeout(() => player.play(), i * 1400);
+    }
   }
 }
 
-const fontsReady = loadFonts(import.meta.env.BASE_URL).catch(() => {});
-
-for (const btn of document.querySelectorAll('.lang-toggle button')) {
-  btn.addEventListener('click', () => {
-    ui.lang = btn.dataset.lang;
-    saveUi(ui);
-    applyLanguage(ui.lang);
-  });
-}
-
-applyLanguage(ui.lang);
+renderCategories();
+renderDesigns();
+hero().catch(() => {});

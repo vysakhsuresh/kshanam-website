@@ -5,8 +5,9 @@
  * are designing for, so all of it happens here on an OffscreenCanvas and the
  * page only receives progress messages and, at the end, the finished file.
  */
-import { loadFonts } from './fonts.js';
+import { ensureFonts } from './fonts.js';
 import { renderToMp4, detectCapabilities } from './encode.js';
+import { templateFamilies } from './render.js';
 import { OUTPUT } from './render.js';
 
 const state = { signal: { aborted: false } };
@@ -41,7 +42,7 @@ self.onmessage = async (event) => {
     // is a frame full of boxes, and it is already encoded by the time anyone
     // notices.
     self.postMessage({ type: 'progress', phase: 'fonts', progress: 0 });
-    await loadFonts(msg.baseUrl || '/');
+    await ensureFonts(templateFamilies(msg.template), msg.baseUrl || '/');
 
     const canvas = new OffscreenCanvas(width, height);
 
@@ -50,8 +51,7 @@ self.onmessage = async (event) => {
       values: msg.values,
       canvas,
       fps: msg.fps,
-      endCard: msg.endCard !== false,
-      music: msg.music || 'tones',
+      music: msg.music || 'music-box',
       pcm: msg.pcm || null,
       signal: state.signal,
       onProgress: (p) => self.postMessage({ type: 'progress', ...p }),

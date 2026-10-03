@@ -1,5 +1,5 @@
 {
-  "name": "kshanam",
+  "name": "festa",
   "private": true,
   "type": "module",
   "description": "Free invitation video maker. Everything runs in the browser; nothing is uploaded.",
@@ -13,7 +13,8 @@
     "test:render": "node tests/render-mp4.mjs",
     "test:screens": "node tests/screens.mjs",
     "build:pages": "node scripts/build-pages.mjs",
-    "test:built": "node tests/built-site.mjs"
+    "test:built": "node tests/built-site.mjs",
+    "designs": "node scripts/gen-templates.mjs"
   },
   "devDependencies": {
     "playwright": "^1.63.0",

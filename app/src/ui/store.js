@@ -6,8 +6,8 @@
  * because localStorage throws in private windows and on phones with site data
  * blocked, and a thrown error here must never stop the page rendering.
  */
-const KEY = 'kshanam.details.v1';
-const UI_KEY = 'kshanam.ui.v1';
+const KEY = 'festa.entry.v2';
+const UI_KEY = 'festa.ui.v2';
 
 function read(key, fallback) {
   try {
@@ -27,36 +27,26 @@ function write(key, value) {
   }
 }
 
-export const DEFAULT_DETAILS = {
+export const DEFAULT_ENTRY = {
   templateId: 'kasavu-gold',
-  occasion: 'wedding',
-  name1: 'Anjali',
-  name2: 'Rahul',
-  dateISO: '2027-02-14',
-  time: '10:30',
-  venue: 'Kalyana Mandapam, Thrissur',
-  customLine: '',
-  inviteLang: 'both',
-  music: 'tones',
-  endCard: true,
+  music: 'music-box',
+  values: {},
 };
 
 export const DEFAULT_UI = {
-  // Site language, separate from the language printed on the invite.
-  lang: 'en',
-  occasion: 'wedding',
+  category: 'all',
 };
 
-export const loadDetails = () => read(KEY, DEFAULT_DETAILS);
-export const saveDetails = (d) => write(KEY, d);
+export const loadEntry = () => read(KEY, DEFAULT_ENTRY);
+export const saveEntry = (d) => write(KEY, d);
 export const loadUi = () => read(UI_KEY, DEFAULT_UI);
 export const saveUi = (u) => write(UI_KEY, u);
 
 /**
- * The photo is held in memory only. Putting a photo in localStorage would
- * both blow the quota and leave a copy of someone's family picture on a
- * shared phone, which is the opposite of the promise on the home page.
+ * Photos are held in memory only. Putting one in localStorage would blow the
+ * quota and leave a copy of somebody's family picture on a shared phone,
+ * which is the opposite of the promise on the home page.
  */
-let photoFile = null;
-export const setPhoto = (file) => { photoFile = file; };
-export const getPhoto = () => photoFile;
+const photoFiles = new Map();
+export const setPhotoFile = (slot, file) => { photoFiles.set(slot, file); };
+export const getPhotoFile = (slot) => photoFiles.get(slot) || null;

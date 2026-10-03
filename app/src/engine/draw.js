@@ -1,11 +1,10 @@
 /**
- * Draws one layer of a template onto a 2D context.
+ * Draws one layer of a design onto a 2D context.
  *
- * Every coordinate here is in the template's design space (360 x 640, the
- * same numbers as the planning mockups). render.js scales the context, so a
- * design never has to know the output resolution.
+ * Coordinates are in the design space (360 x 640); render.js scales the
+ * context, so a design never knows the output resolution.
  */
-import { drawIcon } from './icons.js';
+import { drawMotif, drawFrame, drawPattern } from './ornaments.js';
 import { layoutText, drawLines } from './text.js';
 
 function roundRectPath(ctx, x, y, w, h, r) {
@@ -13,45 +12,89 @@ function roundRectPath(ctx, x, y, w, h, r) {
   ctx.beginPath();
   if (!radius) {
     ctx.rect(x, y, w, h);
-  } else {
-    ctx.moveTo(x + radius, y);
-    ctx.arcTo(x + w, y, x + w, y + h, radius);
-    ctx.arcTo(x + w, y + h, x, y + h, radius);
-    ctx.arcTo(x, y + h, x, y, radius);
-    ctx.arcTo(x, y, x + w, y, radius);
-    ctx.closePath();
+    return;
   }
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + w, y, x + w, y + h, radius);
+  ctx.arcTo(x + w, y + h, x, y + h, radius);
+  ctx.arcTo(x, y + h, x, y, radius);
+  ctx.arcTo(x, y, x + w, y, radius);
+  ctx.closePath();
 }
 
-/** A fill can be a colour string or a linear-gradient description. */
-function toFillStyle(ctx, fill) {
+/** A fill is a colour, or a gradient description a design can write as data. */
+function toFillStyle(ctx, fill, env) {
   if (!fill) return null;
   if (typeof fill === 'string') return fill;
+
   if (fill.type === 'linear') {
     const g = ctx.createLinearGradient(fill.from[0], fill.from[1], fill.to[0], fill.to[1]);
-    for (const [stop, colour] of fill.stops) g.addColorStop(stop, colour);
+    for (const [stop, colour] of fill.stops) g.addColorStop(stop, env.colour(colour) || colour);
+    return g;
+  }
+  if (fill.type === 'radial') {
+    const [cx, cy, r] = fill.circle || [180, 240, 320];
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    for (const [stop, colour] of fill.stops) g.addColorStop(stop, env.colour(colour) || colour);
     return g;
   }
   return null;
 }
 
-/** Cover-fit a bitmap into a box, cropping the overflow like CSS object-fit. */
-function drawCover(ctx, bitmap, x, y, w, h) {
-  const scale = Math.max(w / bitmap.width, h / bitmap.height);
-  const dw = bitmap.width * scale;
-  const dh = bitmap.height * scale;
-  ctx.drawImage(bitmap, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
+function boxOf(layer, env) {
+  const inset = layer.inset != null ? layer.inset : 0;
+  return {
+    x: layer.x != null ? layer.x : inset,
+    y: layer.y != null ? layer.y : inset,
+    w: layer.w != null ? layer.w : env.design.width - inset * 2,
+    h: layer.h != null ? layer.h : env.design.height - inset * 2,
+  };
+}
+
+function clipShape(ctx, layer, box) {
+  if (layer.shape === 'circle') {
+    ctx.beginPath();
+    ctx.arc(box.x + box.w / 2, box.y + box.h / 2, Math.min(box.w, box.h) / 2, 0, Math.PI * 2);
+  } else if (layer.shape === 'arch') {
+    const r = box.w / 2;
+    ctx.beginPath();
+    ctx.moveTo(box.x, box.y + box.h);
+    ctx.lineTo(box.x, box.y + r);
+    ctx.arc(box.x + r, box.y + r, r, Math.PI, 0);
+    ctx.lineTo(box.x + box.w, box.y + box.h);
+    ctx.closePath();
+  } else {
+    roundRectPath(ctx, box.x, box.y, box.w, box.h, layer.radius);
+  }
 }
 
 /**
- * @param {CanvasRenderingContext2D} ctx
- * @param {object} layer     normalised layer definition
- * @param {object} env       { text(layer), colour(token), font(key), photo, design }
+ * Cover-fit a bitmap into a box, honouring a focal point and extra zoom.
+ *
+ * The focal point is what makes a single photo slot usable for a portrait,
+ * a group and a landscape: the subject stays in frame instead of being
+ * cropped to the middle of the file.
  */
+function drawCover(ctx, bitmap, box, focal = {}, zoom = 1) {
+  const fx = focal.x != null ? focal.x : 0.5;
+  const fy = focal.y != null ? focal.y : 0.5;
+  const scale = Math.max(box.w / bitmap.width, box.h / bitmap.height) * (zoom || 1);
+  const dw = bitmap.width * scale;
+  const dh = bitmap.height * scale;
+  // Place the focal point of the image at the focal point of the box, then
+  // clamp so no edge of the box is left empty.
+  let dx = box.x + box.w * fx - dw * fx;
+  let dy = box.y + box.h * fy - dh * fy;
+  dx = Math.min(box.x, Math.max(box.x + box.w - dw, dx));
+  dy = Math.min(box.y, Math.max(box.y + box.h - dh, dy));
+  ctx.drawImage(bitmap, dx, dy, dw, dh);
+}
+
 export function drawLayer(ctx, layer, env) {
   switch (layer.type) {
     case 'rect': {
-      const style = toFillStyle(ctx, env.colour(layer.fill));
+      const style = toFillStyle(ctx, typeof layer.fill === 'string'
+        ? env.colour(layer.fill) : layer.fill, env);
       if (!style) return;
       ctx.fillStyle = style;
       roundRectPath(ctx, layer.x, layer.y, layer.w, layer.h, layer.radius);
@@ -59,16 +102,34 @@ export function drawLayer(ctx, layer, env) {
       return;
     }
 
+    case 'frame':
     case 'border': {
-      const inset = layer.inset != null ? layer.inset : 0;
-      const x = layer.x != null ? layer.x : inset;
-      const y = layer.y != null ? layer.y : inset;
-      const w = layer.w != null ? layer.w : env.design.width - inset * 2;
-      const h = layer.h != null ? layer.h : env.design.height - inset * 2;
-      ctx.strokeStyle = env.colour(layer.stroke) || '#000';
-      ctx.lineWidth = layer.width || 1;
-      roundRectPath(ctx, x, y, w, h, layer.radius);
-      ctx.stroke();
+      const box = boxOf(layer, env);
+      drawFrame(ctx, layer.name || 'thin', box.x, box.y, box.w, box.h, {
+        stroke: env.colour(layer.stroke) || '#000',
+        width: layer.width || 1,
+        radius: layer.radius,
+        gap: layer.gap,
+        arm: layer.arm,
+        step: layer.step,
+      });
+      return;
+    }
+
+    case 'pattern': {
+      const box = boxOf(layer, env);
+      drawPattern(ctx, layer.name || 'dots', box.x, box.y, box.w, box.h, {
+        fill: env.colour(layer.fill) || '#ffffff',
+        colours: (layer.colours || []).map((c) => env.colour(c) || c),
+        alpha: layer.alpha,
+        count: layer.count,
+        step: layer.step,
+        size: layer.size,
+        seed: layer.seed,
+        cx: layer.cx,
+        cy: layer.cy,
+        rotate: layer.rotate,
+      });
       return;
     }
 
@@ -83,11 +144,13 @@ export function drawLayer(ctx, layer, env) {
       return;
     }
 
+    case 'motif':
     case 'icon': {
-      drawIcon(ctx, layer.name, layer.x, layer.y, layer.size, {
+      drawMotif(ctx, layer.name, layer.x, layer.y, layer.size, {
         stroke: env.colour(layer.stroke),
         fill: layer.fill ? env.colour(layer.fill) : undefined,
         width: layer.width || 1.6,
+        rotate: layer.rotate,
       });
       return;
     }
@@ -96,7 +159,7 @@ export function drawLayer(ctx, layer, env) {
       const value = env.text(layer);
       if (!value) return;
 
-      const family = env.font(layer.font);
+      const family = env.font(layer.font, value);
       const weight = layer.weight || 400;
       const maxWidth = layer.maxWidth != null
         ? layer.maxWidth
@@ -106,6 +169,7 @@ export function drawLayer(ctx, layer, env) {
       const laid = layoutText(ctx, value, {
         family,
         weight,
+        style: layer.italic ? 'italic' : 'normal',
         size: layer.size,
         maxWidth,
         maxLines: layer.maxLines || 1,
@@ -120,37 +184,55 @@ export function drawLayer(ctx, layer, env) {
     }
 
     case 'photo': {
-      const photo = env.photo;
-      if (!photo) return;
-      ctx.save();
-      if (layer.shape === 'circle') {
-        ctx.beginPath();
-        ctx.arc(layer.x + layer.w / 2, layer.y + layer.h / 2, Math.min(layer.w, layer.h) / 2, 0, Math.PI * 2);
-        ctx.clip();
-      } else {
-        roundRectPath(ctx, layer.x, layer.y, layer.w, layer.h, layer.radius);
-        ctx.clip();
+      const photo = env.photo(layer.slot);
+      const box = boxOf(layer, env);
+
+      if (!photo) {
+        // An empty slot still shows its shape, so the design does not collapse
+        // into a hole while someone is deciding which picture to use.
+        if (layer.placeholder === false) return;
+        ctx.save();
+        clipShape(ctx, layer, box);
+        ctx.fillStyle = env.colour(layer.placeholderFill) || 'rgba(0,0,0,0.06)';
+        ctx.fill();
+        ctx.restore();
+        if (layer.stroke) {
+          ctx.save();
+          clipShape(ctx, layer, box);
+          ctx.strokeStyle = env.colour(layer.stroke);
+          ctx.lineWidth = layer.width || 1;
+          ctx.stroke();
+          ctx.restore();
+        }
+        return;
       }
-      drawCover(ctx, photo, layer.x, layer.y, layer.w, layer.h);
+
+      ctx.save();
+      clipShape(ctx, layer, box);
+      ctx.clip();
+      drawCover(ctx, photo.bitmap, box, photo.focal, photo.zoom);
+      if (layer.scrim) {
+        const g = ctx.createLinearGradient(0, box.y, 0, box.y + box.h);
+        g.addColorStop(0, 'rgba(0,0,0,0)');
+        g.addColorStop(1, env.colour(layer.scrim) || 'rgba(0,0,0,0.55)');
+        ctx.fillStyle = g;
+        ctx.fillRect(box.x, box.y, box.w, box.h);
+      }
       ctx.restore();
+
       if (layer.stroke) {
+        ctx.save();
+        clipShape(ctx, layer, box);
         ctx.strokeStyle = env.colour(layer.stroke);
         ctx.lineWidth = layer.width || 1;
-        if (layer.shape === 'circle') {
-          ctx.beginPath();
-          ctx.arc(layer.x + layer.w / 2, layer.y + layer.h / 2, Math.min(layer.w, layer.h) / 2, 0, Math.PI * 2);
-          ctx.stroke();
-        } else {
-          roundRectPath(ctx, layer.x, layer.y, layer.w, layer.h, layer.radius);
-          ctx.stroke();
-        }
+        ctx.stroke();
+        ctx.restore();
       }
       return;
     }
 
     default:
-      // An unknown layer type is a template bug, not a reason to abandon the
-      // frame: draw everything else and let the template test report it.
-      return;
+      // An unknown type is a design bug, not a reason to abandon the frame.
+      // tests/templates.mjs is where that gets caught.
   }
 }

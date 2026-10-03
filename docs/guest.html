@@ -3,62 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Make your own invitation video, free — Kshanam</title>
-  <meta name="description" content="Someone sent you an invite made on Kshanam. Make your own in about two minutes, free, with no sign-up and no watermark." />
-  <meta name="theme-color" content="#7A1F2B" />
+  <title>Make your own invitation video, free — Festa</title>
+  <meta name="description" content="Somebody sent you an invitation made on Festa. Make your own in about two minutes, free, with no sign-up and no watermark." />
+  <meta name="theme-color" content="#17141D" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <script type="module" crossorigin src="/kshanam-website/assets/guest-CZ2yp0-c.js"></script>
-  <link rel="modulepreload" crossorigin href="/kshanam-website/assets/sample-values-dwWptOzW.js">
-  <link rel="stylesheet" crossorigin href="/kshanam-website/assets/sample-values-DoZE_knA.css">
+  <script type="module" crossorigin src="/kshanam-website/assets/guest-B29ex1Qy.js"></script>
+  <link rel="modulepreload" crossorigin href="/kshanam-website/assets/player-SkxS0FgC.js">
+  <link rel="modulepreload" crossorigin href="/kshanam-website/assets/app-R32II2ZV.js">
+  <link rel="stylesheet" crossorigin href="/kshanam-website/assets/app-B9YOan8v.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="./">
-      <svg width="22" height="30" viewBox="0 0 22 30" fill="none" stroke="#C9971C" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M11 2c3 4 3 7 0 9c-3-2-3-5 0-9z" /><path d="M3 13h16" />
-        <path d="M11 13v11" /><path d="M8 24h6" /><path d="M5 28h12" />
-      </svg>
-      <span class="brand-word" data-brand>Kshanam</span>
-    </a>
-    <div class="lang-toggle" role="group" aria-label="Site language">
-      <button type="button" data-lang="en" aria-pressed="true">English</button>
-      <button type="button" class="ml" data-lang="ml" aria-pressed="false">മലയാളം</button>
+    <div class="header-inner">
+      <a class="brand" href="./">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2.6 14.6 9h6.8l-5.5 4 2.1 6.6L12 15.7 6 19.6 8.1 13 2.6 9h6.8z"
+                stroke="#8E1F46" stroke-width="1.6" stroke-linejoin="round" />
+        </svg>
+        <span class="brand-word">Festa<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="./#designs">All designs</a>
+      </nav>
     </div>
   </header>
 
-  <main id="main">
-    <section class="section hero">
-      <h1 data-i18n="guestTitle">Make your own invite video</h1>
-      <p class="sub" data-i18n="guestBody">The invite you were sent was made here, free, in about two minutes.</p>
-      <div class="pills">
-        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="free">Free forever</span></span>
-        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="noSignup">No sign-up</span></span>
-        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="noWatermark">No watermark</span></span>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="designs" style="grid-template-columns: minmax(0, 220px)">
-        <div class="design">
-          <div class="design-art" id="guest-art"></div>
-          <span class="design-name" id="guest-name"></span>
-          <span class="design-tag" id="guest-tag"></span>
+  <main id="main" class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Free forever. No sign-up. No watermark.</p>
+        <h1>Make your own invitation video</h1>
+        <p class="hero-sub">The invitation you were sent was made here, free, in about two minutes. Use the same design, or pick another.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary btn-lg" id="use" href="./studio.html">Use this design</a>
+          <a class="btn btn-ghost btn-lg" href="./#designs">See all designs</a>
         </div>
       </div>
-      <div class="btn-row" style="margin-top:18px">
-        <a class="btn btn-primary" id="use" href="./details.html" data-i18n="useThisDesign">Use this design</a>
-        <a class="btn btn-secondary" href="./#designs" data-i18n="seeAllDesigns">See all designs</a>
+      <div class="hero-stage">
+        <div class="hero-card"><canvas id="guest-art" width="360" height="640" role="img" aria-label="The design you were sent"></canvas></div>
       </div>
-    </section>
-
-    <section class="note">
-      <div>
-        <strong data-i18n="privacyTitle">Your photos stay on your phone</strong>
-        <p data-i18n="privacyBody">The video is made right on your device. Nothing is uploaded to us.</p>
-      </div>
-    </section>
+    </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="footer-base">
+      <p>&copy; 2026 Festa</p>
+      <p><a href="./help.html">Help</a></p>
+    </div>
+  </footer>
 
 </body>
 </html>

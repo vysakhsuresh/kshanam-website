@@ -183,3 +183,50 @@ Cloudflare Web Analytics). Never track the names or details users type.
 - Ask before adding paid services, accounts, trackers or anything that breaks
   the promises above.
 - Never commit secrets. Keep the repo clean and the README up to date.
+
+---
+
+# Decisions taken after this brief
+
+The brief above is the original from the planning chat. These changes came
+later, from the owner, and override it where they disagree. Recorded here so
+the next person does not "fix" them back.
+
+1. **The product is called Festa, not Kshanam.** "Kshanam" reads as an
+   invitation only to Malayali families, and this is meant to be the first
+   site anyone reaches for, for any celebration, anywhere. The git repository
+   is still named `kshanam-website`; only the product name changed.
+
+2. **The "Made free on Kshanam" end card is gone.** Not optional — removed.
+   Promise 6 in the brief no longer applies. Growth has to come from the work
+   being good, not from a card on the end of somebody's wedding invitation.
+
+3. **The site's own text is English only.** The Malayalam interface strings
+   were written without a native speaker and were not good enough to ship.
+   Malayalam is still fully supported where it matters: every line on every
+   design is a field the family fills in themselves, in any script their
+   keyboard produces, and the Malayalam faces are loaded so the canvas shapes
+   them properly. There is no "invite language" setting any more, because
+   there is nothing left to switch.
+
+4. **Nothing on a design is fixed copy.** The eyebrow, the invitation line,
+   the closing line — all of it is editable. That is what makes one design
+   work for a Hindu wedding, a Nikah and a christening.
+
+5. **You see it before you make it.** The editor plays the finished
+   invitation while you type and shows every slide with the real words on it.
+   Touching a field jumps to the slide that line appears on. Exporting a video
+   to find out what you got was the single worst thing about the first build.
+
+6. **Designs are generated from compact specs.** `scripts/gen-templates.mjs`
+   holds one spec per design — palette, typefaces, ornaments, a layout recipe
+   — and writes the JSON the engine reads. The output is committed and safe to
+   edit by hand. Six recipes and a kit of 25 drawn motifs, 7 frames and 4
+   patterns is what makes a wide, consistent library affordable.
+
+7. **Music is synthesised, not licensed.** Eight instrumental beds are
+   generated from scratch in `music.js`, so there is no licence to honour and
+   no attribution to carry. Visitors can still pick their own song, or none.
+
+8. **It is a desktop product as much as a phone one.** Laptop, tablet and
+   phone layouts are all designed and all tested at their own widths.

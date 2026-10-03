@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>Design contact sheet</title>
+</head>
+<body>
+  <p>Renders every design for review. Not part of the site.</p>
+  <canvas id="c" width="360" height="640" style="width:180px"></canvas>
+  <script type="module">
+    import { TEMPLATES, defaultValuesFor } from './src/templates/index.js';
+    import { ensureFonts } from './src/engine/fonts.js';
+    import { prepare, renderFrame, sceneAt } from './src/engine/render.js';
+    import { templateFamilies } from './src/engine/render.js';
+    import { toValues } from './src/values.js';
+
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d', { alpha: false });
+
+    window.designIds = () => TEMPLATES.map((t) => ({ id: t.id, name: t.name, categories: t.categories }));
+
+    /** One frame of one design, as a PNG data URL. */
+    window.shot = async (id, sceneId = 'names', offset = 2.2) => {
+      const t = TEMPLATES.find((x) => x.id === id);
+      if (!t) throw new Error('no design ' + id);
+      await ensureFonts(templateFamilies(t), import.meta.env.BASE_URL);
+      const prepared = prepare(t, { photos: [] });
+      const scene = prepared.scenes.find((s) => s.id === sceneId) || prepared.scenes[0];
+      renderFrame(ctx, prepared, toValues(defaultValuesFor(t)),
+        scene.start + Math.min(offset, scene.duration - 0.3));
+      return canvas.toDataURL('image/png');
+    };
+
+    window.__sheetReady = true;
+  </script>
+</body>
+</html>

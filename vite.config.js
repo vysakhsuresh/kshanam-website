@@ -26,8 +26,9 @@ export default defineConfig({
       // has no business being deployed.
       input: {
         home: page('index.html'),
-        details: page('details.html'),
+        studio: page('studio.html'),
         guest: page('guest.html'),
+        help: page('help.html'),
       },
     },
   },

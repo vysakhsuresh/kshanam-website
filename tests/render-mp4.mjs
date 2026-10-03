@@ -91,16 +91,20 @@ async function main() {
     }
 
     console.log('\nFonts');
-    const fonts = await page.evaluate(() => window.checkFonts());
+    const fonts = await page.evaluate(() => window.checkFonts(
+      ['Space Grotesk', 'Marcellus', 'Great Vibes', 'Anek Malayalam']));
     for (const f of fonts) {
       ok(results, `${f.family} is really being used for drawing`, f.applied,
          `${f.withFont.toFixed(1)}px vs ${f.fallback.toFixed(1)}px fallback`);
     }
 
     console.log('\nStill frames');
-    const duration = await page.evaluate(() => window.drawFrame(0));
-    ok(results, 'timeline has a sensible length', duration > 20 && duration < 70,
-       `${duration}s`);
+    const info = await page.evaluate(() => window.drawFrame(0));
+    const duration = info.duration;
+    ok(results, 'timeline has a sensible length', duration > 25 && duration < 70, `${duration}s`);
+    ok(results, 'there is no "made free on" end card',
+       !info.scenes.some((sc) => /end/i.test(sc.id)),
+       info.scenes.map((sc) => sc.id).join(' '));
 
     for (const point of STILL_POINTS) {
       const t = +(duration * point).toFixed(2);
@@ -113,31 +117,41 @@ async function main() {
     }
     console.log(`  wrote ${STILL_POINTS.length} stills to tests/output/`);
 
-    // Every invite language has to be drawable, because a layer positioned
-    // only for "both" would leave a hole in the English-only version.
-    for (const lang of ['en', 'ml', 'both']) {
-      const dataUrl = await page.evaluate(async (l) => {
-        await window.drawFrame(2.6, { lang: l });
-        return document.getElementById('preview').toDataURL('image/png');
-      }, lang);
-      await writeFile(resolve(OUT, `title-${lang}.png`),
-        Buffer.from(dataUrl.split(',')[1], 'base64'));
-    }
-    console.log('  wrote the title scene in en / ml / both');
+    // Typed Malayalam must shape correctly inside a design built around a
+    // Latin serif. That is what the script font stack at the end of every
+    // design's font list is for.
+    const mlUrl = await page.evaluate(async () => {
+      await window.drawFrame(12, { entered: { name1: 'അഞ്ജലി', name2: 'രാഹുൽ' } });
+      return document.getElementById('preview').toDataURL('image/png');
+    });
+    await writeFile(resolve(OUT, 'typed-malayalam.png'),
+      Buffer.from(mlUrl.split(',')[1], 'base64'));
+    console.log('  wrote a Latin design with Malayalam typed into it');
 
     // A very long name is the quality-bar case that breaks naive layouts.
     const longUrl = await page.evaluate(async () => {
-      const { sampleValues } = await import('./src/sample-values.js');
-      const values = sampleValues('both');
-      values.slots.name1 = 'Lakshmi Priyadarshini';
-      values.slots.name2 = 'Venkataraman';
-      values.slots.venue = 'Sree Krishna Swamy Temple Auditorium, East Fort, Thrissur, Kerala';
-      await window.drawFrame(12, { values });
+      await window.drawFrame(12, { entered: {
+        name1: 'Lakshmi Priyadarshini',
+        name2: 'Venkataraman',
+        venue: 'Sree Krishna Swamy Temple Auditorium, East Fort, Thrissur, Kerala',
+      } });
       return document.getElementById('preview').toDataURL('image/png');
     });
     await writeFile(resolve(OUT, 'long-names.png'),
       Buffer.from(longUrl.split(',')[1], 'base64'));
     console.log('  wrote the long-name case');
+
+    // Every design has to draw without throwing, not just the default one.
+    const ids = await page.evaluate(() => window.designs());
+    let drawn = 0;
+    for (const id of ids) {
+      const okDraw = await page.evaluate(async (designId) => {
+        try { await window.drawFrame(12, { id: designId }); return true; }
+        catch { return false; }
+      }, id);
+      if (okDraw) drawn++;
+    }
+    ok(results, 'every design draws a frame', drawn === ids.length, `${drawn}/${ids.length}`);
 
     console.log('\nRendering the video through the worker');
     const started = Date.now();
@@ -145,7 +159,7 @@ async function main() {
       quick ? { fps: 15 } : {}), QUICK);
     const wall = Date.now() - started;
 
-    const file = resolve(OUT, 'kasavu-gold.mp4');
+    const file = resolve(OUT, 'invitation.mp4');
     await writeFile(file, Buffer.from(render.base64, 'base64'));
 
     console.log(`  ${(render.bytes / 1024).toFixed(0)} KB in ${(wall / 1000).toFixed(1)}s ` +
