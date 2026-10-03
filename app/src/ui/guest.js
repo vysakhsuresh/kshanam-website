@@ -7,6 +7,7 @@
 import { byId, TEMPLATES, defaultValuesFor } from '../templates/index.js';
 import { createPlayer } from './player.js';
 import { SUPPORT_URL } from '../config.js';
+import { mountHelpWidget } from './help-widget.js';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -33,3 +34,5 @@ const player = createPlayer(document.getElementById('guest-art'), {
 player.ready(BASE).then(() => {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) player.play();
 });
+
+mountHelpWidget();

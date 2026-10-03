@@ -6,12 +6,17 @@
  * because localStorage throws in private windows and on phones with site data
  * blocked, and a thrown error here must never stop the page rendering.
  */
-const KEY = 'festa.entry.v2';
-const UI_KEY = 'festa.ui.v2';
+const KEY = 'invita.entry.v2';
+const UI_KEY = 'invita.ui.v2';
+
+// The product was called Festa until the name turned out to carry a legal
+// risk. Somebody who typed their wedding details yesterday should not lose
+// them to a rename, so the old keys are read once and then left alone.
+const LEGACY = { 'invita.entry.v2': 'festa.entry.v2', 'invita.ui.v2': 'festa.ui.v2' };
 
 function read(key, fallback) {
   try {
-    const raw = localStorage.getItem(key);
+    const raw = localStorage.getItem(key) || localStorage.getItem(LEGACY[key] || '');
     return raw ? { ...fallback, ...JSON.parse(raw) } : { ...fallback };
   } catch {
     return { ...fallback };

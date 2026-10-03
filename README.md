@@ -1,4 +1,4 @@
-# Festa — free invitation video maker
+# Invita — free invitation video maker
 
 A website where a family makes an invitation video for any celebration and
 sends it on WhatsApp. Weddings, birthdays, naming days, housewarmings,
@@ -9,7 +9,7 @@ photos and names somebody types never leave their device.
 
 The brief is in [CLAUDE.md](./CLAUDE.md), with the decisions taken since it
 was written recorded at the bottom. The repository is still named
-`kshanam-website`; the product is called Festa.
+`kshanam-website`; the product is called Invita.
 
 ---
 

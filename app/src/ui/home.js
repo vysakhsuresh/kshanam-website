@@ -12,6 +12,7 @@ import { categoryName } from '../templates/categories.js';
 import { drawStill, createPlayer } from './player.js';
 import { loadUi, saveUi } from './store.js';
 import { SUPPORT_URL } from '../config.js';
+import { mountHelpWidget } from './help-widget.js';
 
 const BASE = import.meta.env.BASE_URL;
 const ui = loadUi();
@@ -220,6 +221,7 @@ async function hero() {
   }
 }
 
+mountHelpWidget();
 renderCounts();
 renderCategories();
 renderDesigns();

@@ -192,10 +192,13 @@ The brief above is the original from the planning chat. These changes came
 later, from the owner, and override it where they disagree. Recorded here so
 the next person does not "fix" them back.
 
-1. **The product is called Festa, not Kshanam.** "Kshanam" reads as an
-   invitation only to Malayali families, and this is meant to be the first
-   site anyone reaches for, for any celebration, anywhere. The git repository
-   is still named `kshanam-website`; only the product name changed.
+1. **The product is called Invita.** "Kshanam" reads as an invitation only to
+   Malayali families, and this is meant to be the first site anyone reaches
+   for, for any celebration, anywhere. It was briefly called Festa; the owner
+   judged that name a legal risk, so it is Invita now. The git repository is
+   still named `kshanam-website`; only the product name changed. Anyone who had
+   typed details into the old build keeps them — `store.js` reads the old
+   localStorage keys once before falling back.
 
 2. **The "Made free on Kshanam" end card is gone.** Not optional — removed.
    Promise 6 in the brief no longer applies. Growth has to come from the work
@@ -245,3 +248,11 @@ the next person does not "fix" them back.
     designs all saying "Anjali & Rahul", which reads as one design shown twelve
     times. The sample names are the first thing anybody sees, so no two designs
     may share them, and a test enforces it.
+
+11. **The mark is a portrait card that plays.** A 9:16 card outline with a
+    maroon play triangle in it: the aspect every video comes out in, and the
+    one sentence the product needs to say. The alternatives were tried and
+    rejected for good reasons — an arch reads as a gravestone at 16px, a ring
+    with a rule through it reads as "no entry", and an envelope or a folded
+    page is somebody else's icon. The filled version is the favicon, because a
+    hairline disappears in a browser tab.

@@ -14,6 +14,7 @@ import { TRACKS, renderTrack } from '../engine/music.js';
 import { renderFrame, prepare, templateFamilies } from '../engine/render.js';
 import { ensureFonts } from '../engine/fonts.js';
 import { toValues } from '../values.js';
+import { mountHelpWidget } from './help-widget.js';
 
 const BASE = import.meta.env.BASE_URL;
 const $ = (id) => document.getElementById(id);
@@ -495,3 +496,7 @@ ensureFonts(templateFamilies(template), BASE)
       template.idea,
     ].filter(Boolean).join(' ');
   });
+
+// Help is reachable from the editor too. The CSS keeps it off the ready
+// screen, where nothing may float over the download and share buttons.
+mountHelpWidget();

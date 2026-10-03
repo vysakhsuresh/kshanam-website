@@ -1,4 +1,4 @@
-/* Festa — the whole product's styling.
+/* Invita — the whole product's styling.
    Space Grotesk throughout, the face layerbit uses. Built for a laptop and a
    cheap Android equally: this is not a phone layout stretched sideways. */
 
@@ -161,7 +161,9 @@ a:hover { color: var(--brand-dark); }
 .hero-sub { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 46ch; margin-bottom: 26px; }
 
 .trust { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-.trust span {
+/* A direct child only. The counts inside each pill are spans too, and an
+   unscoped `.trust span` gave each number its own pill and its own 7px gap. */
+.trust > span {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 7px 13px; border-radius: 999px; background: var(--cream);
   border: 1px solid var(--line-soft);
@@ -468,4 +470,80 @@ a:hover { color: var(--brand-dark); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ----------------------------------------------------------- get help */
+
+/* Always reachable, never in the way. It sits above the sticky "Make an
+   invite" bar on a phone, and it is not mounted on the render screen at all:
+   nothing floats over the download and share buttons. */
+.help-fab {
+  position: fixed; right: 16px; bottom: 16px; z-index: 60;
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: var(--tap); padding: 0 16px 0 13px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--paper); color: var(--ink);
+  font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: transform .16s var(--ease), border-color .16s var(--ease);
+}
+.help-fab:hover { transform: translateY(-1px); border-color: var(--ink); }
+.help-fab svg { width: 20px; height: 20px; color: var(--brand); }
+
+.help-sheet {
+  position: fixed; inset: 0; z-index: 70;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(23, 20, 29, .46);
+  padding: 16px;
+}
+@media (min-width: 640px) { .help-sheet { align-items: center; } }
+
+.help-panel {
+  position: relative; width: min(420px, 100%);
+  background: var(--paper); border-radius: var(--r-lg);
+  padding: 26px 22px 20px; box-shadow: var(--shadow-lg);
+}
+.help-panel h2 { font-size: 22px; margin: 0 0 6px; }
+.help-blurb { color: var(--muted); font-size: 15px; margin: 0 0 18px; line-height: 1.5; }
+.help-foot { color: var(--muted); font-size: 13px; margin: 14px 0 0; text-align: center; }
+
+.help-close {
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: transparent; color: var(--muted);
+  font-size: 26px; line-height: 1; cursor: pointer;
+}
+.help-close:hover { background: var(--cream); color: var(--ink); }
+
+.help-options { display: grid; gap: 10px; }
+.help-option {
+  display: flex; align-items: center; gap: 13px;
+  padding: 13px 15px; min-height: 60px;
+  border: 1px solid var(--line); border-radius: var(--r);
+  color: var(--ink); text-decoration: none;
+  transition: border-color .16s var(--ease), background-color .16s var(--ease);
+}
+.help-option:hover { border-color: var(--ink); background: var(--cream); color: var(--ink); }
+.help-option-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; flex: none; border-radius: 50%;
+  background: var(--cream); color: var(--ink);
+}
+.help-option-icon svg { width: 21px; height: 21px; }
+.help-option-whatsapp .help-option-icon { background: #E6F4EA; color: #15853C; }
+.help-option-text { display: grid; gap: 2px; }
+.help-option-text strong { font-size: 16px; font-weight: 600; }
+.help-option-text span { color: var(--muted); font-size: 13px; }
+
+body.help-open { overflow: hidden; }
+
+/* Nothing floats over the download and share buttons — the same rule the ads
+   follow. On the ready screen the help button steps aside; the footer link
+   and the help page are still there. */
+body:has(#view-ready:not([hidden])) .help-fab { display: none; }
+
+/* The sticky phone bar would otherwise sit under the button. */
+@media (max-width: 719px) {
+  .help-fab { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  body:has(.make-bar) .help-fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
 }

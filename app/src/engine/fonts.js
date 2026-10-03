@@ -17,7 +17,7 @@ import manifest from '../font-manifest.json';
 import { SCRIPT_FALLBACK } from './script-fonts.js';
 
 /** Text that forces each script we support to be rasterised. */
-const SAMPLES = ['Festa & Co 1234', 'വിവാഹ ക്ഷണം'];
+const SAMPLES = ['Invita & Co 1234', 'വിവാഹ ക്ഷണം'];
 
 /** The interface face. The stylesheet loads it too; this is for canvas use. */
 export const UI_FAMILY = 'Space Grotesk';
@@ -105,7 +105,7 @@ export function verifyFonts(ctx, families = ALL_FAMILIES) {
     const sample = SCRIPT_FAMILIES.includes(family) ? SAMPLES[1] : SAMPLES[0];
     ctx.font = `400 48px "${family}"`;
     const withFont = ctx.measureText(sample).width;
-    ctx.font = '400 48px "FestaNoSuchFamily"';
+    ctx.font = '400 48px "InvitaNoSuchFamily"';
     const fallback = ctx.measureText(sample).width;
     return { family, withFont, fallback, applied: Math.abs(withFont - fallback) > 0.5 };
   });
