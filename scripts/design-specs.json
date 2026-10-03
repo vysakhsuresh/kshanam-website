@@ -1,0 +1,183 @@
+[
+  {
+    "id": "bone-claret",
+    "name": "Bone & Claret",
+    "idea": "Claret engraving on bone paper with one gold hairline and nothing else.",
+    "recipe": "classic",
+    "fieldset": "couple",
+    "categories": ["wedding", "engagement", "reception"],
+    "tagline": "Oxblood engraving, bone paper, one gold rule",
+    "palette": { "bg": "#F6F1E8", "ink": "#4A1220", "muted": "#6B4A46", "accent": "#C9A227", "accentDark": "#8A5A00" },
+    "fonts": { "display": "Marcellus", "body": "Cormorant Garamond" },
+    "frame": "double",
+    "motif": "lamp",
+    "closeMotif": "diya",
+    "texture": "linen",
+    "foil": true,
+    "defaults": {
+      "eyebrow": "Wedding Invitation",
+      "intro": "With the blessings of our families, we invite you to the wedding of",
+      "name1": "Meenakshi", "joiner": "&", "name2": "Harikrishnan",
+      "date": "2027-04-18", "time": "11:15", "timeLabel": "Muhurtham at",
+      "venue": "Sree Krishna Kalyana Mandapam, Guruvayur",
+      "closing": "Your presence is our blessing"
+    }
+  },
+  {
+    "id": "lily-and-bells",
+    "name": "Lily & Bells",
+    "idea": "A single hairline arch over midnight-navy type on ivory, the way a church door frames a couple.",
+    "recipe": "arch",
+    "fieldset": "couple",
+    "categories": ["wedding", "engagement"],
+    "tagline": "An ivory arch for a church wedding",
+    "palette": { "bg": "#F3F1EA", "ink": "#16233C", "muted": "#4C5873", "accent": "#B08D57", "accentDark": "#3E4A63" },
+    "fonts": { "display": "Cinzel", "body": "Cormorant Garamond" },
+    "motif": "dove",
+    "closeMotif": "bell",
+    "divider": "diamond",
+    "texture": "paper",
+    "defaults": {
+      "eyebrow": "Holy Matrimony",
+      "intro": "Mr and Mrs Varghese invite you to the marriage of their daughter",
+      "name1": "Ann", "joiner": "to", "name2": "Thomas",
+      "date": "2027-01-09", "time": "10:00", "timeLabel": "Nuptial mass at",
+      "venue": "St Thomas Church, Kottayam",
+      "closing": "Together in His grace"
+    }
+  },
+  {
+    "id": "kasavu-gold",
+    "name": "Kasavu Gold",
+    "idea": "A woven kasavu band of gold threads top and bottom, sindoor maroon names on uncoated cream.",
+    "recipe": "banner",
+    "fieldset": "couple",
+    "categories": ["wedding", "engagement", "save-the-date"],
+    "tagline": "Kerala kasavu, gold thread and deep red",
+    "palette": { "bg": "#FFFBF2", "ink": "#6E1622", "muted": "#6A4F4A", "accent": "#B07D15", "accentDark": "#8A5A0A" },
+    "fonts": { "display": "Marcellus", "body": "Space Grotesk" },
+    "frame": "thin",
+    "motif": "lamp",
+    "closeMotif": "diya",
+    "texture": "linen",
+    "foil": true,
+    "defaults": {
+      "eyebrow": "Muhurtham",
+      "intro": "Together with our families we invite you to the wedding of",
+      "name1": "Devika", "joiner": "&", "name2": "Sreehari",
+      "date": "2027-02-21", "time": "10:45", "timeLabel": "Muhurtham at",
+      "venue": "Vadakkunnathan Kalyana Mandapam, Thrissur",
+      "closing": "With our families' blessings"
+    }
+  },
+  {
+    "id": "chalk-graphite",
+    "name": "Chalk Graphite",
+    "idea": "A letterhead, not a party: slate on cool chalk, left rail, no ornament but one 52px bar.",
+    "recipe": "modern",
+    "fieldset": "person",
+    "categories": ["graduation", "corporate", "farewell", "save-the-date"],
+    "tagline": "Cool chalk and slate, set like a letterhead",
+    "palette": { "bg": "#ECECE9", "ink": "#1F2225", "muted": "#585C61", "accent": "#BCC0BC", "accentDark": "#4C5258" },
+    "fonts": { "display": "Space Grotesk", "body": "Space Grotesk" },
+    "motif": "graduation-cap",
+    "texture": "paper",
+    "defaults": {
+      "eyebrow": "Convocation",
+      "intro": "After four years and one very long final term, we would like you there",
+      "name1": "Daniel Okafor", "subtitle": "graduates in law",
+      "date": "2027-06-06", "time": "11:00", "timeLabel": "from",
+      "venue": "Senate House, University of Madras, Chennai",
+      "closing": "Lunch afterwards, do stay"
+    }
+  },
+  {
+    "id": "gallery-white",
+    "name": "Gallery White",
+    "idea": "One enormous hairline name across the full measure on gallery white, and two thirds of the sheet left empty.",
+    "recipe": "masthead",
+    "fieldset": "couple",
+    "categories": ["wedding", "save-the-date", "reception"],
+    "tagline": "A private-view card: one name, enormous",
+    "palette": { "bg": "#FBFAF7", "ink": "#16151A", "muted": "#5A5862", "accent": "#8E8A7F", "accentDark": "#4F4C45" },
+    "fonts": { "display": "Italiana", "body": "Space Grotesk" },
+    "texture": "paper",
+    "motif": "diamond",
+    "defaults": {
+      "eyebrow": "Save the Date",
+      "intro": "We are getting married next spring, and we would like you there",
+      "name1": "Hana", "joiner": "and", "name2": "Elias",
+      "date": "2027-11-06", "time": "16:00", "timeLabel": "from",
+      "venue": "Jaipur — invitation to follow",
+      "closing": "Do join us"
+    }
+  },
+  {
+    "id": "oyster-panel",
+    "name": "Oyster Panel",
+    "idea": "A sheet of bronze-ruled oyster paper lying on a slightly darker ground, like a card on a table.",
+    "recipe": "panel",
+    "fieldset": "couple",
+    "categories": ["engagement", "anniversary", "housewarming"],
+    "tagline": "A ruled card resting on warm beige",
+    "palette": { "bg": "#EFE7DB", "ink": "#2B2118", "muted": "#6B5B4A", "accent": "#9C7F42", "accentDark": "#6E5733" },
+    "fonts": { "display": "Cormorant Garamond", "body": "Outfit" },
+    "frame": "rules",
+    "motif": "monogram-ring",
+    "closeMotif": "sprig",
+    "texture": "paper",
+    "displayScale": 1.12,
+    "foil": true,
+    "defaults": {
+      "eyebrow": "Engagement",
+      "intro": "Two families would like you with them on the morning the promise is made",
+      "name1": "Meera", "joiner": "and", "name2": "Arjun",
+      "date": "2027-05-30", "time": "09:30", "timeLabel": "at",
+      "venue": "Heritage Hall, Fort Kochi",
+      "closing": "With our families"
+    }
+  },
+  {
+    "id": "sindoor-band",
+    "name": "Sindoor Band",
+    "idea": "One oxblood band straight through the middle of the frame with the names reversed out of it in marigold gold.",
+    "recipe": "band",
+    "fieldset": "couple",
+    "categories": ["wedding", "reception", "anniversary"],
+    "tagline": "Names reversed out of an oxblood band",
+    "palette": { "bg": "#FBF3E5", "ink": "#4A0F1B", "muted": "#7A5A4A", "accent": "#8A5A0A", "accentDark": "#8A5A0A" },
+    "fonts": { "display": "Cinzel", "body": "Outfit" },
+    "motif": "mandala",
+    "texture": "linen",
+    "defaults": {
+      "eyebrow": "The Reception",
+      "intro": "The evening after the wedding, with everybody we love in one room",
+      "name1": "Aishwarya", "joiner": "&", "name2": "Vikram",
+      "date": "2027-02-22", "time": "19:00", "timeLabel": "from",
+      "venue": "Crowne Ballroom, Kochi",
+      "closing": "Dinner, and dancing after"
+    }
+  },
+  {
+    "id": "umber-dusk",
+    "name": "Umber Dusk",
+    "idea": "The photograph is the design: warm umber dusk, a bronze crescent, and type held to the lower third.",
+    "recipe": "photoLed",
+    "fieldset": "couple",
+    "categories": ["wedding", "reception", "save-the-date"],
+    "tagline": "A photograph at dusk, bronze crescent",
+    "palette": { "bg": "#241F1A", "bg2": "#171310", "ink": "#EFE7D9", "muted": "#AC9F8E", "accent": "#CBB392", "accentDark": "#CBB392" },
+    "fonts": { "display": "Playfair Display", "body": "Outfit" },
+    "gradient": true,
+    "motif": "crescent",
+    "texture": "vignette",
+    "defaults": {
+      "eyebrow": "Nikah",
+      "intro": "Bismillah. We invite you to the nikah of our children",
+      "name1": "Fathima", "joiner": "&", "name2": "Nizam",
+      "date": "2027-03-07", "time": "18:00", "timeLabel": "after Maghrib,",
+      "venue": "Al Bustan Hall, Kozhikode",
+      "closing": "Barakallahu lakuma"
+    }
+  }
+]

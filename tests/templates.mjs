@@ -20,6 +20,84 @@ const DIR = join(ROOT, 'app/src/templates');
 
 const LAYER_TYPES = new Set(['rect', 'border', 'frame', 'pattern', 'line', 'motif', 'icon', 'text', 'photo']);
 
+/**
+ * The taste rules, checked on the committed JSON rather than only inside the
+ * generator. A design can be edited by hand - that is a promise the README
+ * makes - so the bar has to be enforced where the app actually reads it.
+ */
+const SCATTER = new Set(['confetti', 'dots', 'stars', 'rays']);
+const PURE = new Set(['#FFFFFF', '#FFF', '#000000', '#000']);
+
+const hex = (c) => {
+  const h = String(c).replace('#', '');
+  const n = h.length === 3 ? h.split('').map((x) => x + x).join('') : h;
+  return [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16));
+};
+const luminance = (c) => {
+  const [r, g, b] = hex(c).map((v) => {
+    const x = v / 255;
+    return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const contrast = (a, b) => {
+  const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+};
+
+/** Ornament counted per scene: the template-level frame is structure. */
+const marksIn = (scene) => (scene.layers || [])
+  .filter((l) => l.type === 'motif' || l.type === 'icon' || l.type === 'line').length;
+
+function checkTaste(file, t) {
+  const palette = t.palette || {};
+  for (const [key, value] of Object.entries(palette)) {
+    if (typeof value === 'string' && PURE.has(value.toUpperCase())) {
+      note(file, `palette.${key} is ${value}; no pure white and no pure black`);
+    }
+  }
+  const grounds = [palette.bg, ...(palette.bg2 ? [palette.bg2] : [])].filter(Boolean);
+  for (const bg of grounds) {
+    for (const key of ['ink', 'muted', 'accentDark']) {
+      if (!palette[key]) continue;
+      const r = contrast(palette[key], bg);
+      if (r < 4.5) note(file, `${key} ${palette[key]} on ${bg} is ${r.toFixed(2)}:1, needs 4.5:1`);
+    }
+  }
+
+  if (!t.idea || t.idea.length < 20) {
+    note(file, 'has no "idea": one sentence naming the decision the design makes');
+  }
+  if (!t.tagline) note(file, 'has no tagline for the gallery card');
+
+  for (const { layer, where } of allLayers(t)) {
+    if (layer.type === 'pattern' && SCATTER.has(layer.name)) {
+      note(file, `${where}: pattern "${layer.name}" is scatter`);
+    }
+    if (layer.type === 'text') {
+      if (layer.color === '@foil') note(file, `${where}: foil inside a letterform`);
+      if (layer.size > 20 && layer.uppercase) note(file, `${where}: ${layer.size}px upper case`);
+      if (layer.uppercase && !(layer.letterSpacing > 1)) note(file, `${where}: capitals with no tracking`);
+    }
+    if ((layer.type === 'motif' || layer.type === 'icon')) {
+      if (layer.size > 72 || layer.size < 10) note(file, `${where}: motif at ${layer.size}px (10-72)`);
+      if (layer.width > 1.6) note(file, `${where}: motif stroked at ${layer.width} (max 1.6)`);
+    }
+  }
+
+  for (const scene of t.scenes || []) {
+    const n = marksIn(scene);
+    if (n > 2) note(file, `scene "${scene.id}" carries ${n} ornamental marks; pick two`);
+    const sizes = new Set((scene.layers || []).filter((l) => l.type === 'text').map((l) => l.size));
+    if (sizes.size > 3) note(file, `scene "${scene.id}" has ${sizes.size} type sizes; three is the ceiling`);
+    const caps = (scene.layers || []).filter((l) => l.type === 'text' && l.uppercase).length;
+    if (caps > 1) note(file, `scene "${scene.id}" has ${caps} upper-case lines; one is the ceiling`);
+  }
+
+  const closing = (t.defaults || {}).closing || '';
+  if (/[.!]$/.test(closing)) note(file, `closing "${closing}" ends in a full stop or exclamation mark`);
+}
+
 /** Slots the app computes rather than the family typing them. */
 const DERIVED = new Set(['dateLong', 'timeText']);
 
@@ -155,6 +233,8 @@ async function checkTemplate(file, fieldsets) {
     if (v == null || v === '') note(file, `has no default for "${field.key}"`);
   }
 
+  checkTaste(file, t);
+
   // Lengths, with and without the optional photo scene, through the real
   // timeline builder rather than by adding numbers up here.
   const bare = prepare(t, { photos: [] });
@@ -178,6 +258,7 @@ async function main() {
 
   console.log(`Checking ${files.length} designs`);
   const ids = new Set();
+  const subjects = new Map();
   const byCategory = {};
   const fontsUsed = new Set();
   let shortest = Infinity;
@@ -189,6 +270,14 @@ async function main() {
     const { t, bare, withPhoto } = result;
     if (ids.has(t.id)) note(file, `id "${t.id}" is used by another design`);
     ids.add(t.id);
+
+    // Two designs showing the same sample names look like one design listed
+    // twice, and the sample names are the first thing anybody sees.
+    const d = t.defaults || {};
+    const subject = [d.name1, d.name2 || d.subtitle].filter(Boolean).join(' / ').toLowerCase();
+    if (subjects.has(subject)) note(file, `shares its sample copy "${subject}" with ${subjects.get(subject)}`);
+    subjects.set(subject, file);
+
     for (const c of t.categories || []) byCategory[c] = (byCategory[c] || 0) + 1;
     for (const f of Object.values(t.fonts || {})) fontsUsed.add(f);
     shortest = Math.min(shortest, bare.duration);

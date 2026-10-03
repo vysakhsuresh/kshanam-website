@@ -17,6 +17,31 @@ export const TEMPLATES = Object.entries(modules)
 
 export const byId = (id) => TEMPLATES.find((t) => t.id === id) || null;
 
+/**
+ * The two designs the home page plays at the top.
+ *
+ * A design marks itself with `hero: true` rather than the page naming ids:
+ * the library is replaced wholesale from time to time, and a hard-coded id
+ * means the hero quietly goes blank the day that design is cut. The fallback
+ * picks one light and one dark so the pair always contrast.
+ */
+export function heroPicks(count = 2) {
+  const marked = TEMPLATES.filter((t) => t.hero);
+  const picked = marked.slice(0, count);
+  // Fall back by alternating light and dark grounds, so whatever is left in
+  // the library the pair still read as two different ideas.
+  const rest = TEMPLATES.filter((t) => !picked.includes(t));
+  const dark = rest.filter((t) => isDarkHex(t.palette && t.palette.bg));
+  const light = rest.filter((t) => !isDarkHex(t.palette && t.palette.bg));
+  const queues = [light, dark];
+  for (let i = 0; picked.length < count && (light.length || dark.length); i++) {
+    const next = (queues[i % 2].shift() || queues[(i + 1) % 2].shift());
+    if (!next) break;
+    picked.push(next);
+  }
+  return picked;
+}
+
 export const forCategory = (category) =>
   (!category || category === 'all'
     ? TEMPLATES

@@ -7,7 +7,7 @@
  * design's typeface get downloaded — opening this page on mobile data should
  * not fetch nine font families.
  */
-import { TEMPLATES, forCategory, usedCategories, defaultValuesFor } from '../templates/index.js';
+import { TEMPLATES, forCategory, usedCategories, defaultValuesFor, heroPicks } from '../templates/index.js';
 import { categoryName } from '../templates/categories.js';
 import { drawStill, createPlayer } from './player.js';
 import { loadUi, saveUi } from './store.js';
@@ -154,11 +154,11 @@ function stopOthers() {
 /* ----------------------------------------------------------- hero cards */
 
 async function hero() {
-  const picks = ['ivory-deco', 'confetti-pop'];
   const canvases = [$('hero-a'), $('hero-b')];
+  const picks = heroPicks(canvases.length);
 
   for (let i = 0; i < picks.length; i++) {
-    const template = TEMPLATES.find((t) => t.id === picks[i]) || TEMPLATES[i];
+    const template = picks[i];
     const canvas = canvases[i];
     if (!template || !canvas) continue;
 
