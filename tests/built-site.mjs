@@ -40,6 +40,17 @@ async function main() {
     process.exit(1);
   }
 
+  // A plain `npm run build` writes dist/ for the root, and serving that under
+  // a sub-path 404s every asset. Say which mistake was made rather than
+  // reporting eight missing files and a blank page.
+  const { readFile } = await import('node:fs/promises');
+  const indexHtml = await readFile(join(dist, 'index.html'), 'utf8');
+  if (!indexHtml.includes(`="${BASE}assets/`)) {
+    console.error(`dist/ was not built for ${BASE}.`);
+    console.error(`Run: KSHANAM_BASE=${BASE} npm run build`);
+    process.exit(1);
+  }
+
   // Lay the build out under the sub-path, exactly as Pages will.
   const servedRoot = await mkdtemp(join(tmpdir(), 'kshanam-pages-'));
   const segment = BASE.replace(/^\/|\/$/g, '');
