@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kasavu Gold invite frame</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700&amp;family=Manjari:wght@400;700&amp;family=Marcellus&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 360px; height: 640px; box-sizing: border-box; overflow: hidden; background: #FFFDF7; color: #2A1A1F; font-family: 'Anek Malayalam', 'Noto Sans', system-ui, sans-serif; display: flex; flex-direction: column; justify-content: space-between">
+<div style="flex: none; height: 22px; background: {{gold}}; border-bottom: 4px solid #7A1F2B"></div>
+<div style="position: absolute; top: 40px; left: 18px; right: 18px; bottom: 40px; border: 1px solid {{gold}}; border-radius: 6px"></div>
+<div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 36px; text-align: center">
+<svg width="40" height="55" viewBox="0 0 22 30" fill="none" stroke="{{gold}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2c3 4 3 7 0 9c-3-2-3-5 0-9z"></path><path d="M3 13h16"></path><path d="M11 13v11"></path><path d="M8 24h6"></path><path d="M5 28h12"></path></svg>
+<span style="font-family: Manjari, sans-serif; font-size: 24px; color: #8A5A00">വിവാഹ ക്ഷണം</span>
+<span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #8A5A00">Wedding Invitation</span>
+<span style="font-size: 14px; line-height: 1.4; color: #5E4C51">Together with our families, we invite you to the wedding of</span>
+<span style="font-family: Marcellus, Georgia, serif; font-size: 46px; line-height: 1; color: #7A1F2B">Anjali</span>
+<span style="font-family: Marcellus, Georgia, serif; font-size: 24px; color: #8A5A00">&amp;</span>
+<span style="font-family: Marcellus, Georgia, serif; font-size: 46px; line-height: 1; color: #7A1F2B">Rahul</span>
+<div style="width: 60px; height: 1px; background: {{gold}}"></div>
+<span style="font-size: 17px; font-weight: 600">Sunday, 14 February 2027</span>
+<span style="font-size: 15px">Muhurtham 10:30 AM</span>
+<span style="font-size: 15px; color: #5E4C51">Kalyana Mandapam, Thrissur</span>
+<span style="margin-top: 6px; font-family: Marcellus, Georgia, serif; font-size: 16px; color: #7A1F2B">Your presence is our blessing</span>
+</div>
+<div style="flex: none; height: 22px; background: {{gold}}; border-top: 4px solid #7A1F2B"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"gold":{"editor":"color","default":"#C9971C","options":["#C9971C","#B8860B","#A97142"]},"$preview":{"width":360,"height":640}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { gold: this.props.gold ?? '#C9971C' };
+  }
+}
+</script>
+</body>
+</html>

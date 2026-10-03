@@ -12,7 +12,7 @@
     "test:templates": "node tests/templates.mjs",
     "test:render": "node tests/render-mp4.mjs",
     "test:screens": "node tests/screens.mjs",
-    "build:pages": "KSHANAM_BASE=/kshanam-website/ vite build --outDir ../docs --emptyOutDir && touch docs/.nojekyll",
+    "build:pages": "node scripts/build-pages.mjs",
     "test:built": "node tests/built-site.mjs"
   },
   "devDependencies": {
