@@ -346,5 +346,9 @@
         }
       ]
     }
-  ]
+  ],
+  "contrast": {
+    "inkOnBg": 18.86,
+    "labelOnBg": 7.78
+  }
 }

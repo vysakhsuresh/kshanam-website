@@ -29,7 +29,45 @@
     "ink": "#FDF6E6",
     "muted": "#CBBC9E",
     "accent": "#D9A441",
-    "accentDark": "#D9A441"
+    "accentDark": "#D9A441",
+    "foil": {
+      "type": "linear",
+      "space": "box",
+      "from": [
+        0,
+        0
+      ],
+      "to": [
+        1,
+        0.3
+      ],
+      "stops": [
+        [
+          0,
+          "#D9A441"
+        ],
+        [
+          0.22,
+          "#eed6aa"
+        ],
+        [
+          0.42,
+          "#D9A441"
+        ],
+        [
+          0.6,
+          "#f4e6ca"
+        ],
+        [
+          0.78,
+          "#D9A441"
+        ],
+        [
+          1,
+          "#D9A441"
+        ]
+      ]
+    }
   },
   "fonts": {
     "display": "Playfair Display",
@@ -54,9 +92,9 @@
     },
     {
       "type": "frame",
-      "name": "deco",
+      "name": "ornate",
       "inset": 22,
-      "stroke": "@accent",
+      "stroke": "@foil",
       "width": 1,
       "anim": {
         "in": {
@@ -65,6 +103,15 @@
           "dur": 1
         }
       }
+    },
+    {
+      "type": "pattern",
+      "name": "vignette",
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 640,
+      "alpha": 0.42
     }
   ],
   "scenes": [
@@ -74,11 +121,11 @@
       "layers": [
         {
           "type": "motif",
-          "name": "sun",
+          "name": "wreath",
           "x": 180,
           "y": 250,
           "size": 68,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.5,
           "anim": {
             "in": {
@@ -114,7 +161,7 @@
           "x": 180,
           "y": 392,
           "size": 12,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.1,
           "anim": {
             "in": {
@@ -218,7 +265,7 @@
           "y1": 418,
           "x2": 210,
           "y2": 418,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1,
           "anchorX": 180,
           "anchorY": 418,
@@ -256,7 +303,7 @@
           "w": 176,
           "h": 236,
           "radius": 3,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1,
           "anchorX": 180,
           "anchorY": 310
@@ -365,11 +412,11 @@
         },
         {
           "type": "motif",
-          "name": "laurel",
+          "name": "olive-branch",
           "x": 180,
           "y": 404,
           "size": 46,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.3,
           "anim": {
             "in": {
@@ -381,5 +428,9 @@
         }
       ]
     }
-  ]
+  ],
+  "contrast": {
+    "inkOnBg": 16.53,
+    "labelOnBg": 7.92
+  }
 }

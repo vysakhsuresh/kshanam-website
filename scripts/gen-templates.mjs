@@ -60,6 +60,78 @@ const photoScene = (layer) => ({
   layers: [{ type: 'photo', slot: 'main', motion: { preset: 'zoom-in', amount: 0.07 }, anim: scaleIn(0.1, 0.9), ...layer }],
 });
 
+
+/* ------------------------------------------------------- premium finishes */
+
+const hex = (c) => {
+  const h = String(c).replace('#', '');
+  const n = h.length === 3 ? h.split('').map((x) => x + x).join('') : h;
+  return [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16));
+};
+
+/** WCAG relative luminance. */
+function luminance(colour) {
+  const [r, g, b] = hex(colour).map((v) => {
+    const x = v / 255;
+    return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+export function contrast(a, b) {
+  const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+}
+
+const mix = (a, b, t) => {
+  const A = hex(a); const B = hex(b);
+  return '#' + [0, 1, 2].map((i) =>
+    Math.round(A[i] + (B[i] - A[i]) * t).toString(16).padStart(2, '0')).join('');
+};
+
+/**
+ * A metallic sweep built from the design's own accent.
+ *
+ * Flat gold looks like a swatch; foil looks like foil because the highlight
+ * travels. space:"box" makes it travel across each word and each rule rather
+ * than across the whole frame.
+ */
+const foilToken = (accent, accentDark) => ({
+  type: 'linear', space: 'box', from: [0, 0], to: [1, 0.3],
+  stops: [
+    [0, accentDark],
+    [0.22, mix(accent, '#FFFFFF', 0.55)],
+    [0.42, accent],
+    [0.6, mix(accent, '#FFFFFF', 0.72)],
+    [0.78, accent],
+    [1, accentDark],
+  ],
+});
+
+/** Swap flat accent for foil everywhere it is painted, not where it is read. */
+function applyFoil(node) {
+  if (Array.isArray(node)) return node.map(applyFoil);
+  if (!node || typeof node !== 'object') return node;
+  const out = {};
+  for (const [k, v] of Object.entries(node)) {
+    out[k] = (k === 'stroke' || k === 'fill') && v === '@accent' ? '@foil' : applyFoil(v);
+  }
+  return out;
+}
+
+/** A texture layer, tuned light or dark to whatever it sits on. */
+function textureLayer(name, bg) {
+  if (!name || name === 'none') return null;
+  const dark = luminance(bg) < 0.4;
+  if (name === 'vignette') return { type: 'pattern', name, x: 0, y: 0, w: 360, h: 640, alpha: dark ? 0.42 : 0.16 };
+  return {
+    type: 'pattern', name, x: 0, y: 0, w: 360, h: 640,
+    fill: dark ? '#FFFFFF' : '#000000',
+    alpha: name === 'linen' ? (dark ? 0.05 : 0.045) : (dark ? 0.06 : 0.05),
+    seed: 13,
+  };
+}
+
 /* ------------------------------------------------------------- recipes */
 
 const RECIPES = {
@@ -313,7 +385,7 @@ const SPECS = [
     tagline: 'Deep maroon and a golden lamp',
     palette: { bg: '#5E1120', ink: '#FFF6E8', muted: '#E7C6A6', accent: '#F2C14E', accentDark: '#F2C14E' },
     fonts: { display: 'Cinzel', body: 'Outfit' },
-    frame: 'double', motif: 'lamp', closeMotif: 'mandala',
+    frame: 'ornate', motif: 'lamp', closeMotif: 'mandala', foil: true, texture: 'linen',
     defaults: { timeLabel: 'Muhurtham' } },
 
   { id: 'lily-and-bells', name: 'Lily and Bells', recipe: 'arch', fieldset: 'couple',
@@ -337,7 +409,7 @@ const SPECS = [
     tagline: 'Art deco lines on warm ivory',
     palette: { bg: '#F6F2EA', ink: '#1C1A17', muted: '#6B6358', accent: '#B08D3F', accentDark: '#8A6C27' },
     fonts: { display: 'Italiana', body: 'Space Grotesk' },
-    frame: 'deco', motif: 'diamond', closeMotif: 'flourish' },
+    frame: 'ornate', motif: 'crest', closeMotif: 'deco-fan', foil: true, texture: 'paper' },
 
   { id: 'rose-script', name: 'Rose Script', recipe: 'classic', fieldset: 'couple',
     categories: ['wedding', 'engagement', 'anniversary'],
@@ -376,7 +448,7 @@ const SPECS = [
     tagline: 'Black and gold, after dark',
     palette: { bg: '#0C0C0E', ink: '#F5EFE2', muted: '#B9B2A4', accent: '#CBA14A', accentDark: '#CBA14A' },
     fonts: { display: 'Italiana', body: 'Outfit' },
-    frame: 'deco', motif: 'sparkle', closeMotif: 'starburst',
+    frame: 'deco', motif: 'chandelier', closeMotif: 'deco-fan', foil: true, texture: 'grain',
     defaults: { eyebrow: 'Reception', intro: 'Join us for an evening of dinner and dancing', timeLabel: 'from', closing: 'Dress for a party' } },
 
   // ------------------------------------------------------------ birthdays
@@ -463,7 +535,7 @@ const SPECS = [
     tagline: 'Deep bronze and gold',
     palette: { bg: '#1C1710', ink: '#FDF6E6', muted: '#CBBC9E', accent: '#D9A441', accentDark: '#D9A441' },
     fonts: { display: 'Playfair Display', body: 'Outfit' },
-    frame: 'deco', motif: 'sun', closeMotif: 'laurel',
+    frame: 'ornate', motif: 'wreath', closeMotif: 'olive-branch', foil: true, texture: 'vignette',
     defaults: { eyebrow: 'Fifty Years', intro: 'Fifty years married. Please come and celebrate with us', closing: 'With all our love' } },
 
   // --------------------------------------------------------- housewarming
@@ -554,7 +626,38 @@ function buildTemplate(spec) {
   const recipe = RECIPES[spec.recipe];
   if (!recipe) throw new Error(`${spec.id}: unknown recipe "${spec.recipe}"`);
 
-  const { background, scenes } = recipe(spec);
+  const palette = { ...spec.palette };
+
+  // A gradient ground, when the design asked for one.
+  if (spec.gradient && palette.bg2) {
+    spec = { ...spec, bgFill: spec.bgFill || {
+      type: 'linear', from: [0, 0], to: [0, 640],
+      stops: [[0, '@bg'], [1, '@bg2']],
+    } };
+  }
+
+  let { background, scenes } = recipe(spec);
+
+  if (spec.foil) {
+    palette.foil = foilToken(palette.accent, palette.accentDark);
+    background = applyFoil(background);
+    scenes = applyFoil(scenes);
+  }
+
+  const texture = textureLayer(spec.texture, palette.bg);
+  if (texture) background = [...background, texture];
+
+  // The accessibility floor is also the taste floor: pale grey on cream reads
+  // as cheap long before it reads as inaccessible.
+  const inkOnBg = contrast(palette.ink, palette.bg);
+  const labelOnBg = contrast(palette.accentDark, palette.bg);
+  if (inkOnBg < 4.5) {
+    throw new Error(`${spec.id}: ink ${palette.ink} on bg ${palette.bg} is ${inkOnBg.toFixed(2)}:1, needs 4.5:1`);
+  }
+  if (labelOnBg < 3) {
+    throw new Error(`${spec.id}: accentDark ${palette.accentDark} on bg ${palette.bg} is ${labelOnBg.toFixed(2)}:1, needs 3:1`);
+  }
+
   const defaults = { ...BASE_DEFAULTS[spec.fieldset], ...(spec.defaults || {}) };
 
   return {
@@ -566,12 +669,13 @@ function buildTemplate(spec) {
     fieldset: spec.fieldset,
     defaults,
     design: { width: 360, height: 640 },
-    palette: spec.palette,
+    palette,
     fonts: spec.fonts,
     photoSlots: [{ key: 'main', label: 'Photo', hint: 'A picture of the people this is about' }],
     transition: 0.5,
     background,
     scenes,
+    contrast: { inkOnBg: Number(inkOnBg.toFixed(2)), labelOnBg: Number(labelOnBg.toFixed(2)) },
   };
 }
 

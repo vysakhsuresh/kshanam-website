@@ -30,7 +30,45 @@
     "ink": "#1C1A17",
     "muted": "#6B6358",
     "accent": "#B08D3F",
-    "accentDark": "#8A6C27"
+    "accentDark": "#8A6C27",
+    "foil": {
+      "type": "linear",
+      "space": "box",
+      "from": [
+        0,
+        0
+      ],
+      "to": [
+        1,
+        0.3
+      ],
+      "stops": [
+        [
+          0,
+          "#8A6C27"
+        ],
+        [
+          0.22,
+          "#dbcca9"
+        ],
+        [
+          0.42,
+          "#B08D3F"
+        ],
+        [
+          0.6,
+          "#e9dfc9"
+        ],
+        [
+          0.78,
+          "#B08D3F"
+        ],
+        [
+          1,
+          "#8A6C27"
+        ]
+      ]
+    }
   },
   "fonts": {
     "display": "Italiana",
@@ -55,9 +93,9 @@
     },
     {
       "type": "frame",
-      "name": "deco",
+      "name": "ornate",
       "inset": 22,
-      "stroke": "@accent",
+      "stroke": "@foil",
       "width": 1,
       "anim": {
         "in": {
@@ -66,6 +104,17 @@
           "dur": 1
         }
       }
+    },
+    {
+      "type": "pattern",
+      "name": "paper",
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 640,
+      "fill": "#000000",
+      "alpha": 0.05,
+      "seed": 13
     }
   ],
   "scenes": [
@@ -75,11 +124,11 @@
       "layers": [
         {
           "type": "motif",
-          "name": "diamond",
+          "name": "crest",
           "x": 180,
           "y": 250,
           "size": 68,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.5,
           "anim": {
             "in": {
@@ -115,7 +164,7 @@
           "x": 180,
           "y": 392,
           "size": 12,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.1,
           "anim": {
             "in": {
@@ -219,7 +268,7 @@
           "y1": 418,
           "x2": 210,
           "y2": 418,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1,
           "anchorX": 180,
           "anchorY": 418,
@@ -257,7 +306,7 @@
           "w": 176,
           "h": 236,
           "radius": 3,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1,
           "anchorX": 180,
           "anchorY": 310
@@ -366,11 +415,11 @@
         },
         {
           "type": "motif",
-          "name": "flourish",
+          "name": "deco-fan",
           "x": 180,
           "y": 404,
           "size": 46,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.3,
           "anim": {
             "in": {
@@ -382,5 +431,9 @@
         }
       ]
     }
-  ]
+  ],
+  "contrast": {
+    "inkOnBg": 15.55,
+    "labelOnBg": 4.42
+  }
 }

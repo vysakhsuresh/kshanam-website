@@ -408,6 +408,174 @@ export const MOTIFS = {
     },
   },
 
+  /** A small heraldic shield. Reads as a monogram crest at any size. */
+  crest: {
+    w: 40, h: 50,
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(4, 4);
+      ctx.lineTo(36, 4);
+      ctx.lineTo(36, 26);
+      ctx.quadraticCurveTo(36, 42, 20, 47);
+      ctx.quadraticCurveTo(4, 42, 4, 26);
+      ctx.closePath();
+      ctx.stroke();
+      line(ctx, 10, 13, 30, 13);
+    },
+  },
+
+  /** A broken ring, for initials to sit inside. */
+  'monogram-ring': {
+    w: 52, h: 52,
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.arc(26, 26, 24, 0.42, Math.PI * 2 - 0.42);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(26, 26, 19.5, 0.52, Math.PI * 2 - 0.52);
+      ctx.stroke();
+    },
+  },
+
+  lotus: {
+    w: 56, h: 40,
+    draw(ctx) {
+      for (const [dx, lean] of [[0, 0], [-13, -0.42], [13, 0.42], [-24, -0.8], [24, 0.8]]) {
+        ctx.save();
+        ctx.translate(28 + dx, 36);
+        ctx.rotate(lean);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(-8, -18, 0, -30);
+        ctx.quadraticCurveTo(8, -18, 0, 0);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
+  },
+
+  paisley: {
+    w: 34, h: 48,
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(17, 46);
+      ctx.bezierCurveTo(1, 38, 2, 14, 15, 6);
+      ctx.bezierCurveTo(26, 0, 33, 10, 28, 18);
+      ctx.bezierCurveTo(24, 24, 16, 22, 17, 15);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(17, 40);
+      ctx.bezierCurveTo(7, 34, 8, 18, 17, 13);
+      ctx.stroke();
+    },
+  },
+
+  /** Art-deco fan: the Chrysler Building in twelve strokes. */
+  'deco-fan': {
+    w: 60, h: 34,
+    draw(ctx) {
+      for (let i = 0; i <= 6; i++) {
+        const a = Math.PI + (i / 6) * Math.PI;
+        line(ctx, 30, 32, 30 + Math.cos(a) * 27, 32 + Math.sin(a) * 27);
+      }
+      ctx.beginPath();
+      ctx.arc(30, 32, 27, Math.PI, 0);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(30, 32, 15, Math.PI, 0);
+      ctx.stroke();
+    },
+  },
+
+  /** A scrolling flourish for a corner, drawn pointing down-right. */
+  filigree: {
+    w: 46, h: 46,
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(2, 2);
+      ctx.bezierCurveTo(26, 4, 42, 20, 44, 44);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(10, 4);
+      ctx.bezierCurveTo(22, 14, 20, 26, 11, 25);
+      ctx.bezierCurveTo(5, 24, 6, 16, 13, 17);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(42, 36);
+      ctx.bezierCurveTo(32, 24, 20, 26, 21, 35);
+      ctx.bezierCurveTo(22, 41, 30, 40, 29, 33);
+      ctx.stroke();
+    },
+  },
+
+  wreath: {
+    w: 56, h: 56,
+    draw(ctx, o) {
+      ctx.fillStyle = o.stroke;
+      for (let i = 0; i < 22; i++) {
+        const a = (i / 22) * TAU - Math.PI / 2;
+        const x = 28 + Math.cos(a) * 21;
+        const y = 28 + Math.sin(a) * 21;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(a + Math.PI / 2);
+        leaf(ctx, 0, 0, 8, 3.2, i % 2 ? 1 : -1);
+        ctx.restore();
+      }
+    },
+  },
+
+  chandelier: {
+    w: 44, h: 50,
+    draw(ctx, o) {
+      line(ctx, 22, 2, 22, 14);
+      ctx.beginPath();
+      ctx.moveTo(6, 18);
+      ctx.quadraticCurveTo(22, 10, 38, 18);
+      ctx.stroke();
+      ctx.fillStyle = o.stroke;
+      for (const [x, len] of [[8, 14], [15, 22], [22, 28], [29, 22], [36, 14]]) {
+        line(ctx, x, 18, x, 18 + len);
+        dot(ctx, x, 18 + len + 2.4, 2.2);
+      }
+    },
+  },
+
+  'olive-branch': {
+    w: 56, h: 30,
+    draw(ctx, o) {
+      ctx.beginPath();
+      ctx.moveTo(2, 26);
+      ctx.quadraticCurveTo(26, 22, 54, 5);
+      ctx.stroke();
+      ctx.fillStyle = o.stroke;
+      for (let i = 0; i < 5; i++) {
+        const t = 0.12 + i * 0.19;
+        const x = 2 + (26 - 2) * 2 * t * (1 - t) + (54 - 2) * t * t;
+        const y = 26 + (22 - 26) * 2 * t * (1 - t) + (5 - 26) * t * t;
+        leaf(ctx, x, y, 10, 3.6, 1);
+        leaf(ctx, x, y - 2, -9, 3.2, -1);
+      }
+    },
+  },
+
+  quill: {
+    w: 34, h: 46,
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(4, 43);
+      ctx.quadraticCurveTo(18, 30, 30, 3);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(30, 3);
+      ctx.quadraticCurveTo(12, 10, 9, 33);
+      ctx.quadraticCurveTo(22, 28, 30, 3);
+      ctx.closePath();
+      ctx.stroke();
+    },
+  },
+
   wave: {
     w: 64, h: 12,
     draw(ctx) {
@@ -485,6 +653,73 @@ export const FRAMES = {
     ctx.stroke();
   },
 
+  /** A double rule with a scroll at each corner. The dress-uniform frame. */
+  ornate(ctx, x, y, w, h, o) {
+    const gap = o.gap != null ? o.gap : 7;
+    ctx.strokeRect(x, y, w, h);
+    const inner = ctx.lineWidth;
+    ctx.lineWidth = inner * 0.55;
+    ctx.strokeRect(x + gap, y + gap, w - gap * 2, h - gap * 2);
+    ctx.lineWidth = inner;
+    const arm = 18;
+    for (const [cx, cy, sx, sy] of [
+      [x + gap, y + gap, 1, 1], [x + w - gap, y + gap, -1, 1],
+      [x + gap, y + h - gap, 1, -1], [x + w - gap, y + h - gap, -1, -1],
+    ]) {
+      ctx.beginPath();
+      ctx.moveTo(cx + arm * sx, cy);
+      ctx.quadraticCurveTo(cx + arm * 0.3 * sx, cy + arm * 0.3 * sy, cx, cy + arm * sy);
+      ctx.stroke();
+    }
+  },
+
+  /** Scalloped edge, like a pressed card. */
+  scallop(ctx, x, y, w, h, o) {
+    const r = o.scallop != null ? o.scallop : 9;
+    ctx.beginPath();
+    const run = (from, to, horizontal, flip) => {
+      const span = Math.abs(to - from);
+      const n = Math.max(2, Math.round(span / (r * 2)));
+      const step = span / n;
+      for (let i = 0; i < n; i++) {
+        const a = from + step * i * (to > from ? 1 : -1);
+        const b = from + step * (i + 1) * (to > from ? 1 : -1);
+        const mid = (a + b) / 2;
+        if (horizontal) ctx.quadraticCurveTo(mid, flip, b, horizontal === 'top' ? y : y + h);
+        else ctx.quadraticCurveTo(flip, mid, horizontal === 'left' ? x : x + w, b);
+      }
+    };
+    ctx.moveTo(x, y);
+    run(x, x + w, 'top', y - r);
+    run(y, y + h, 'right', x + w + r);
+    run(x + w, x, 'bottom', y + h + r);
+    run(y + h, y, 'left', x - r);
+    ctx.closePath();
+    ctx.stroke();
+  },
+
+  /** A border of beads rather than a line. */
+  beaded(ctx, x, y, w, h, o) {
+    const step = o.bead != null ? o.bead : 13;
+    const r = ctx.lineWidth * 0.9;
+    const fill = ctx.strokeStyle;
+    ctx.fillStyle = fill;
+    const put = (px, py) => { ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2); ctx.fill(); };
+    const across = Math.max(2, Math.round(w / step));
+    const down = Math.max(2, Math.round(h / step));
+    for (let i = 0; i <= across; i++) { put(x + (w / across) * i, y); put(x + (w / across) * i, y + h); }
+    for (let i = 1; i < down; i++) { put(x, y + (h / down) * i); put(x + w, y + (h / down) * i); }
+  },
+
+  /** A filled panel sitting inside the frame, for text to rest on. */
+  'inset-panel'(ctx, x, y, w, h, o) {
+    if (o.panelFill) {
+      ctx.fillStyle = o.panelFill;
+      ctx.fillRect(x, y, w, h);
+    }
+    ctx.strokeRect(x, y, w, h);
+  },
+
   /** Thin rule inset top and bottom only - quiet, works under any typeface. */
   rules(ctx, x, y, w, h) {
     line(ctx, x, y, x + w, y);
@@ -532,6 +767,50 @@ export const PATTERNS = {
     }
   },
 
+  /** Fine speckle. Stops a flat fill looking like a flat fill. */
+  paper(ctx, x, y, w, h, o) {
+    const rand = rng(o.seed || 17);
+    ctx.fillStyle = o.fill || '#000';
+    const count = o.count || Math.round((w * h) / 420);
+    for (let i = 0; i < count; i++) {
+      ctx.globalAlpha = (o.alpha != null ? o.alpha : 0.05) * (0.35 + rand() * 0.65);
+      dot(ctx, x + rand() * w, y + rand() * h, 0.4 + rand() * 0.9);
+    }
+  },
+
+  /** A woven crosshatch, for designs that want to feel like cloth or card. */
+  linen(ctx, x, y, w, h, o) {
+    const step = o.step || 5;
+    ctx.strokeStyle = o.fill || '#000';
+    ctx.globalAlpha = o.alpha != null ? o.alpha : 0.045;
+    ctx.lineWidth = 0.6;
+    for (let px = x; px < x + w; px += step) line(ctx, px, y, px, y + h);
+    for (let py = y; py < y + h; py += step) line(ctx, x, py, x + w, py);
+  },
+
+  /** Coarser film grain, for dark grounds that would otherwise band. */
+  grain(ctx, x, y, w, h, o) {
+    const rand = rng(o.seed || 29);
+    const count = o.count || Math.round((w * h) / 200);
+    for (let i = 0; i < count; i++) {
+      const v = rand();
+      ctx.fillStyle = v > 0.5 ? '#ffffff' : '#000000';
+      ctx.globalAlpha = (o.alpha != null ? o.alpha : 0.05) * rand();
+      ctx.fillRect(x + rand() * w, y + rand() * h, 1, 1);
+    }
+  },
+
+  /** Darkened edges. Pushes the eye to the middle, like a lit photograph. */
+  vignette(ctx, x, y, w, h, o) {
+    const g = ctx.createRadialGradient(
+      x + w / 2, y + h * 0.45, Math.min(w, h) * 0.26,
+      x + w / 2, y + h * 0.45, Math.max(w, h) * 0.78);
+    g.addColorStop(0, 'rgba(0,0,0,0)');
+    g.addColorStop(1, `rgba(0,0,0,${o.alpha != null ? o.alpha : 0.34})`);
+    ctx.fillStyle = g;
+    ctx.fillRect(x, y, w, h);
+  },
+
   /** Soft rays from a point, for a celebratory backdrop. */
   rays(ctx, x, y, w, h, o) {
     const cx = x + w * (o.cx != null ? o.cx : 0.5);
@@ -576,9 +855,18 @@ export function drawMotif(ctx, name, cx, cy, height, opts = {}) {
   ctx.lineWidth = (opts.width || 1.6) / scale;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  ctx.strokeStyle = stroke;
-  ctx.fillStyle = opts.fill || stroke;
-  m.draw(ctx, { stroke, fill: opts.fill || stroke });
+
+  // A gradient has to be built under this transform, in the motif's own
+  // coordinate space, or a foil highlight lands somewhere off the shape.
+  const resolved = opts.resolve
+    ? opts.resolve(ctx, { x: 0, y: 0, w: m.w, h: m.h })
+    : { stroke, fill: opts.fill };
+  const strokeStyle = resolved.stroke || stroke;
+  const fillStyle = resolved.fill || strokeStyle;
+
+  ctx.strokeStyle = strokeStyle;
+  ctx.fillStyle = fillStyle;
+  m.draw(ctx, { stroke: strokeStyle, fill: fillStyle });
   ctx.restore();
 }
 

@@ -1,0 +1,1 @@
+import"./app-IhVOVyTh.js";for(let e of document.querySelectorAll(`[data-coffee]`));

@@ -6,8 +6,17 @@
  */
 import { byId, TEMPLATES, defaultValuesFor } from '../templates/index.js';
 import { createPlayer } from './player.js';
+import { SUPPORT_URL } from '../config.js';
 
 const BASE = import.meta.env.BASE_URL;
+
+if (SUPPORT_URL) {
+  for (const link of document.querySelectorAll('[data-coffee]')) {
+    link.href = SUPPORT_URL;
+    link.target = '_blank';
+    link.rel = 'noopener';
+  }
+}
 const params = new URLSearchParams(location.search);
 const template = byId(params.get('t')) || TEMPLATES[0];
 

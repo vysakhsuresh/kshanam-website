@@ -17,9 +17,15 @@ const BASE = import.meta.env.BASE_URL;
 const ui = loadUi();
 const $ = (id) => document.getElementById(id);
 
+// The coffee button is always on screen. Without a configured link it goes to
+// the help page, which explains that support is not set up yet — better than
+// hiding the whole idea, which is what the owner noticed was missing.
 if (SUPPORT_URL) {
-  const link = $('footer-support');
-  if (link) { link.hidden = false; link.href = SUPPORT_URL; }
+  for (const link of document.querySelectorAll('[data-coffee]')) {
+    link.href = SUPPORT_URL;
+    link.target = '_blank';
+    link.rel = 'noopener';
+  }
 }
 
 /* ----------------------------------------------------------- categories */

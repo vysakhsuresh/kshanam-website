@@ -22,18 +22,40 @@ function roundRectPath(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
-/** A fill is a colour, or a gradient description a design can write as data. */
-function toFillStyle(ctx, fill, env) {
+/**
+ * Resolve a colour token to something canvas can paint with.
+ *
+ * A token is a palette reference ("@accent"), a literal colour, or a gradient
+ * written as data. Gradients come in two flavours:
+ *
+ *   space "design" (the default) - from/to are design-space coordinates, for
+ *     a wash across the whole invitation.
+ *   space "box" - from/to are fractions of the element being painted, which
+ *     is what metallic foil needs: the highlight has to travel across each
+ *     word and each rule, not across the frame.
+ */
+function styleFor(ctx, token, env, box) {
+  const fill = typeof token === 'string' ? env.colour(token) : token;
   if (!fill) return null;
   if (typeof fill === 'string') return fill;
 
+  const b = box || { x: 0, y: 0, w: env.design.width, h: env.design.height };
+  const boxed = fill.space === 'box';
+  const px = (pt) => (boxed
+    ? [b.x + pt[0] * b.w, b.y + pt[1] * b.h]
+    : [pt[0], pt[1]]);
+
   if (fill.type === 'linear') {
-    const g = ctx.createLinearGradient(fill.from[0], fill.from[1], fill.to[0], fill.to[1]);
+    const [x1, y1] = px(fill.from);
+    const [x2, y2] = px(fill.to);
+    const g = ctx.createLinearGradient(x1, y1, x2, y2);
     for (const [stop, colour] of fill.stops) g.addColorStop(stop, env.colour(colour) || colour);
     return g;
   }
   if (fill.type === 'radial') {
-    const [cx, cy, r] = fill.circle || [180, 240, 320];
+    const c = fill.circle || [180, 240, 320];
+    const [cx, cy] = boxed ? px([c[0], c[1]]) : [c[0], c[1]];
+    const r = boxed ? c[2] * Math.max(b.w, b.h) : c[2];
     const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
     for (const [stop, colour] of fill.stops) g.addColorStop(stop, env.colour(colour) || colour);
     return g;
@@ -93,8 +115,8 @@ function drawCover(ctx, bitmap, box, focal = {}, zoom = 1) {
 export function drawLayer(ctx, layer, env) {
   switch (layer.type) {
     case 'rect': {
-      const style = toFillStyle(ctx, typeof layer.fill === 'string'
-        ? env.colour(layer.fill) : layer.fill, env);
+      const style = styleFor(ctx, layer.fill, env,
+        { x: layer.x, y: layer.y, w: layer.w, h: layer.h });
       if (!style) return;
       ctx.fillStyle = style;
       roundRectPath(ctx, layer.x, layer.y, layer.w, layer.h, layer.radius);
@@ -106,7 +128,8 @@ export function drawLayer(ctx, layer, env) {
     case 'border': {
       const box = boxOf(layer, env);
       drawFrame(ctx, layer.name || 'thin', box.x, box.y, box.w, box.h, {
-        stroke: env.colour(layer.stroke) || '#000',
+        stroke: styleFor(ctx, layer.stroke, env, box) || '#000',
+        panelFill: layer.panelFill ? styleFor(ctx, layer.panelFill, env, box) : null,
         width: layer.width || 1,
         radius: layer.radius,
         gap: layer.gap,
@@ -119,7 +142,7 @@ export function drawLayer(ctx, layer, env) {
     case 'pattern': {
       const box = boxOf(layer, env);
       drawPattern(ctx, layer.name || 'dots', box.x, box.y, box.w, box.h, {
-        fill: env.colour(layer.fill) || '#ffffff',
+        fill: styleFor(ctx, layer.fill, env, box) || '#ffffff',
         colours: (layer.colours || []).map((c) => env.colour(c) || c),
         alpha: layer.alpha,
         count: layer.count,
@@ -134,7 +157,10 @@ export function drawLayer(ctx, layer, env) {
     }
 
     case 'line': {
-      ctx.strokeStyle = env.colour(layer.stroke) || '#000';
+      ctx.strokeStyle = styleFor(ctx, layer.stroke, env, {
+        x: Math.min(layer.x1, layer.x2), y: Math.min(layer.y1, layer.y2) - 2,
+        w: Math.abs(layer.x2 - layer.x1) || 1, h: Math.abs(layer.y2 - layer.y1) || 4,
+      }) || '#000';
       ctx.lineWidth = layer.width || 1;
       ctx.lineCap = layer.cap || 'butt';
       ctx.beginPath();
@@ -147,8 +173,12 @@ export function drawLayer(ctx, layer, env) {
     case 'motif':
     case 'icon': {
       drawMotif(ctx, layer.name, layer.x, layer.y, layer.size, {
-        stroke: env.colour(layer.stroke),
-        fill: layer.fill ? env.colour(layer.fill) : undefined,
+        // Resolved inside drawMotif, after its own transform, so a foil
+        // gradient travels across the motif rather than the whole frame.
+        resolve: (c, localBox) => ({
+          stroke: styleFor(c, layer.stroke, env, localBox),
+          fill: layer.fill ? styleFor(c, layer.fill, env, localBox) : undefined,
+        }),
         width: layer.width || 1.6,
         rotate: layer.rotate,
       });
@@ -177,7 +207,11 @@ export function drawLayer(ctx, layer, env) {
         minSize: layer.minSize,
       });
 
-      ctx.fillStyle = env.colour(layer.color) || '#000';
+      const blockH = laid.lineHeight * laid.lines.length;
+      const left = layer.align === 'left' ? layer.x
+        : layer.align === 'right' ? layer.x - maxWidth : layer.x - maxWidth / 2;
+      ctx.fillStyle = styleFor(ctx, layer.color, env,
+        { x: left, y: layer.y - blockH / 2, w: maxWidth, h: blockH }) || '#000';
       drawLines(ctx, laid.lines, layer.x, layer.y, laid.lineHeight, layer.align || 'center');
       ctx.letterSpacing = '0px';
       return;
@@ -193,13 +227,13 @@ export function drawLayer(ctx, layer, env) {
         if (layer.placeholder === false) return;
         ctx.save();
         clipShape(ctx, layer, box);
-        ctx.fillStyle = env.colour(layer.placeholderFill) || 'rgba(0,0,0,0.06)';
+        ctx.fillStyle = styleFor(ctx, layer.placeholderFill, env, box) || 'rgba(0,0,0,0.06)';
         ctx.fill();
         ctx.restore();
         if (layer.stroke) {
           ctx.save();
           clipShape(ctx, layer, box);
-          ctx.strokeStyle = env.colour(layer.stroke);
+          ctx.strokeStyle = styleFor(ctx, layer.stroke, env, box);
           ctx.lineWidth = layer.width || 1;
           ctx.stroke();
           ctx.restore();
@@ -223,7 +257,7 @@ export function drawLayer(ctx, layer, env) {
       if (layer.stroke) {
         ctx.save();
         clipShape(ctx, layer, box);
-        ctx.strokeStyle = env.colour(layer.stroke);
+        ctx.strokeStyle = styleFor(ctx, layer.stroke, env, box);
         ctx.lineWidth = layer.width || 1;
         ctx.stroke();
         ctx.restore();

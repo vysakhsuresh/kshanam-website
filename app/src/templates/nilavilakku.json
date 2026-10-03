@@ -29,7 +29,45 @@
     "ink": "#FFF6E8",
     "muted": "#E7C6A6",
     "accent": "#F2C14E",
-    "accentDark": "#F2C14E"
+    "accentDark": "#F2C14E",
+    "foil": {
+      "type": "linear",
+      "space": "box",
+      "from": [
+        0,
+        0
+      ],
+      "to": [
+        1,
+        0.3
+      ],
+      "stops": [
+        [
+          0,
+          "#F2C14E"
+        ],
+        [
+          0.22,
+          "#f9e3af"
+        ],
+        [
+          0.42,
+          "#F2C14E"
+        ],
+        [
+          0.6,
+          "#fbeecd"
+        ],
+        [
+          0.78,
+          "#F2C14E"
+        ],
+        [
+          1,
+          "#F2C14E"
+        ]
+      ]
+    }
   },
   "fonts": {
     "display": "Cinzel",
@@ -54,9 +92,9 @@
     },
     {
       "type": "frame",
-      "name": "double",
+      "name": "ornate",
       "inset": 22,
-      "stroke": "@accent",
+      "stroke": "@foil",
       "width": 1,
       "anim": {
         "in": {
@@ -65,6 +103,17 @@
           "dur": 1
         }
       }
+    },
+    {
+      "type": "pattern",
+      "name": "linen",
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 640,
+      "fill": "#FFFFFF",
+      "alpha": 0.05,
+      "seed": 13
     }
   ],
   "scenes": [
@@ -78,7 +127,7 @@
           "x": 180,
           "y": 250,
           "size": 68,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.5,
           "anim": {
             "in": {
@@ -114,7 +163,7 @@
           "x": 180,
           "y": 392,
           "size": 12,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.1,
           "anim": {
             "in": {
@@ -218,7 +267,7 @@
           "y1": 418,
           "x2": 210,
           "y2": 418,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1,
           "anchorX": 180,
           "anchorY": 418,
@@ -256,7 +305,7 @@
           "w": 176,
           "h": 236,
           "radius": 3,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1,
           "anchorX": 180,
           "anchorY": 310
@@ -369,7 +418,7 @@
           "x": 180,
           "y": 404,
           "size": 46,
-          "stroke": "@accent",
+          "stroke": "@foil",
           "width": 1.3,
           "anim": {
             "in": {
@@ -381,5 +430,9 @@
         }
       ]
     }
-  ]
+  ],
+  "contrast": {
+    "inkOnBg": 12.43,
+    "labelOnBg": 7.94
+  }
 }
