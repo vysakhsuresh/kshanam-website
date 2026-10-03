@@ -1,6 +1,6 @@
-__pycache__/
-*.pyc
-.DS_Store
 node_modules/
-test-results/
-screenshots/
+dist/
+tests/output/
+.DS_Store
+*.log
+.vite/

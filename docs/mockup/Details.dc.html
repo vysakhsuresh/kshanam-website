@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Type the invite details</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700&amp;family=Manjari:wght@400;700&amp;family=Marcellus&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#7A1F2B}a:hover{color:#5A1520}
+</style>
+</helmet>
+<div style="width: 390px; height: 1900px; box-sizing: border-box; background: #FFFFFF; color: #2A1A1F; font-family: 'Anek Malayalam', 'Noto Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+
+<header style="display: flex; flex-direction: column; gap: 10px; padding: 8px 20px 14px; border-bottom: 1px solid #EADFD9">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 4px; min-height: 44px; font-size: 16px; font-weight: 600; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6l6 6"></path></svg>Designs</a>
+<span style="font-size: 14px; font-weight: 600; color: #5E4C51">Step 2 of 3</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<div style="height: 5px; border-radius: 3px; background: #7A1F2B"></div>
+<div style="height: 5px; border-radius: 3px; background: #7A1F2B"></div>
+<div style="height: 5px; border-radius: 3px; background: #EADFD9"></div>
+</div>
+</header>
+
+<section style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; background: #FBF1EC">
+<p style="margin: 0; font-size: 14px; font-weight: 600; color: #5E4C51">Live preview: it changes as you type</p>
+<div style="width: 216px; height: 384px; border-radius: 12px; overflow: hidden; background: #FFFDF7; box-shadow: 0 6px 18px rgba(42,26,31,0.12); display: flex; flex-direction: column; justify-content: space-between">
+<div style="height: 14px; background: #C9971C; border-bottom: 3px solid #7A1F2B"></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 0 16px; text-align: center">
+<svg width="24" height="33" viewBox="0 0 22 30" fill="none" stroke="#C9971C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2c3 4 3 7 0 9c-3-2-3-5 0-9z"></path><path d="M3 13h16"></path><path d="M11 13v11"></path><path d="M8 24h6"></path><path d="M5 28h12"></path></svg>
+<sc-if value="{{showMl}}" hint-placeholder-val="{{true}}">
+<span style="font-family: Manjari, sans-serif; font-size: 15px; color: #8A5A00">വിവാഹ ക്ഷണം</span>
+</sc-if>
+<sc-if value="{{showEn}}" hint-placeholder-val="{{true}}">
+<span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A5A00">Wedding Invitation</span>
+</sc-if>
+<span style="font-family: Marcellus, Georgia, serif; font-size: 26px; line-height: 1.05; color: #7A1F2B">{{bride}}</span>
+<span style="font-family: Marcellus, Georgia, serif; font-size: 16px; color: #8A5A00">&amp;</span>
+<span style="font-family: Marcellus, Georgia, serif; font-size: 26px; line-height: 1.05; color: #7A1F2B">{{groom}}</span>
+<div style="width: 40px; height: 1px; background: #C9971C"></div>
+<span style="font-size: 12px; font-weight: 600">{{date}}</span>
+<span style="font-size: 12px">{{time}}</span>
+<span style="font-size: 11px; line-height: 1.3; color: #5E4C51">{{venue}}</span>
+</div>
+<div style="height: 14px; background: #C9971C; border-top: 3px solid #7A1F2B"></div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 18px; padding: 24px 20px 32px">
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="bride" style="font-size: 15px; font-weight: 600">Bride's name</label>
+<input id="bride" type="text" value="{{bride}}" onChange="{{onBride}}" autocomplete="off" style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #D9CBC4; border-radius: 12px; font: inherit; font-size: 17px; color: #2A1A1F; background: #FFFFFF">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="groom" style="font-size: 15px; font-weight: 600">Groom's name</label>
+<input id="groom" type="text" value="{{groom}}" onChange="{{onGroom}}" autocomplete="off" style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #D9CBC4; border-radius: 12px; font: inherit; font-size: 17px; color: #2A1A1F; background: #FFFFFF">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="date" style="font-size: 15px; font-weight: 600">Date</label>
+<input id="date" type="text" value="{{date}}" onChange="{{onDate}}" autocomplete="off" style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #D9CBC4; border-radius: 12px; font: inherit; font-size: 17px; color: #2A1A1F; background: #FFFFFF">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="time" style="font-size: 15px; font-weight: 600">Muhurtham time</label>
+<input id="time" type="text" value="{{time}}" onChange="{{onTime}}" autocomplete="off" style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #D9CBC4; border-radius: 12px; font: inherit; font-size: 17px; color: #2A1A1F; background: #FFFFFF">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="venue" style="font-size: 15px; font-weight: 600">Venue</label>
+<input id="venue" type="text" value="{{venue}}" onChange="{{onVenue}}" autocomplete="off" style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #D9CBC4; border-radius: 12px; font: inherit; font-size: 17px; color: #2A1A1F; background: #FFFFFF">
+</div>
+
+<fieldset style="display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; border: none">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 15px; font-weight: 600">Invite language</legend>
+<div style="display: flex; gap: 8px">
+<sc-for list="{{langs}}" as="item" hint-placeholder-count="3">
+<sc-if value="{{item.on}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{item.pick}}" aria-pressed="true" style="flex: 1; height: 48px; border-radius: 12px; border: 1.5px solid #7A1F2B; background: #7A1F2B; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 600">{{item.label}}</button>
+</sc-if>
+<sc-if value="{{item.off}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{item.pick}}" aria-pressed="false" style="flex: 1; height: 48px; border-radius: 12px; border: 1.5px solid #D9CBC4; background: #FFFFFF; color: #2A1A1F; font: inherit; font-size: 16px">{{item.label}}</button>
+</sc-if>
+</sc-for>
+</div>
+</fieldset>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 15px; font-weight: 600">Couple photo <span style="font-weight: 400; color: #5E4C51">(optional)</span></span>
+<button type="button" style="height: 96px; border: 1.5px dashed #B9A39B; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 10px; font: inherit; font-size: 16px; font-weight: 600; color: #7A1F2B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>Add a photo</button>
+</div>
+
+<fieldset style="display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; border: none">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 15px; font-weight: 600">Music</legend>
+<sc-for list="{{musics}}" as="item" hint-placeholder-count="4">
+<sc-if value="{{item.on}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{item.pick}}" aria-pressed="true" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 10px 14px; border: 1.5px solid #7A1F2B; border-radius: 12px; background: #FBF1EC; text-align: left; font: inherit; color: #2A1A1F">
+<span style="flex: none; width: 20px; height: 20px; box-sizing: border-box; border-radius: 50%; border: 6px solid #7A1F2B"></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 600">{{item.label}}</span><span style="font-size: 13px; color: #5E4C51">{{item.note}}</span></span>
+</button>
+</sc-if>
+<sc-if value="{{item.off}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{item.pick}}" aria-pressed="false" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 10px 14px; border: 1.5px solid #D9CBC4; border-radius: 12px; background: #FFFFFF; text-align: left; font: inherit; color: #2A1A1F">
+<span style="flex: none; width: 20px; height: 20px; box-sizing: border-box; border-radius: 50%; border: 2px solid #8E7C81"></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 600">{{item.label}}</span><span style="font-size: 13px; color: #5E4C51">{{item.note}}</span></span>
+</button>
+</sc-if>
+</sc-for>
+</fieldset>
+
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 12px; background: #FBF1EC">
+<input id="endcard" type="checkbox" checked="{{endCard}}" onChange="{{toggleEnd}}" style="flex: none; width: 24px; height: 24px; margin: 2px 0 0; accent-color: #7A1F2B">
+<label for="endcard" style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">Add a 2-second thank-you card at the end</span><span style="font-size: 13px; line-height: 1.4; color: #5E4C51">It says the invite was made free on Kshanam. It helps keep the site free. You can turn it off.</span></label>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px; padding-top: 8px">
+<a href="Share.dc.html" style="display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: #7A1F2B; color: #FFFFFF; font-size: 18px; font-weight: 700; text-decoration: none">Make my video</a>
+<p style="margin: 0; text-align: center; font-size: 14px; color: #5E4C51">Made on your phone. Nothing is uploaded.</p>
+</div>
+
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1900}}'>
+class Component extends DCLogic {
+  val(k, d) {
+    const s = this.state || {};
+    return s[k] != null ? s[k] : d;
+  }
+  renderVals() {
+    const lang = this.val('lang', 'both');
+    const music = this.val('music', 'veena');
+    const set = (k) => (e) => this.setState({ [k]: e.target.value });
+    const langs = [
+      { id: 'en', label: 'English' },
+      { id: 'ml', label: 'മലയാളം' },
+      { id: 'both', label: 'Both' }
+    ].map((o) => ({ ...o, on: o.id === lang, off: o.id !== lang, pick: () => this.setState({ lang: o.id }) }));
+    const musics = [
+      { id: 'veena', label: 'Gentle veena', note: 'Free to use' },
+      { id: 'nadaswaram', label: 'Nadaswaram', note: 'Free to use' },
+      { id: 'own', label: 'My own song', note: 'Pick a song from your phone' },
+      { id: 'none', label: 'No music', note: 'Silent video' }
+    ].map((o) => ({ ...o, on: o.id === music, off: o.id !== music, pick: () => this.setState({ music: o.id }) }));
+    const endCard = this.val('endCard', true);
+    return {
+      bride: this.val('bride', 'Anjali'),
+      groom: this.val('groom', 'Rahul'),
+      date: this.val('date', 'Sunday, 14 February 2027'),
+      time: this.val('time', '10:30 AM'),
+      venue: this.val('venue', 'Kalyana Mandapam, Thrissur'),
+      onBride: set('bride'),
+      onGroom: set('groom'),
+      onDate: set('date'),
+      onTime: set('time'),
+      onVenue: set('venue'),
+      showMl: lang !== 'en',
+      showEn: lang !== 'ml',
+      langs: langs,
+      musics: musics,
+      endCard: endCard,
+      toggleEnd: () => this.setState({ endCard: !endCard })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-name: Build check
+name: Build and render check
 
 on:
   pull_request:
@@ -6,44 +6,60 @@ on:
     branches: [main]
 
 jobs:
-  build-check:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
 
-      - name: Verify committed pages match src/partials + src/pages
-        run: python3 build.py --check
+      - run: npm ci
 
-      - name: Verify the placeholder plates match their generator
+      - name: Build the static site
+        run: npm run build
+
+      - name: Check the build fits Cloudflare Pages limits
         run: |
-          python3 scripts/gen_placeholders.py
-          git diff --exit-code images/placeholders
+          files=$(find dist -type f | wc -l)
+          biggest=$(find dist -type f -printf '%s\n' | sort -rn | head -1)
+          echo "dist: $files files, largest $biggest bytes"
+          test "$files" -lt 20000 || { echo "too many files for Cloudflare Pages"; exit 1; }
+          test "$biggest" -lt 26214400 || { echo "a file is over the 25 MiB limit"; exit 1; }
 
-      - name: Validate HTML, JSON-LD, inline JS, SEO, images and the link graph
-        run: python3 scripts/validate.py
+      - name: Every design still parses and has what the engine needs
+        run: node tests/templates.mjs
 
-  browser-tests:
+  render:
     runs-on: ubuntu-latest
-    needs: build-check
+    needs: build
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.x"
+          node-version: "20"
+          cache: npm
 
-      - name: Install Playwright + Chromium
-        run: |
-          pip install playwright
-          python -m playwright install --with-deps chromium
+      - run: npm ci
 
-      - name: Drive every page in headless Chromium
-        run: python3 scripts/test_pages.py
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      # The CI browser ships without H.264/AAC, so this exercises the fallback
+      # path and the muxing. A real Android phone is still the only place the
+      # WhatsApp-facing H.264 encode can be confirmed.
+      - name: Render an invite and check the file
+        run: node tests/render-mp4.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rendered-invite
+          path: tests/output/
+          retention-days: 7

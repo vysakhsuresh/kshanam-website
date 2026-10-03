@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your details — Kshanam invitation video maker</title>
+  <meta name="description" content="Type the names, date and venue. Watch the invitation video change as you type, then send it on WhatsApp." />
+  <meta name="theme-color" content="#7A1F2B" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/src/ui/app.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="back-link" href="/">
+      <span aria-hidden="true">←</span><span data-i18n="back">Back</span>
+    </a>
+    <div class="lang-toggle" role="group" aria-label="Site language">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" class="ml" data-lang="ml" aria-pressed="false">മലയാളം</button>
+    </div>
+  </header>
+
+  <!-- The live preview. Not an ad in sight on this screen, by design. -->
+  <div class="preview-wrap" id="preview-wrap">
+    <div class="preview-inner">
+      <canvas class="preview-canvas" id="preview" width="270" height="480"
+              role="img" aria-label="Live preview of your invitation"></canvas>
+      <div>
+        <p class="preview-note">
+          <strong id="preview-title">Your invite</strong>
+          <span data-i18n="step2Body">Names, date and venue. You see the invite change as you type.</span>
+        </p>
+        <label class="visually-hidden" for="scrub">Move through the video</label>
+        <input class="scrub" id="scrub" type="range" min="0" max="100" value="38" />
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- 1. the form -->
+    <section class="section" id="view-form">
+      <h1 class="visually-hidden" data-i18n="detailsTitle">Your details</h1>
+
+      <h2 data-i18n="yourNames">Names</h2>
+      <div class="field-row">
+        <div class="field">
+          <label for="name1" data-i18n="name1">First name</label>
+          <input id="name1" name="name1" type="text" autocomplete="off" maxlength="24" />
+        </div>
+        <div class="field">
+          <label for="name2" data-i18n="name2">Second name</label>
+          <input id="name2" name="name2" type="text" autocomplete="off" maxlength="24" />
+        </div>
+      </div>
+
+      <h2 data-i18n="whenWhere">When and where</h2>
+      <div class="field-row">
+        <div class="field">
+          <label for="dateISO" data-i18n="date">Date</label>
+          <input id="dateISO" name="dateISO" type="date" />
+        </div>
+        <div class="field">
+          <label for="time" data-i18n="time">Muhurtham time</label>
+          <input id="time" name="time" type="time" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="venue" data-i18n="venue">Venue</label>
+        <input id="venue" name="venue" type="text" maxlength="90" />
+      </div>
+      <div class="field">
+        <label for="customLine" data-i18n="extraLine">One more line (optional)</label>
+        <input id="customLine" name="customLine" type="text" maxlength="70" />
+      </div>
+
+      <div class="field">
+        <span class="field-label" id="lang-label" data-i18n="inviteLanguage">Language on the invite</span>
+        <div class="segmented" role="group" aria-labelledby="lang-label" id="invite-lang">
+          <button type="button" data-value="en" data-i18n="langEn">English</button>
+          <button type="button" data-value="ml" data-i18n="langMl">Malayalam</button>
+          <button type="button" data-value="both" data-i18n="langBoth">Both</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label" id="photo-label" data-i18n="photo">Photo (optional)</span>
+        <input class="visually-hidden" id="photo" type="file" accept="image/*" />
+        <button type="button" class="btn btn-secondary" id="photo-btn" data-i18n="addPhoto">Add a photo</button>
+        <p class="field-help" id="photo-help" data-i18n="privacyBody">The video is made right on your device. Nothing is uploaded to us.</p>
+      </div>
+
+      <div class="field">
+        <span class="field-label" id="music-label" data-i18n="music">Music</span>
+        <div class="segmented" role="group" aria-labelledby="music-label" id="music">
+          <button type="button" data-value="tones" data-i18n="musicTones">Soft tones</button>
+          <button type="button" data-value="none" data-i18n="musicNone">No music</button>
+          <button type="button" data-value="file" data-i18n="musicOwn">My own song</button>
+        </div>
+        <input class="visually-hidden" id="song" type="file" accept="audio/*" />
+        <p class="field-help" id="song-name"></p>
+      </div>
+
+      <div class="field">
+        <label class="switch-row">
+          <input type="checkbox" id="endCard" checked />
+          <span>
+            <span data-i18n="endCardLabel">Add a 2-second "Made free on Kshanam" card at the end</span>
+            <span class="field-help" data-i18n="endCardHelp">It helps other families find us. You can switch it off.</span>
+          </span>
+        </label>
+      </div>
+
+      <p class="field-error" id="form-error" role="alert"></p>
+      <button type="button" class="btn btn-primary" id="make" data-i18n="makeVideo">Make my video</button>
+    </section>
+
+    <!-- 2. rendering -->
+    <section class="progress-shell" id="view-progress" hidden>
+      <h2 data-i18n="making">Making your video</h2>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-pct" id="progress-pct" role="status" aria-live="polite">0%</p>
+      <p class="field-help" data-i18n="makingHelp">Keep this screen open. It takes about a minute.</p>
+      <p style="margin-top:18px">
+        <button type="button" class="btn btn-secondary" id="cancel" data-i18n="cancel">Cancel</button>
+      </p>
+    </section>
+
+    <!-- 3. ready -->
+    <section class="section" id="view-ready" hidden>
+      <h2 data-i18n="readyTitle">Your video is ready</h2>
+      <video class="ready-video" id="ready-video" controls playsinline></video>
+      <div class="btn-row">
+        <button type="button" class="btn btn-whatsapp" id="share" data-i18n="sendWhatsapp">Send on WhatsApp</button>
+        <a class="btn btn-secondary" id="download" download="kshanam-invite.mp4" data-i18n="download">Download video</a>
+      </div>
+      <p class="codec-warn" id="codec-warn" hidden></p>
+
+      <h2 style="margin-top:26px" data-i18n="howWasIt">How was it?</h2>
+      <div class="feedback-choices">
+        <button type="button" class="btn btn-secondary" id="fb-good" data-i18n="looksGreat">Looks great</button>
+        <button type="button" class="btn btn-secondary" id="fb-bad" data-i18n="somethingWrong">Something's wrong</button>
+      </div>
+      <p class="field-help" id="fb-reply" style="margin-top:12px"></p>
+
+      <div class="note" style="margin-top:24px">
+        <div>
+          <strong data-i18n="honestTitle">How this stays free</strong>
+          <p data-i18n="honestBody">Ads on the gallery pages pay for the hosting. There are none in the editor, none while your video is being made, and none next to these buttons.</p>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" id="again" data-i18n="startAgain">Make another invite</button>
+    </section>
+  </main>
+
+  <script type="module" src="/src/ui/details.js"></script>
+</body>
+</html>

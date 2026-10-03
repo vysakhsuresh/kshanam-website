@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Invitation Video Maker — Wedding Invites | Kshanam</title>
+  <meta name="description" content="Make a wedding or housewarming invitation video free, in about two minutes. No sign-up, no watermark, and your photos never leave your phone." />
+  <meta name="theme-color" content="#7A1F2B" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free invitation video maker — Kshanam" />
+  <meta property="og:description" content="Pick a design, type the names, send it on WhatsApp. Free forever, no sign-up, no watermark." />
+  <link rel="stylesheet" href="/src/ui/app.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="/">
+      <svg width="22" height="30" viewBox="0 0 22 30" fill="none" stroke="#C9971C" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M11 2c3 4 3 7 0 9c-3-2-3-5 0-9z" /><path d="M3 13h16" />
+        <path d="M11 13v11" /><path d="M8 24h6" /><path d="M5 28h12" />
+      </svg>
+      <span class="brand-word" data-brand>Kshanam</span>
+    </a>
+    <div class="lang-toggle" role="group" aria-label="Site language">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" class="ml" data-lang="ml" aria-pressed="false">മലയാളം</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section hero">
+      <p class="eyebrow" data-i18n="eyebrow">For every family function</p>
+      <h1 data-i18n="headline">Your invitation video, ready in 2 minutes</h1>
+      <p class="sub" data-i18n="sub">Pick a design, type the names and send it on WhatsApp.</p>
+      <div class="pills">
+        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="free">Free forever</span></span>
+        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="noSignup">No sign-up</span></span>
+        <span class="pill"><span aria-hidden="true">✓</span><span data-i18n="noWatermark">No watermark</span></span>
+      </div>
+      <a class="btn btn-primary" href="#designs" data-i18n="startCta">Start with a design</a>
+    </section>
+
+    <section class="section">
+      <h2 data-i18n="whatFunction">What's the function?</h2>
+      <div class="chips" id="occasions" role="group" aria-label="Choose the function"></div>
+    </section>
+
+    <section class="section" id="designs">
+      <h2 id="designs-heading">Wedding designs</h2>
+      <div class="designs" id="design-list"></div>
+    </section>
+
+    <section class="section">
+      <h2 data-i18n="howItWorks">How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <h3 data-i18n="step1">Pick a design</h3>
+            <p data-i18n="step1Body">Made for Kerala weddings, housewarmings, baptisms and more.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <h3 data-i18n="step2">Type the details</h3>
+            <p data-i18n="step2Body">Names, date and venue. You see the invite change as you type.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <h3 data-i18n="step3">Send on WhatsApp</h3>
+            <p data-i18n="step3Body">Download the video and share it with everyone in one tap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="note">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none">
+        <rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" />
+      </svg>
+      <div>
+        <strong data-i18n="privacyTitle">Your photos stay on your phone</strong>
+        <p data-i18n="privacyBody">The video is made right on your device. Nothing is uploaded to us.</p>
+      </div>
+    </section>
+
+    <!-- Ads are allowed here (a gallery page) and nowhere in the editor,
+         the rendering screen, or beside the download and share buttons. -->
+    <div class="ad-slot" id="ad-home" hidden>Advertisement</div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Kshanam is free and always will be. No account, no watermark, nothing uploaded.</p>
+  </footer>
+
+  <script type="module" src="/src/ui/home.js"></script>
+</body>
+</html>

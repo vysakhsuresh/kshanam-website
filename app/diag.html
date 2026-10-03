@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Encoder diagnosis</title><meta name="robots" content="noindex"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>
+<body>
+<pre id="log">ready</pre>
+<script type="module">
+import {
+  Output, Mp4OutputFormat, BufferTarget, CanvasSource, AudioSampleSource, AudioSample,
+  getFirstEncodableVideoCodec, getFirstEncodableAudioCodec, QUALITY_LOW,
+} from 'mediabunny';
+
+const W = 320, H = 568, FPS = 30, FRAMES = 10;
+const RATE = 48000, CH = 2;
+
+const withTimeout = (promise, ms, label) => Promise.race([
+  promise,
+  new Promise((_, rej) => setTimeout(() => rej(new Error(`TIMED OUT at: ${label}`)), ms)),
+]);
+
+function makeCanvas() {
+  const c = new OffscreenCanvas(W, H);
+  const ctx = c.getContext('2d', { alpha: false });
+  return { c, ctx };
+}
+
+function paint(ctx, i) {
+  ctx.fillStyle = i % 2 ? '#7A1F2B' : '#C9971C';
+  ctx.fillRect(0, 0, W, H);
+}
+
+function audioChunk(timestamp, frames) {
+  const data = new Float32Array(frames * CH);
+  for (let i = 0; i < frames; i++) {
+    const v = Math.sin(2 * Math.PI * 440 * (i / RATE)) * 0.1;
+    data[i * CH] = v; data[i * CH + 1] = v;
+  }
+  return new AudioSample({ data, format: 'f32', numberOfChannels: CH, sampleRate: RATE, timestamp });
+}
+
+async function build({ audio, order }) {
+  const video = await getFirstEncodableVideoCodec(['avc', 'vp9', 'vp8', 'av1'], { width: W, height: H });
+  const acodec = audio ? await getFirstEncodableAudioCodec(['aac', 'opus'], { numberOfChannels: CH, sampleRate: RATE }) : null;
+
+  const output = new Output({ format: new Mp4OutputFormat({ fastStart: 'in-memory' }), target: new BufferTarget() });
+  const { c, ctx } = makeCanvas();
+  const vs = new CanvasSource(c, { codec: video, quality: QUALITY_LOW });
+  output.addVideoTrack(vs, { frameRate: FPS });
+
+  let as = null;
+  if (acodec) { as = new AudioSampleSource({ codec: acodec, quality: QUALITY_LOW }); output.addAudioTrack(as); }
+
+  await withTimeout(output.start(), 20000, 'output.start()');
+
+  const half = Math.floor(RATE / 2);
+  let written = 0;
+  const pushAudio = async (upto) => {
+    while (as && written / RATE < upto && written < RATE * 2) {
+      const n = Math.min(half, RATE * 2 - written);
+      await as.add(audioChunk(written / RATE, n));
+      written += n;
+    }
+  };
+
+  for (let i = 0; i < FRAMES; i++) {
+    paint(ctx, i);
+    const t = i / FPS;
+    if (order === 'audio-first') {
+      await withTimeout(pushAudio(t + 1), 20000, `audio before frame ${i}`);
+      await withTimeout(vs.add(t, 1 / FPS), 20000, `video frame ${i}`);
+    } else if (order === 'concurrent') {
+      const p = vs.add(t, 1 / FPS);
+      await withTimeout(pushAudio(t + 1), 20000, `audio alongside frame ${i}`);
+      await withTimeout(p, 20000, `video frame ${i}`);
+    } else {
+      await withTimeout(vs.add(t, 1 / FPS), 20000, `video frame ${i}`);
+      await withTimeout(pushAudio(t + 1), 20000, `audio after frame ${i}`);
+    }
+  }
+  await withTimeout(pushAudio(Infinity), 20000, 'flush audio');
+  await withTimeout(output.finalize(), 25000, 'finalize()');
+  return { bytes: output.target.buffer.byteLength, video, audio: acodec };
+}
+
+window.diag = async () => {
+  const cases = [
+    { name: 'video only', opts: { audio: false, order: 'video-first' } },
+    { name: 'video + audio, audio after video (current code)', opts: { audio: true, order: 'video-first' } },
+    { name: 'video + audio, audio before video', opts: { audio: true, order: 'audio-first' } },
+    { name: 'video + audio, both in flight', opts: { audio: true, order: 'concurrent' } },
+  ];
+  const out = [];
+  for (const c of cases) {
+    const started = performance.now();
+    try {
+      const r = await build(c.opts);
+      out.push({ case: c.name, ok: true, ms: Math.round(performance.now() - started), ...r });
+    } catch (err) {
+      out.push({ case: c.name, ok: false, ms: Math.round(performance.now() - started), error: String(err.message || err) });
+    }
+    document.getElementById('log').textContent = JSON.stringify(out, null, 2);
+  }
+  return out;
+};
+window.__diagReady = true;
+</script>
+</body>
+</html>

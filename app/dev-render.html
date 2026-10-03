@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <title>Kshanam render harness</title>
+  <style>
+    body { font: 15px/1.5 system-ui, sans-serif; margin: 24px; color: #2A1A1F; }
+    canvas { width: 240px; height: 427px; border: 1px solid #EADFD9; }
+    pre { background: #FBF1EC; padding: 12px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Render harness</h1>
+  <p>Not part of the site. The automated test drives this page; it exists so the
+     real worker pipeline can be exercised in a browser.</p>
+  <canvas id="preview" width="720" height="1280"></canvas>
+  <pre id="log">idle</pre>
+
+  <script type="module">
+    import kasavu from './src/templates/kasavu-gold.json';
+    import { loadFonts, verifyFonts } from './src/engine/fonts.js';
+    import { prepare, renderFrame } from './src/engine/render.js';
+    import { sampleValues } from './src/sample-values.js';
+
+    const log = (m) => { document.getElementById('log').textContent = m; };
+
+    const makeWorker = () => new Worker(
+      new URL('./src/engine/worker.js', import.meta.url), { type: 'module' });
+
+    window.__templates = { 'kasavu-gold': kasavu };
+
+    /** Capability probe, run inside the worker exactly as the app does. */
+    window.capabilities = () => new Promise((resolve, reject) => {
+      const w = makeWorker();
+      w.onmessage = (e) => {
+        if (e.data.type === 'capabilities') { resolve(e.data.caps); w.terminate(); }
+        else if (e.data.type === 'error') { reject(new Error(e.data.message)); w.terminate(); }
+      };
+      w.onerror = (e) => reject(new Error(e.message));
+      w.postMessage({ type: 'capabilities', id: 1, size: { width: 720, height: 1280 } });
+    });
+
+    /** Full render through the worker. Returns the MP4 as a base64 string. */
+    window.renderViaWorker = (opts = {}) => new Promise((resolve, reject) => {
+      const w = makeWorker();
+      const started = performance.now();
+
+      w.onmessage = async (e) => {
+        const d = e.data;
+        if (d.type === 'progress') {
+          log(`${d.phase}: ${Math.round((d.progress || 0) * 100)}%` +
+              (d.frames ? ` (${d.frame}/${d.frames})` : ''));
+          window.__lastProgress = d;
+        } else if (d.type === 'done') {
+          w.terminate();
+          const blob = new Blob([d.result.buffer], { type: 'video/mp4' });
+          const base64 = await new Promise((res) => {
+            const fr = new FileReader();
+            fr.onload = () => res(String(fr.result).split(',')[1]);
+            fr.readAsDataURL(blob);
+          });
+          log(`done in ${Math.round(performance.now() - started)}ms, ` +
+              `${(blob.size / 1024).toFixed(0)} KB`);
+          resolve({
+            base64,
+            bytes: blob.size,
+            codecs: d.result.codecs,
+            duration: d.result.duration,
+            frames: d.result.frames,
+            ms: d.result.ms,
+            wallMs: Math.round(performance.now() - started),
+          });
+        } else if (d.type === 'error') {
+          w.terminate();
+          reject(new Error(d.message));
+        } else if (d.type === 'cancelled') {
+          w.terminate();
+          reject(new Error('cancelled'));
+        }
+      };
+      w.onerror = (e) => { w.terminate(); reject(new Error(e.message || 'worker failed')); };
+
+      w.postMessage({
+        type: 'render',
+        template: opts.template || kasavu,
+        values: opts.values || sampleValues(opts.lang || 'both'),
+        fps: opts.fps || 30,
+        endCard: opts.endCard !== false,
+        music: opts.music || 'tones',
+        baseUrl: import.meta.env.BASE_URL,
+        width: 720,
+        height: 1280,
+      });
+    });
+
+    /** Draw one frame on the main thread, for visual checks and screenshots. */
+    window.drawFrame = async (t, opts = {}) => {
+      await loadFonts(import.meta.env.BASE_URL);
+      const canvas = document.getElementById('preview');
+      const ctx = canvas.getContext('2d', { alpha: false });
+      const prepared = prepare(opts.template || kasavu, { endCard: opts.endCard !== false });
+      renderFrame(ctx, prepared, opts.values || sampleValues(opts.lang || 'both'), t);
+      return prepared.duration;
+    };
+
+    /** Proves the self-hosted faces are really being used for drawing. */
+    window.checkFonts = async () => {
+      await loadFonts(import.meta.env.BASE_URL);
+      const ctx = document.getElementById('preview').getContext('2d');
+      return verifyFonts(ctx);
+    };
+
+    window.__harnessReady = true;
+    log('ready');
+  </script>
+</body>
+</html>

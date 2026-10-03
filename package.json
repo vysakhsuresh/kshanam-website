@@ -1,0 +1,23 @@
+{
+  "name": "kshanam",
+  "private": true,
+  "type": "module",
+  "description": "Free invitation video maker. Everything runs in the browser; nothing is uploaded.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "test": "node tests/templates.mjs && node tests/render-mp4.mjs && node tests/screens.mjs",
+    "test:templates": "node tests/templates.mjs",
+    "test:render": "node tests/render-mp4.mjs",
+    "test:screens": "node tests/screens.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "vite": "^8.3.2"
+  },
+  "dependencies": {
+    "mediabunny": "^1.61.0"
+  }
+}
