@@ -1,0 +1,10 @@
+{
+  "file": "work.html",
+  "title": "Our Work: Wedding, Portrait and Film Photography",
+  "description": "Weddings, portraits, films and editorial work from Kshanam, photographed across Kerala and the rest of India.",
+  "og_image_alt": "Selected photographs from Kshanam studio",
+  "robots": null,
+  "nav_active": "work",
+  "gallery_schema": "all",
+  "breadcrumb": [["Home", "index.html"], ["Work", "work.html"]]
+}

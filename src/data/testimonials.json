@@ -1,0 +1,5 @@
+{
+  "_note": "Real client quotes only. This ships empty on purpose: invented testimonials on a working studio site are a lie to the people reading them, and Google treats fabricated reviews as spam. The section does not render at all while items is empty, so the page stays clean until you have something true to put here. Add an entry and the section appears on the homepage and the studio page with no other edit.",
+  "_shape": { "quote": "Two or three lines, their words, lightly trimmed.", "name": "How they want to be credited", "context": "Wedding, Kochi, March 2026" },
+  "items": []
+}

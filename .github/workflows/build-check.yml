@@ -1,0 +1,49 @@
+name: Build check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify committed pages match src/partials + src/pages
+        run: python3 build.py --check
+
+      - name: Verify the placeholder plates match their generator
+        run: |
+          python3 scripts/gen_placeholders.py
+          git diff --exit-code images/placeholders
+
+      - name: Validate HTML, JSON-LD, inline JS, SEO, images and the link graph
+        run: python3 scripts/validate.py
+
+  browser-tests:
+    runs-on: ubuntu-latest
+    needs: build-check
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Playwright + Chromium
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Drive every page in headless Chromium
+        run: python3 scripts/test_pages.py

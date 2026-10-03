@@ -1,0 +1,22 @@
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="brand" href="{{PREFIX}}index.html" aria-label="Kshanam, home">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <circle cx="16" cy="16" r="14.2" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.45" />
+          <path d="M16 4.6 L25.8 10.3 L25.8 21.7 L16 27.4 L6.2 21.7 L6.2 10.3 Z" fill="none" stroke="currentColor" stroke-width="1.3" />
+          <circle cx="16" cy="16" r="2.5" fill="#c8a46b" />
+        </svg>
+        <span class="brand-word">Kshanam</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul>
+{{NAV_LINKS}}
+          <li class="nav-cta"><a href="{{PREFIX}}contact.html">Enquire</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>

@@ -1,0 +1,3 @@
+    @media (min-width: 900px) {
+      .steps-wide { grid-template-columns: repeat(3, 1fr); }
+    }

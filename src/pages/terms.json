@@ -1,0 +1,10 @@
+{
+  "file": "terms.html",
+  "title": "Terms of Use | Kshanam Photography Studio",
+  "description": "The terms covering this website, the copyright in our photographs, and what you may and may not do with the images published here.",
+  "og_image_alt": "Kshanam studio terms of use",
+  "robots": null,
+  "nav_active": null,
+  "extra_head": "  <link rel=\"stylesheet\" href=\"{{PREFIX}}css/article.css\" />\n",
+  "breadcrumb": [["Home", "index.html"], ["Terms", "terms.html"]]
+}

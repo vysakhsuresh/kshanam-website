@@ -1,0 +1,88 @@
+{
+  "_note": "Single source of truth for every gallery on the site. build.py renders the grids, the collection cards and the ImageGallery/ImageObject schema from this file. To publish a real photograph, drop the file into images/ and change that entry's src, w and h - nothing else moves. Alt text is written for the photograph that belongs at each slot; see README.md 'Before launch' before the site goes public with placeholder plates still in place.",
+  "collections": [
+    {
+      "slug": "weddings",
+      "title": "Weddings",
+      "blurb": "Two or three days, photographed the way they actually happen. No posing lines, no held-up bouquets.",
+      "cover": "images/placeholders/weddings-02.svg"
+    },
+    {
+      "slug": "portraits",
+      "title": "Portraits",
+      "blurb": "An unhurried hour, usually outdoors, usually near the end of the day. You end up with pictures that look like you.",
+      "cover": "images/placeholders/portraits-01.svg"
+    },
+    {
+      "slug": "films",
+      "title": "Film & motion",
+      "blurb": "A short film cut from sound as much as picture. Vows, speeches, the room going quiet.",
+      "cover": "images/placeholders/films-01.svg"
+    },
+    {
+      "slug": "editorial",
+      "title": "Editorial & brand",
+      "blurb": "Rooms, makers and products, lit so the work is the subject and the photograph gets out of the way.",
+      "cover": "images/placeholders/editorial-01.svg"
+    }
+  ],
+  "images": [
+    { "src": "images/placeholders/weddings-01.svg", "collection": "weddings", "w": 1600, "h": 1067, "featured": true,
+      "alt": "A bride turning towards a window as the morning light reaches her face",
+      "caption": "First light, before the house wakes" },
+    { "src": "images/placeholders/weddings-02.svg", "collection": "weddings", "w": 1067, "h": 1600, "featured": true,
+      "alt": "Hands exchanging rings, photographed close and from the side",
+      "caption": "The quietest thirty seconds of the day" },
+    { "src": "images/placeholders/weddings-03.svg", "collection": "weddings", "w": 1600, "h": 1067,
+      "alt": "Guests laughing together under strung lights after the ceremony",
+      "caption": "Nobody asked them to stand there" },
+    { "src": "images/placeholders/weddings-04.svg", "collection": "weddings", "w": 1200, "h": 1200, "featured": true,
+      "alt": "A grandmother watching the ceremony from the edge of the crowd",
+      "caption": "She watched the whole thing from here" },
+    { "src": "images/placeholders/weddings-05.svg", "collection": "weddings", "w": 1067, "h": 1600,
+      "alt": "A couple walking away down a corridor at the end of the night",
+      "caption": "Last frame of a very long day" },
+    { "src": "images/placeholders/weddings-06.svg", "collection": "weddings", "w": 1600, "h": 1067,
+      "alt": "Rain on the morning of a wedding, seen from a covered verandah",
+      "caption": "It rained. It was better for it" },
+
+    { "src": "images/placeholders/portraits-01.svg", "collection": "portraits", "w": 1067, "h": 1600, "featured": true,
+      "alt": "A portrait taken at dusk, the subject lit only by the remaining sky",
+      "caption": "Twenty minutes after the sun went" },
+    { "src": "images/placeholders/portraits-02.svg", "collection": "portraits", "w": 1200, "h": 1200,
+      "alt": "A close portrait of someone mid-sentence rather than posed",
+      "caption": "Mid-sentence, which is the good bit" },
+    { "src": "images/placeholders/portraits-03.svg", "collection": "portraits", "w": 1067, "h": 1600,
+      "alt": "A full-length portrait against a weathered wall in open shade",
+      "caption": "Open shade, an old wall, nothing else" },
+    { "src": "images/placeholders/portraits-04.svg", "collection": "portraits", "w": 1600, "h": 1067, "featured": true,
+      "alt": "Two siblings photographed together on the steps of a family house",
+      "caption": "Same steps as the picture from 1994" },
+
+    { "src": "images/placeholders/films-01.svg", "collection": "films", "w": 1600, "h": 900, "featured": true,
+      "alt": "A still from a wedding film: the room watching a speech",
+      "caption": "Still from a wedding film, Kochi" },
+    { "src": "images/placeholders/films-02.svg", "collection": "films", "w": 1600, "h": 900,
+      "alt": "A wide still of a ceremony filmed from the back of the hall",
+      "caption": "Filmed from the back, on purpose" },
+    { "src": "images/placeholders/films-03.svg", "collection": "films", "w": 1600, "h": 900,
+      "alt": "A handheld still of a couple walking, shot in the last of the light",
+      "caption": "Handheld, because it had to be" },
+    { "src": "images/placeholders/films-04.svg", "collection": "films", "w": 1200, "h": 1200,
+      "alt": "A detail still of a musician's hands during a live performance",
+      "caption": "Live sound, no second take" },
+
+    { "src": "images/placeholders/editorial-01.svg", "collection": "editorial", "w": 1600, "h": 1067, "featured": true,
+      "alt": "A workshop interior photographed with available light only",
+      "caption": "A workshop, exactly as it is" },
+    { "src": "images/placeholders/editorial-02.svg", "collection": "editorial", "w": 1067, "h": 1600,
+      "alt": "A maker at work, photographed over the shoulder",
+      "caption": "Over the shoulder, hands working" },
+    { "src": "images/placeholders/editorial-03.svg", "collection": "editorial", "w": 1200, "h": 1200,
+      "alt": "A product photographed on a textured surface in raking light",
+      "caption": "One light, raking across" },
+    { "src": "images/placeholders/editorial-04.svg", "collection": "editorial", "w": 1600, "h": 1067,
+      "alt": "A restaurant dining room photographed shortly before service",
+      "caption": "Ten minutes before service" }
+  ]
+}

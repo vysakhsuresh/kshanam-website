@@ -1,0 +1,10 @@
+{
+  "file": "privacy.html",
+  "title": "Privacy Policy | Kshanam Photography Studio",
+  "description": "What this website collects, what we do with enquiry details and photographs, and how to ask us to delete anything we hold about you.",
+  "og_image_alt": "Kshanam studio privacy policy",
+  "robots": null,
+  "nav_active": null,
+  "extra_head": "  <link rel=\"stylesheet\" href=\"{{PREFIX}}css/article.css\" />\n",
+  "breadcrumb": [["Home", "index.html"], ["Privacy", "privacy.html"]]
+}

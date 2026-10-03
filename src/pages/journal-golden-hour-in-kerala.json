@@ -1,0 +1,17 @@
+{
+  "file": "journal/golden-hour-in-kerala.html",
+  "title": "What Golden Hour Really Looks Like in Kerala",
+  "description": "Kerala light is not the light photography blogs are written about. When golden hour actually falls here, and how the monsoon rewrites the plan.",
+  "og_image_alt": "The quality of late afternoon light in Kerala",
+  "robots": null,
+  "nav_active": "journal",
+  "extra_head": "  <link rel=\"stylesheet\" href=\"{{PREFIX}}css/article.css\" />\n",
+  "breadcrumb": [["Home", "index.html"], ["Journal", "journal.html"], ["What golden hour really looks like in Kerala", "journal/golden-hour-in-kerala.html"]],
+  "article": {
+    "headline": "What golden hour really looks like in Kerala",
+    "standfirst": "Most advice about light is written for latitudes where the sun sets slowly. Ours does not. What that means for an evening wedding here.",
+    "date": "2026-03-09",
+    "date_label": "9 March 2026",
+    "read_time": "6 minute read"
+  }
+}

@@ -1,0 +1,12 @@
+    .section-more { margin-top: clamp(2rem, 4vw, 3rem); }
+    .hero-meta span { position: relative; }
+    @media (max-width: 680px) { .hero-meta span + span::before { display: none; } }
+    .hero-meta span + span::before {
+      content: '';
+      position: absolute;
+      left: -1.15rem;
+      top: 0.55em;
+      width: 4px;
+      height: 1px;
+      background: var(--faint);
+    }

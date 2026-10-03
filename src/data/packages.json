@@ -1,0 +1,57 @@
+{
+  "_note": "Rendered by the PACKAGES component on services.html. Prices read 'On request' because a two-day wedding and a four-day wedding are not the same number, and quoting a fake 'from' price to win a click wastes everyone's afternoon. Put real numbers here the moment you are happy to publish them.",
+  "items": [
+    {
+      "slug": "wedding-day",
+      "name": "The day itself",
+      "summary": "One photographer, one day, from the morning preparations to the end of the reception.",
+      "price": "On request",
+      "includes": [
+        "Up to twelve hours of coverage",
+        "Around 400 finished photographs, colour and black and white",
+        "A private online gallery your family can download from",
+        "A pre-wedding call to walk through the timeline",
+        "Full print and personal-use rights, in writing"
+      ]
+    },
+    {
+      "slug": "full-wedding",
+      "name": "The whole wedding",
+      "summary": "Two photographers across every function, plus a film cut from the sound of the day.",
+      "price": "On request",
+      "featured": true,
+      "includes": [
+        "Two to four days, every function covered",
+        "Two photographers and a dedicated film unit",
+        "Around 900 finished photographs",
+        "A six to nine minute film, plus a ninety second cut for sharing",
+        "A location and light recce before the date",
+        "An album designed with you, printed when you are ready"
+      ]
+    },
+    {
+      "slug": "portraits",
+      "name": "Portrait sitting",
+      "summary": "An hour and a half, usually outdoors, usually near the end of the day.",
+      "price": "On request",
+      "includes": [
+        "Ninety minutes, one or two locations",
+        "Around 40 finished photographs",
+        "A short call beforehand about clothes and light",
+        "Delivered inside a week"
+      ]
+    },
+    {
+      "slug": "editorial",
+      "name": "Editorial & brand",
+      "summary": "A half or full day for rooms, makers, food and product, shot to a brief.",
+      "price": "On request",
+      "includes": [
+        "Half day or full day on location",
+        "A shot list agreed before we arrive",
+        "Commercial licence for web and print",
+        "Files delivered sized for your channels"
+      ]
+    }
+  ]
+}

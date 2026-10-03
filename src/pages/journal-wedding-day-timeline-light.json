@@ -1,0 +1,17 @@
+{
+  "file": "journal/wedding-day-timeline-light.html",
+  "title": "How to Build a Wedding Timeline Around Light",
+  "description": "Your photographs are only as good as the light you give them. How to plan a wedding day so the best hour is not spent cutting a cake indoors.",
+  "og_image_alt": "Planning a wedding day timeline around available light",
+  "robots": null,
+  "nav_active": "journal",
+  "extra_head": "  <link rel=\"stylesheet\" href=\"{{PREFIX}}css/article.css\" />\n",
+  "breadcrumb": [["Home", "index.html"], ["Journal", "journal.html"], ["How to build a wedding timeline around light", "journal/wedding-day-timeline-light.html"]],
+  "article": {
+    "headline": "How to build a wedding timeline around light",
+    "standfirst": "There is one hour on your wedding day when photographs come out markedly better. Almost every schedule we are sent has something else booked in it.",
+    "date": "2026-07-02",
+    "date_label": "2 July 2026",
+    "read_time": "7 minute read"
+  }
+}

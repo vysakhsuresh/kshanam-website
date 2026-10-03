@@ -1,0 +1,100 @@
+/* Journal article typography. Loaded only by pages that carry long-form
+   prose, so the gallery pages do not pay for rules they never use. */
+
+.article-head { padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(2rem, 4vw, 3rem); }
+.article-head h1 {
+  font-size: clamp(2.3rem, 1.3rem + 4.6vw, 4.25rem);
+  max-width: 30ch;
+}
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin: 2rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid var(--line-soft);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.article-standfirst {
+  margin-top: 1.75rem;
+  max-width: 42rem;
+  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+  line-height: 1.6;
+  color: var(--text);
+  font-weight: 300;
+}
+
+.article-figure { margin: clamp(2.5rem, 5vw, 4rem) 0; }
+.article-figure img { width: 100%; }
+.article-figure figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.82rem;
+  color: var(--faint);
+}
+
+.prose { max-width: var(--maxw-text); }
+.prose > * + * { margin-top: 1.3em; }
+.prose h2 {
+  margin-top: clamp(2.75rem, 5vw, 4rem);
+  font-size: clamp(1.6rem, 1.3rem + 1.3vw, 2.3rem);
+}
+.prose h3 {
+  margin-top: 2.5rem;
+  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.55rem);
+  font-weight: 500;
+}
+.prose p { margin-bottom: 0; line-height: 1.78; }
+.prose ul, .prose ol { margin: 0; padding-left: 1.3rem; }
+.prose li { margin-bottom: 0.7rem; line-height: 1.7; }
+.prose li::marker { color: var(--accent); }
+.prose strong { color: var(--text); font-weight: 500; }
+.prose blockquote {
+  margin: clamp(2rem, 4vw, 3rem) 0;
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+  border-left: 1px solid var(--accent);
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.8rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--text);
+}
+.prose blockquote p { margin: 0; line-height: inherit; }
+.prose hr {
+  margin-block: clamp(2.5rem, 5vw, 4rem);
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.pull-box {
+  margin-block: clamp(2.25rem, 4vw, 3.25rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+}
+.pull-box h3 { margin-top: 0; font-size: 1.2rem; font-weight: 500; }
+.pull-box > * + * { margin-top: 1rem; }
+.pull-box p { font-size: 0.97rem; color: var(--muted); }
+
+.article-end {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.related { margin: 1.25rem 0 2.25rem; padding: 0; list-style: none; max-width: 44rem; }
+.related li { border-top: 1px solid var(--line-soft); }
+.related li:last-child { border-bottom: 1px solid var(--line-soft); }
+.related a {
+  display: block;
+  padding: 1.1rem 0;
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.35rem);
+  color: var(--text);
+}
+.related a:hover { color: var(--accent); }

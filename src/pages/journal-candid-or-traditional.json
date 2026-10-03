@@ -1,0 +1,17 @@
+{
+  "file": "journal/candid-or-traditional.html",
+  "title": "Candid or Traditional Wedding Photography?",
+  "description": "What candid, documentary and traditional actually mean on a wedding quote, and which one leaves you with the photographs you were imagining.",
+  "og_image_alt": "Comparing candid and traditional wedding photography",
+  "robots": null,
+  "nav_active": "journal",
+  "extra_head": "  <link rel=\"stylesheet\" href=\"{{PREFIX}}css/article.css\" />\n",
+  "breadcrumb": [["Home", "index.html"], ["Journal", "journal.html"], ["Candid or traditional wedding photography", "journal/candid-or-traditional.html"]],
+  "article": {
+    "headline": "Candid or traditional? What those words mean in a quote",
+    "standfirst": "Every studio in India now advertises candid photography, which has made the word almost useless. Here is how to work out what you are actually being sold.",
+    "date": "2026-05-21",
+    "date_label": "21 May 2026",
+    "read_time": "6 minute read"
+  }
+}

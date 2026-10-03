@@ -1,0 +1,51 @@
+{
+  "file": "services.html",
+  "title": "Services & Pricing | Kshanam Photography Studio",
+  "description": "What a Kshanam booking includes: coverage, finished photographs, films, albums and rights, plus straight answers to the questions we are asked most.",
+  "og_image_alt": "What a booking with Kshanam studio includes",
+  "robots": null,
+  "nav_active": "services",
+  "breadcrumb": [["Home", "index.html"], ["Services", "services.html"]],
+  "faq": [
+    {
+      "q": "Why is there no price on this page?",
+      "a": "<p>Because a two-day wedding and a four-day wedding are not the same number, and a &lsquo;packages from&rsquo; figure that nobody ends up paying is just bait. Send us the date and the rough shape of the thing and you will have a real quote within two working days &mdash; itemised, with nothing waiting to be added later.</p><p>What we can tell you now: there are no charges for travel inside Kerala, no charge for the pre-wedding call, and no per-photograph fees of any kind.</p>"
+    },
+    {
+      "q": "How many photographs do we actually get?",
+      "a": "<p>Around 400 for a single day, around 900 across a full multi-day wedding. Every one of them finished &mdash; colour corrected, straightened, cleaned up &mdash; not a dump of everything the shutter caught.</p><p>We do not pad the count. If a frame is out of focus or someone is blinking, you will never see it, and we are not going to charge you by the gigabyte.</p>"
+    },
+    {
+      "q": "When do we get them?",
+      "a": "<p>A set of around thirty photographs within four days, so you have something while the week is still happening. The full gallery within three weeks. Films within eight weeks, because sound takes longer than picture.</p><p>If we are going to miss a date we will tell you before it passes, not after.</p>"
+    },
+    {
+      "q": "Do we own the photographs?",
+      "a": "<p>You get a written, permanent licence to print, share and reproduce every photograph for any personal use &mdash; albums, framing, social media, your parents&rsquo; wall, a reprint in twenty years. No watermarks, no per-print fees, no expiry on the gallery.</p><p>We keep the copyright itself, which is standard, and we keep the right to show work in our own portfolio. If you would rather we did not publish anything at all, say so and nothing goes online. That is in the contract too.</p>"
+    },
+    {
+      "q": "Do you travel outside Kerala?",
+      "a": "<p>Often. We photograph weddings across India and will travel further for the right one. Outside Kerala we add travel and accommodation at cost, shown as a separate line on the quote &mdash; we do not mark it up.</p>"
+    },
+    {
+      "q": "What happens if it rains?",
+      "a": "<p>Rain is not a problem, it is a photograph. Some of the best frames in the galleries above exist because the weather went wrong and everybody crowded under one verandah.</p><p>What we do is practical: we find the covered options during the recce, we carry weather protection for the cameras, and we keep a plan for the portraits that does not depend on an open sky.</p>"
+    },
+    {
+      "q": "What if you fall ill on the morning of the wedding?",
+      "a": "<p>The question most studios hope you will not ask. We work inside a network of photographers in Kerala whose work we know and would vouch for, and the contract commits us to arranging a replacement at our cost if we physically cannot be there, plus a full refund of our fee.</p><p>It has not happened yet. The arrangement exists so that if it ever does, it is our problem and not yours.</p>"
+    },
+    {
+      "q": "Can we have the unedited files?",
+      "a": "<p>No, and we would rather explain why than pretend it is a policy. A raw file is an unfinished thing &mdash; flat, wrongly coloured, built to be worked on. Handing them over means photographs going out into the world with our name attached and none of the work done.</p><p>If there is a specific frame you wanted and did not get, ask. We still have everything, and we will go back and finish it for you.</p>"
+    },
+    {
+      "q": "Do you shoot video as well as stills?",
+      "a": "<p>Yes, with a separate unit. A photographer trying to do both does neither well, so a film booking brings its own people and its own kit. The two teams plan the day together, which is the only reason it works.</p><p>Films run six to nine minutes, cut from the sound of the day &mdash; vows, speeches, the room going quiet &mdash; plus a ninety-second version for sharing.</p>"
+    },
+    {
+      "q": "We are not sure what we want yet. Is it too early to write?",
+      "a": "<p>No. Half the enquiries we get have no venue and no fixed date, and the call is more useful then than later. We will tell you what is realistic for the season you are looking at, which weekends are already going, and what we would do differently if the date moved by a fortnight.</p><p>Nothing about the enquiry commits you to anything. <a href='{{PREFIX}}contact.html'>The form is here.</a></p>"
+    }
+  ]
+}

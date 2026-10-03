@@ -1,0 +1,17 @@
+{
+  "file": "journal/wedding-photographer-questions.html",
+  "title": "Twelve Questions to Ask a Wedding Photographer",
+  "description": "The questions that reveal how a photographer actually works, and the answers that should make you walk away. Written by people who get asked them.",
+  "og_image_alt": "Notes on choosing a wedding photographer",
+  "robots": null,
+  "nav_active": "journal",
+  "extra_head": "  <link rel=\"stylesheet\" href=\"{{PREFIX}}css/article.css\" />\n",
+  "breadcrumb": [["Home", "index.html"], ["Journal", "journal.html"], ["Twelve questions to ask a wedding photographer", "journal/wedding-photographer-questions.html"]],
+  "article": {
+    "headline": "Twelve questions to ask a wedding photographer",
+    "standfirst": "Most couples ask about price and portfolio. Neither one tells you what will happen on the day. These are the questions that do.",
+    "date": "2026-08-18",
+    "date_label": "18 August 2026",
+    "read_time": "8 minute read"
+  }
+}

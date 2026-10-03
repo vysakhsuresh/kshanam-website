@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Private client galleries are not hosted here, but make the intent explicit.
+Disallow: /galleries/
+
+Sitemap: https://kshanam.in/sitemap.xml
